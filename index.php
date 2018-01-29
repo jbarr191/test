@@ -29,6 +29,13 @@
 			<li><a href="">Contact Us</a></li>
 		</ul>
 
+		<div id="form">
+			<form method="get" action="results.php" enctype="multipart/form-data">
+				<input type="text" name="user_query" placeholder="Search for stuff" />
+				<input type="submit" name="search" value="Search" />
+			</form>
+		</div>
+
 	</div>
 
 		<div class="content_wrapper">

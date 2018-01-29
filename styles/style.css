@@ -55,7 +55,8 @@ body {background:white;}
 #menu {
 	padding: 0;
 	margin: 0;
-	line-height: 35px;
+	line-height: 48px;
+	float: left;
 }
 
 #menu li {
@@ -67,13 +68,15 @@ body {background:white;}
 #menu a {
 	text-decoration: none;
 	color: white;
-	padding: 10px;
-	margin: 5px;
-	font-size: 18px;
+	padding: 8px;
+	margin: 4px;
+	font-size: 16px;
 	font-family: Courier;
 }
 
 #menu a:hover {color:orange; text-decoration: underline; font-weight: bolder}
+
+#form {float: right; padding-right: 8px; line-height: 48px;}
 
 .content_wrapper {
 	width: 1000px;
