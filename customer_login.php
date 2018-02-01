@@ -24,7 +24,7 @@
 			<li><a href="">Home</a></li>
 			<li><a href="">All Products</a></li>
 			<li><a href="">My Account</a></li>
-			<li><a href="customer_register.php">Log In</a></li>
+			<li><a href="">Log In</a></li>
 			<li><a href="">Shopping Cart</a></li>
 			<li><a href="">Contact Us</a></li>
 		</ul>
