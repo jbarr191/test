@@ -21,10 +21,10 @@
 	<div class="menubar">
 
 		<ul id="menu">
-			<li><a href="">Home</a></li>
+			<li><a href="index.php">Home</a></li>
 			<li><a href="">All Products</a></li>
 			<li><a href="">My Account</a></li>
-			<li><a href="customer_register.php">Log In</a></li>
+			<li><a href="customer_login.php">Log In</a></li>
 			<li><a href="">Shopping Cart</a></li>
 			<li><a href="">Contact Us</a></li>
 		</ul>
@@ -38,6 +38,7 @@
 
 	</div>
 
+		<!--content_wrapper starts here-->
 		<div class="content_wrapper">
 
 			<div id="sidebar">sidebar</div>
@@ -45,6 +46,7 @@
 			<div id="content_area">Content Area</div>
 
 		</div>
+		<!--content_wrapper ends here-->
 
 
 		<div id="footer">footer</div>
