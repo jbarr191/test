@@ -98,6 +98,21 @@ body {background:white;}
 	background: black;
 	float: left;
 }
+#sidebar_title{
+	background:white;
+	color:black;
+	font-size:22px;
+	font-family:arial;
+	padding:10px;
+}
+#cats{
+	text-align:center;
+}
+#cats li { list-style:none; margin:10px;}
+
+#cats a {color:white; padding:15px; font-size: 20x; font-family: Comic Sans Ms;}
+
+#cats a:hover {color:orange; font-weight:bolder; text-decoration:underline;
 
 #footer {
 	width: 1000px;

@@ -39,12 +39,34 @@
 	</div>
 
 		<!--content_wrapper starts here-->
-		<div class="content_wrapper">
-
-			<div id="sidebar">sidebar</div>
-
-			<div id="content_area">Content Area</div>
-
+		<div class = "content_wrapper">
+		
+			<div id ="sidebar">
+			
+				<div id="sidebar_title">Categories</div>
+				
+				<ul id="cats">
+					<li><a href="#">Laptops</a></li>
+					<li><a href="#">Laptops</a></li>
+					<li><a href="#">Laptops</a></li>
+					<li><a href="#">Laptops</a></li>
+					<li><a href="#">Laptops</a></li>
+					<li><a href="#">Laptops</a></li>
+				<ul>
+				<div id="sidebar_title">Brands</div>
+				
+				<ul id="cats">
+					<li><a href="#">HP</a></li>
+					<li><a href="#">Dell</a></li>
+					<li><a href="#">Motorola</a></li>
+					<li><a href="#">idk</a></li>
+					<li><a href="#">idk</a></li>
+					<li><a href="#">idk</a></li>
+				<ul>
+				
+			</div>
+			
+			<div id="content_area">This is content area</div>
 		</div>
 		<!--content_wrapper ends here-->
 
