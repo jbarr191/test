@@ -80,24 +80,40 @@ body {background:white;}
 
 .content_wrapper {
 	width: 1000px;
-	height: 800px;
 	margin: auto;
 	background: orange;
 }
 
 #content_area {
-	width: 1000px;
-	height:800px;
-	float: right;
-	background: orange;
+	width:8000px;
+	float:right;
+	background:orange;
 }
 
 #sidebar {
-	width: 200px;
-	height: 800px;
-	background: black;
-	float: left;
+	width:200px;
+	background:black;
+	float:left;
 }
+#sidebar_title{
+	background:white;
+	color:black;
+	font-size:22px;
+	font-family:arial;
+	padding:10px;
+	text-align:center;
+	
+}
+
+
+#cats{
+	text-align:center;
+}
+#cats li { list-style:none; margin:10px;}
+
+#cats a {color:white; padding:15px; font-size: 20x; font-family: Comic Sans Ms;}
+
+#cats a:hover {color:orange; font-weight:bolder; text-decoration:underline;
 
 #footer {
 	width: 1000px;

@@ -1,4 +1,9 @@
 <!DOCTYPE>
+<?php
+
+include("functions/functions.php");
+?>
+
 <html>
 	<head>
 		<title>My Online Shop</title>
@@ -41,7 +46,17 @@
 		<!--content_wrapper starts here-->
 		<div class="content_wrapper">
 
-			<div id="sidebar">sidebar</div>
+			<div id ="sidebar">
+			
+				<div id="sidebar_title">Genres</div>
+				
+				<ul id="gens">
+				
+				<?php getGens(); ?>
+					
+				<ul>
+
+			</div>	
 
 			<div id="content_area">Content Area</div>
 
@@ -49,7 +64,12 @@
 		<!--content_wrapper ends here-->
 
 
-		<div id="footer">footer</div>
+		<div id="footer">
+		
+		<h2 style = "text-align:center; padding-top:30px;">&copy; 2018
+		by software engineering TEAM 1</h2>
+		
+		</div>
 
 	</div>
 	<!--Main Container ends here-->
