@@ -38,30 +38,26 @@
 
 	</div>
 
-		<!--content_wrapper starts here-->
+	
+	<!--Content Wrapper starts here-->	
 		<div class = "content_wrapper">
 		
 			<div id ="sidebar">
 			
-				<div id="sidebar_title">Categories</div>
+				<div id="sidebar_title">Genres</div>
 				
-				<ul id="cats">
-					<li><a href="#">Laptops</a></li>
-					<li><a href="#">Laptops</a></li>
-					<li><a href="#">Laptops</a></li>
-					<li><a href="#">Laptops</a></li>
-					<li><a href="#">Laptops</a></li>
-					<li><a href="#">Laptops</a></li>
+				<ul id="gens">
+				
+				<?php getGens(); ?>
+					
 				<ul>
-				<div id="sidebar_title">Brands</div>
 				
-				<ul id="cats">
-					<li><a href="#">HP</a></li>
-					<li><a href="#">Dell</a></li>
-					<li><a href="#">Motorola</a></li>
-					<li><a href="#">idk</a></li>
-					<li><a href="#">idk</a></li>
-					<li><a href="#">idk</a></li>
+				<div id="sidebar_title">Authors</div>
+				
+				<ul id="gens">
+				
+				<?php getAuthors(); ?>
+					
 				<ul>
 				
 			</div>
