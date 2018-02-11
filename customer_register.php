@@ -1,4 +1,11 @@
 <!DOCTYPE>
+<?php
+
+include("functions/functions.php");
+include("includes/db.php");
+
+?>
+
 <html>
 	<head>
 		<title>My Online Shop</title>
@@ -58,7 +65,7 @@
 							</tr>
 							<tr>
 								<td align="right">Last Name: </td>
-								<td ><input type="text" name="c_name" /></td>
+								<td ><input type="text" name="c_last" /></td>
 							</tr>
 							<tr>
 								<td align="right">Customer Email: </td>
@@ -95,3 +102,27 @@
 
 </body>
 </html>
+
+<?php
+	if (isset($_POST['register'])){
+
+		$c_name = $_POST['c_name'];
+		$c_last = $_POST['c_last'];
+		$c_email = $_POST['c_email'];
+		$c_pass = $_POST['c_pass'];
+		$c_cpass = $_POST['c_cpass'];
+		$c_image = $_FILES['c_image']['name'];
+		$c_image_tmp = $_FILES['c_image']['tmp_name'];
+
+		move_uploaded_file($c_image_tmp,"customer/customer_images/$c_image");
+
+		echo $insert_c = "insert into accounts (email, first_name, last_name, password, user_image) values ('$c_email','$c_name','$c_last','$c_pass','$c_image')";
+
+		$run_c = mysqli_query($con, $insert_c);
+
+		if($run_c) {
+			echo "<script>alert('registration successful')</script>";
+		}
+	}
+
+ ?>
