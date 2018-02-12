@@ -77,7 +77,7 @@ include("includes/db.php");
 							</tr>
 							<tr>
 								<td align="right">Confirm Password: </td>
-								<td><input type="text" name="c_cpass" /></td>
+								<td><input type="password" name="c_cpass" /></td>
 							</tr>
 							<tr>
 								<td align="right">Profile Image: </td>
