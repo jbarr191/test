@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2018 at 10:31 AM
+-- Generation Time: Feb 14, 2018 at 06:44 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -117,6 +117,15 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`product_id`, `product_title`, `product_image`, `product_author`, `product_desc`, `product_bio`, `product_genre`, `product_pub`, `product_release`) VALUES
+(1, 'testtitle', 'trust.png', 'testauthor', 'testdesc', 'testbio', '1', 'testpub', '0000-00-00'),
+(2, 'testtitle2', 'patrick.jpg', 'testauthor2', 'testdesc2', 'testbio2', '2', 'testpub2', '0000-00-00'),
+(4, 'testtitle3', 'Capture.JPG', 'testauthor3', 'testdesc3', 'testbio3', '2', 'testpub3', '0000-00-00');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -152,13 +161,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `gen_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `gen_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

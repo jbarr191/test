@@ -31,3 +31,43 @@ function getGens()
 	echo "<li><a href='#'>$gen_type</a></li>";
 	}
 }
+
+function getPro(){
+	
+	global $con;
+	
+	// query
+	$get_pro = "select * from products order by RAND() LIMIT 0,6";
+	
+	// run query on the connection
+	$run_pro = mysqli_query($con, $get_pro);
+	
+	while($row_pro=mysqli_fetch_array($run_pro)){
+		
+		$pro_id = $row_pro['product_id'];
+		$pro_title = $row_pro['product_title'];
+		$pro_image = $row_pro['product_image'];
+		$pro_author = $row_pro['product_author'];
+		$pro_desc= $row_pro['product_desc'];
+		$pro_bio = $row_pro['product_bio'];
+		$pro_gen = $row_pro['product_genre'];
+		$pro_release = $row_pro['product_release'];
+		
+		echo "
+				<div id='single_product'>
+				
+					<h3>$pro_title</h3>
+					
+					<img src='admin_area/product_images/$pro_image' width='180' height='180' />
+					
+					<p><b> Price:   </b></p>
+					
+					<a href='index.php?pro_id=$pro_id'><button style='float:right'>Add to Cart</button></a>
+					
+								
+				</div>			
+		";	
+	}
+}
+
+?>
