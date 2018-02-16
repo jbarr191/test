@@ -49,6 +49,7 @@ function getPro(){
 		$pro_image = $row_pro['product_image'];
 		$pro_author = $row_pro['product_author'];
 		$pro_desc= $row_pro['product_desc'];
+		$pro_price = $row_pro['product_price'];
 		$pro_bio = $row_pro['product_bio'];
 		$pro_gen = $row_pro['product_genre'];
 		$pro_release = $row_pro['product_release'];
@@ -58,9 +59,9 @@ function getPro(){
 				
 					<h3>$pro_title</h3>
 					
-					<img src='admin_area/product_images/$pro_image' width='180' height='180' />
+					<img src='admin_area/product_images/$pro_image' width='180' height='277' />
 					
-					<p><b> Price:   </b></p>
+					<p><b> Price: $ $pro_price  </b></p>
 					
 					<a href='index.php?pro_id=$pro_id'><button style='float:right'>Add to Cart</button></a>
 					

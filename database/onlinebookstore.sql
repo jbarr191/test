@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2018 at 06:44 PM
+-- Generation Time: Feb 16, 2018 at 03:37 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -110,6 +110,7 @@ CREATE TABLE `products` (
   `product_image` text NOT NULL,
   `product_author` varchar(255) NOT NULL,
   `product_desc` text NOT NULL,
+  `product_price` double NOT NULL,
   `product_bio` text NOT NULL,
   `product_genre` varchar(255) NOT NULL,
   `product_pub` text NOT NULL,
@@ -120,10 +121,11 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `product_title`, `product_image`, `product_author`, `product_desc`, `product_bio`, `product_genre`, `product_pub`, `product_release`) VALUES
-(1, 'testtitle', 'trust.png', 'testauthor', 'testdesc', 'testbio', '1', 'testpub', '0000-00-00'),
-(2, 'testtitle2', 'patrick.jpg', 'testauthor2', 'testdesc2', 'testbio2', '2', 'testpub2', '0000-00-00'),
-(4, 'testtitle3', 'Capture.JPG', 'testauthor3', 'testdesc3', 'testbio3', '2', 'testpub3', '0000-00-00');
+INSERT INTO `products` (`product_id`, `product_title`, `product_image`, `product_author`, `product_desc`, `product_price`, `product_bio`, `product_genre`, `product_pub`, `product_release`) VALUES
+(5, 'To Kill a Mockingbird', 'mockingbird.jpg', 'Harper Lee', 'The unforgettable novel of a childhood in a sleepy Southern town and the crisis of conscience that rocked it, To Kill A Mockingbird became both an instant bestseller and a critical success when it was first published in 1960. It went on to win the Pulitzer Prize in 1961 and was later made into an Academy Award-winning film, also a classic.', 6.61, 'Nelle Harper Lee (April 28, 1926 â€“ February 19, 2016), better known by her pen name Harper Lee, was an American novelist widely known for To Kill a Mockingbird, published in 1960. Immediately successful, it won the 1961 Pulitzer Prize and has become a classic of modern American literature.', '2', 'Warner Books, Inc.', '1960-07-11'),
+(6, 'Pride and Prejudice', 'pride.jpg', 'Jane Austen', 'â€œIt is a truth universally acknowledged, that a single man in possession of a good fortune must be in want of a wife.â€ So begins Pride and Prejudice, Jane Austenâ€™s witty comedy of mannersâ€”one of the most popular novels of all timeâ€”that features splendidly civilized sparring between the proud Mr. Darcy and the prejudiced Elizabeth Bennet', 6.99, 'Jane Austen (16 December 1775 â€“ 18 July 1817) was an English novelist known primarily for her six major novels, which interpret, critique and comment upon the British landed gentry at the end of the 18th century. ', '2', 'Thomas Egerton', '1813-01-28'),
+(8, 'The Great Gatsby', 'greatGatsby.jpg', 'Francis Fitzgerald', 'Jay Gatsby is the man who has everything. But one thing will always be out of his reach. Everybody who is anybody is seen at his glittering parties. Day and night his Long Island mansion buzzes with bright young things drinking, dancing, and debating his mysterious character. ', 3.99, 'Francis Scott Key Fitzgerald was an American writer of novels and short stories, whose works have been seen as evocative of the Jazz Age, a term he himself allegedly coined. He is regarded as one of the greatest twentieth century writers.', '2', 'Charles Scribners Sons', '1925-04-10'),
+(9, 'The Book Thief', 'bookthief.jpg', 'Markus Zusak', 'Itâ€™s just a small story really, about among other things: a girl, some words, an accordionist, some fanatical Germans, a Jewish fist-fighter, and quite a lot of thievery ...', 5.29, 'Markus Zusak was born in 1975 and is the author of five books, including the international bestseller, The Book Thief , which is translated into more than forty languages.', '2', '', '0000-00-00');
 
 --
 -- Indexes for dumped tables
@@ -167,7 +169,7 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `product_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

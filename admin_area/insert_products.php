@@ -31,6 +31,10 @@ include("includes/db1.php");
 				<td><input type="text" name="product_author"/></td>
 			</tr>
 			<tr>
+				<td align = "right"><b>Book Price:</b></td>
+				<td><input type="text" name="product_price" /></td>
+			</tr>
+			<tr>
 				<td align = "right"><b>Book Description:</b></td>
 				<td><textarea name = "product_desc" cols ="20" rows="10"></textarea></td>
 			</tr>
@@ -103,6 +107,7 @@ include("includes/db1.php");
 		$product_title= $_POST['product_title'];
 		$product_author= $_POST['product_author'];
 		$product_desc= $_POST['product_desc'];
+		$product_price= $_POST['product_price'];
 		$product_bio= $_POST['product_bio'];
 		$product_genre= $_POST['product_genre'];
 		$product_pub= $_POST['product_pub'];
@@ -116,8 +121,8 @@ include("includes/db1.php");
 		move_uploaded_file($product_image_tmp, "product_images/$product_image");
 		
 		
-		$insert_products = "insert into products(product_title, product_image, product_author, product_desc, product_bio, product_genre, product_pub, product_release) 
-											values('$product_title','$product_image','$product_author','$product_desc','$product_bio','$product_genre','$product_pub','$product_release')";
+		$insert_products = "insert into products(product_title, product_image, product_author, product_desc, product_price, product_bio, product_genre, product_pub, product_release) 
+											values('$product_title','$product_image','$product_author','$product_desc','$product_price','$product_bio','$product_genre','$product_pub','$product_release')";
 		$insert_pro = mysqli_query($con, $insert_products);
 		if($insert_pro)
 		{
