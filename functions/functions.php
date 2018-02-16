@@ -12,6 +12,61 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	//$run_acc() = mysqli_query($con, $get_acc);
 //}
+
+
+
+/* script function to retrieve a visitor's IP address.
+Source: http://www.phpf1.com/tutorial/get-ip-address.html
+*/
+function getIp() {
+	
+    $ip = $_SERVER['REMOTE_ADDR'];
+ 
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+ 
+    return $ip;
+}
+
+function cart(){
+	
+	// if add to cart button was clicked
+	if(isset($_GET['add_cart'])){
+		
+		global $con;
+		// get the user's IP address
+		$ip = getIp();
+		
+		// get the id of the product that was added
+		$pro_id = $_GET['add_cart'];
+		
+		// check if the product has already been added for that user
+		$check_pro = "select * from cart where ip_add='$ip' AND p_id='$pro_id'";
+		
+		// execute query
+		$run_check = mysqli_query($con, $check_pro);
+		
+		// if the query returns more than 0 items, do nothing
+		if (mysqli_num_rows($run_check)>0){
+			
+			echo "";
+		}
+		else { // insert the product; since it does not already exist 
+			
+			// insert product id, and the ip address of the user
+			$insert_pro = "insert into cart (p_id, ip_add) values ('$pro_id', '$ip')";
+			
+			$run_pro = mysqli_query($con, $insert_pro);
+			
+			// refresh page and go back to index.php
+			echo "<script>window.open('index.php','_self')</script>";
+		}		
+	}	
+}
+
 function getGens()
 {
 	global $con;
@@ -31,3 +86,44 @@ function getGens()
 	echo "<li><a href='#'>$gen_type</a></li>";
 	}
 }
+
+function getPro(){
+	
+	global $con;
+	
+	// query
+	$get_pro = "select * from products order by RAND() LIMIT 0,6";
+	
+	// run query on the connection
+	$run_pro = mysqli_query($con, $get_pro);
+	
+	while($row_pro=mysqli_fetch_array($run_pro)){
+		
+		$pro_id = $row_pro['product_id'];
+		$pro_title = $row_pro['product_title'];
+		$pro_image = $row_pro['product_image'];
+		$pro_author = $row_pro['product_author'];
+		$pro_desc= $row_pro['product_desc'];
+		$pro_price = $row_pro['product_price'];
+		$pro_bio = $row_pro['product_bio'];
+		$pro_gen = $row_pro['product_genre'];
+		$pro_release = $row_pro['product_release'];
+		
+		echo "
+				<div id='single_product'>
+				
+					<h3>$pro_title</h3>
+					
+					<img src='admin_area/product_images/$pro_image' width='180' height='277' />
+					
+					<p><b> Price: $ $pro_price  </b></p>
+					
+					<a href='index.php?add_cart=$pro_id'><button style='float:right'>Add to Cart</button></a>
+					
+								
+				</div>			
+		";	
+	}
+}
+
+?>

@@ -33,6 +33,7 @@ body {background:white;}
 	width: 1000px;
 	height: auto;
 	margin: auto;
+	background: black;
 }
 
 .header_wrapper {
@@ -85,7 +86,7 @@ body {background:white;}
 }
 
 #content_area {
-	width:8000px;
+	width:800px;
 	float:right;
 	background:orange;
 }
@@ -106,14 +107,27 @@ body {background:white;}
 }
 
 
-#cats{
+#gens{
 	text-align:center;
 }
-#cats li { list-style:none; margin:10px;}
+#gens li { list-style:none; margin:10px;}
 
-#cats a {color:white; padding:15px; font-size: 20x; font-family: Comic Sans Ms;}
+#gens a {color:white; padding:15px; font-size: 20x; font-family: Comic Sans Ms;}
 
-#cats a:hover {color:orange; font-weight:bolder; text-decoration:underline;
+#gens a:hover {color:orange; font-weight:bolder; text-decoration:underline;}
+
+#products_box{
+	width:780px;
+	text-align:center;
+	margin-left:30px;
+	margin-bottom:10px;
+}
+
+#single_product{float:left; margin-left:30px; padding:10px;}
+	
+#single_product img {border:2px solid black;}
+	
+#shopping_cart {width:800px; height:50px; background:black; color:white;}
 
 #footer {
 	width: 1000px;
