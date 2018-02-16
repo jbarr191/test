@@ -12,6 +12,61 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	//$run_acc() = mysqli_query($con, $get_acc);
 //}
+
+
+
+/* script function to retrieve a visitor's IP address.
+Source: http://www.phpf1.com/tutorial/get-ip-address.html
+*/
+function getIp() {
+	
+    $ip = $_SERVER['REMOTE_ADDR'];
+ 
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+ 
+    return $ip;
+}
+
+function cart(){
+	
+	// if add to cart button was clicked
+	if(isset($_GET['add_cart'])){
+		
+		global $con;
+		// get the user's IP address
+		$ip = getIp();
+		
+		// get the id of the product that was added
+		$pro_id = $_GET['add_cart'];
+		
+		// check if the product has already been added for that user
+		$check_pro = "select * from cart where ip_add='$ip' AND p_id='$pro_id'";
+		
+		// execute query
+		$run_check = mysqli_query($con, $check_pro);
+		
+		// if the query returns more than 0 items, do nothing
+		if (mysqli_num_rows($run_check)>0){
+			
+			echo "";
+		}
+		else { // insert the product; since it does not already exist 
+			
+			// insert product id, and the ip address of the user
+			$insert_pro = "insert into cart (p_id, ip_add) values ('$pro_id', '$ip')";
+			
+			$run_pro = mysqli_query($con, $insert_pro);
+			
+			// refresh page and go back to index.php
+			echo "<script>window.open('index.php','_self')</script>";
+		}		
+	}	
+}
+
 function getGens()
 {
 	global $con;
@@ -63,7 +118,7 @@ function getPro(){
 					
 					<p><b> Price: $ $pro_price  </b></p>
 					
-					<a href='index.php?pro_id=$pro_id'><button style='float:right'>Add to Cart</button></a>
+					<a href='index.php?add_cart=$pro_id'><button style='float:right'>Add to Cart</button></a>
 					
 								
 				</div>			

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2018 at 03:37 AM
+-- Generation Time: Feb 16, 2018 at 11:22 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -78,6 +78,27 @@ INSERT INTO `author` (`authorNum`, `authorLast`, `authorFirst`) VALUES
 ('23', 'O\'Rourke', 'Randy'),
 ('24', 'Kidder', 'Tracy'),
 ('25', 'Schleining', 'Lon');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `p_id` int(10) NOT NULL,
+  `ip_add` varchar(255) NOT NULL,
+  `qty` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`p_id`, `ip_add`, `qty`) VALUES
+(6, '::1', 0),
+(9, '::1', 0),
+(8, '::1', 0);
 
 -- --------------------------------------------------------
 
