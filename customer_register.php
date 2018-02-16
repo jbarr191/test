@@ -106,22 +106,53 @@ include("includes/db.php");
 <?php
 	if (isset($_POST['register'])){
 
+		$isEmail = (boolean) true;
+		$isNewEmail = (boolean) true;
+		$correctPass = (boolean) true;
 		$c_name = $_POST['c_name'];
 		$c_last = $_POST['c_last'];
-		$c_email = $_POST['c_email'];
+		$c_email = strtolower(trim($_POST['c_email']));
 		$c_pass = $_POST['c_pass'];
 		$c_cpass = $_POST['c_cpass'];
 		$c_image = $_FILES['c_image']['name'];
 		$c_image_tmp = $_FILES['c_image']['tmp_name'];
 
-		move_uploaded_file($c_image_tmp,"customer/customer_images/$c_image");
+		//Checks if the given email is a legitimate email
+		if(!(filter_var($c_email, FILTER_VALIDATE_EMAIL))){
+			echo "Please enter a valid email.\n";
+			$isEmail = false;
+		}
 
-		echo $insert_c = "insert into accounts (email, first_name, last_name, password, user_image) values ('$c_email','$c_name','$c_last','$c_pass','$c_image')";
+		//Checks if the given email is the same to any other one already registered
+		$emailQuery = sprintf("select * from accounts where lower(email)= '%s' ", $c_email);
+		$result = mysqli_query($con, $emailQuery);
+		$num_rows = mysqli_num_rows($result);
 
-		$run_c = mysqli_query($con, $insert_c);
+		//Tests if any matches were found when looking for already-registed emails
+		if($num_rows > 0)
+		{
+			echo "That email is already being used.\n";
+			$isNewEmail = false;
+		}
 
-		if($run_c) {
-			echo "<script>alert('registration successful')</script>";
+		//Checks if the two given passwords are the same
+		if($c_pass != $c_cpass){
+			echo "Passwords do not match.\n";
+			$correctPass = false;
+		}
+
+		//Creates an account if all validations go through
+		if($isEmail && $isNewEmail && $correctPass) {
+
+			move_uploaded_file($c_image_tmp,"customer/customer_images/$c_image");
+
+			echo $insert_c = "insert into accounts (email, first_name, last_name, password, user_image) values ('$c_email','$c_name','$c_last','$c_pass','$c_image')";
+
+			$run_c = mysqli_query($con, $insert_c);
+
+			if($run_c) {
+				echo "<script>alert('registration successful')</script>";
+			}
 		}
 	}
 
