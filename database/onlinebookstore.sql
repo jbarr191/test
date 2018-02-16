@@ -3,11 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
-<<<<<<< HEAD
+
 -- Generation Time: Feb 13, 2018 at 04:57 PM
-=======
 -- Generation Time: Feb 16, 2018 at 11:22 PM
->>>>>>> refs/remotes/origin/master
+
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -86,7 +85,7 @@ INSERT INTO `author` (`authorNum`, `authorLast`, `authorFirst`) VALUES
 -- --------------------------------------------------------
 
 --
-<<<<<<< HEAD
+
 -- Table structure for table `comments`
 --
 
@@ -97,7 +96,7 @@ CREATE TABLE `comments` (
   `rating` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-=======
+
 -- Table structure for table `cart`
 --
 
@@ -116,7 +115,7 @@ INSERT INTO `cart` (`p_id`, `ip_add`, `qty`) VALUES
 (9, '::1', 0),
 (8, '::1', 0);
 
->>>>>>> refs/remotes/origin/master
+
 -- --------------------------------------------------------
 
 --
