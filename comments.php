@@ -73,11 +73,38 @@ include("functions/functions.php");
 				
 				</div>
 			
-				<div id="products_box">
+				<?php
 				
+				if(isset($_GET['pro_id'])){
+					$product_id = $_GET['pro_id'];
 					
 				
-				</div>
+				$get_pro = "select * from comments where book_id = '$product_id'";
+	
+	
+				$run_pro = mysqli_query($con, $get_pro);
+	
+				while($row_pro=mysqli_fetch_array($run_pro)){
+		
+					$pro_id = $row_pro['book_id'];
+					$pro_user = $row_pro['user_email'];
+					$pro_text = $row_pro['comment_text'];
+					$pro_rating = $row_pro['rating'];
+					
+		
+					echo "
+					
+				
+					<h3>$pro_user</h3>
+					
+					<h4>$pro_text</h4>
+					<h5>Rating: $pro_rating</h5>
+								
+		";	
+	}
+				}
+?>
+				
 			
 			</div>
 
