@@ -105,7 +105,17 @@ body {background:white;}
 	text-align:center;
 	
 }
+#comment_insert{
+	width:400px;
+	float:right;
+	height:300px;
+}
 
+#comment_text{
+	padding:15px;
+	float:right;
+	color:pink;
+}
 
 #gens{
 	text-align:center;

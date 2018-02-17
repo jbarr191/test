@@ -120,10 +120,13 @@ function getPro(){
 					
 					<a href='index.php?add_cart=$pro_id'><button style='float:right'>Add to Cart</button></a>
 					
-					<a href ='comments.php' style = 'float:right'>Comments</a>
+					<a href ='comments.php?pro_id=$pro_id' style = 'float:right'>Comments</a>
 				</div>			
 		";	
 	}
 }
+
+
+
 
 ?>
