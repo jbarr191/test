@@ -3,10 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
-
--- Generation Time: Feb 13, 2018 at 04:57 PM
--- Generation Time: Feb 16, 2018 at 11:22 PM
-
+-- Generation Time: Feb 17, 2018 at 03:38 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -85,18 +82,6 @@ INSERT INTO `author` (`authorNum`, `authorLast`, `authorFirst`) VALUES
 -- --------------------------------------------------------
 
 --
-
--- Table structure for table `comments`
---
-
-CREATE TABLE `comments` (
-  `book_id` int(100) NOT NULL,
-  `user_email` varchar(50) NOT NULL,
-  `comment_text` text,
-  `rating` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
 -- Table structure for table `cart`
 --
 
@@ -106,15 +91,18 @@ CREATE TABLE `cart` (
   `qty` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `cart`
+-- Table structure for table `comments`
 --
 
-INSERT INTO `cart` (`p_id`, `ip_add`, `qty`) VALUES
-(6, '::1', 0),
-(9, '::1', 0),
-(8, '::1', 0);
-
+CREATE TABLE `comments` (
+  `book_id` int(100) NOT NULL,
+  `user_email` varchar(50) NOT NULL,
+  `comment_text` text,
+  `rating` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -181,6 +169,12 @@ ALTER TABLE `author`
   ADD PRIMARY KEY (`authorNum`);
 
 --
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`p_id`);
+
+--
 -- Indexes for table `genres`
 --
 ALTER TABLE `genres`
@@ -201,12 +195,6 @@ ALTER TABLE `products`
 --
 ALTER TABLE `genres`
   MODIFY `gen_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `products`
---
-ALTER TABLE `products`
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
