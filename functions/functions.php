@@ -67,6 +67,82 @@ function cart(){
 	}	
 }
 
+// Getting the total number of items in cart
+function total_items(){
+	
+	global $con;
+	
+	// if add to cart is clicked, update total items
+	if(isset($_GET['add_cart'])){
+		
+		$ip = getIP();
+		
+		// query the db to retrieve all items that belong to an ip
+		$get_items = "select * from cart where ip_add='$ip'";
+		
+		$run_items = mysqli_query($con, $get_items);
+		
+		// get the number of rows
+		$count_items = mysqli_num_rows($run_items);
+	}	
+	else{
+		$ip = getIP();
+		
+		// query the db to retrieve all items that belong to an ip
+		$get_items = "select * from cart where ip_add='$ip'";
+		
+		$run_items = mysqli_query($con, $get_items);
+		
+		// get the number of rows
+		$count_items = mysqli_num_rows($run_items);
+	}
+	
+	echo $count_items;		
+}
+
+// Getting the total running price of the items in cart
+function total_price(){
+	
+	global $con;
+	
+	$total = 0;
+	
+	$ip = getIp();
+	
+	// query the db to retrieve all items that belong to an ip
+	$sel_price = "select * from cart where ip_add='$ip'";
+	
+	// run the above query
+	$run_price = mysqli_query($con, $sel_price);
+	
+	// while there's additional rows to fetch from the query results
+	while($p_price=mysqli_fetch_array($run_price)){
+		
+		// get the product id from the cart
+		$pro_id = $p_price['p_id'];
+		
+		// retrieve the product with the matching id from products table
+		$pro_price = "select * from products where product_id = '$pro_id'";
+		
+		// run the above query
+		$run_pro_price = mysqli_query($con, $pro_price);
+		
+		// while there's additional rows to fetch from the query results
+		while ($pp_price = mysqli_fetch_array($run_pro_price)){
+			
+			// store the price of each item into an array
+			$product_price = array($pp_price['product_price']);
+			
+			// sum up all values in the array
+			$values = array_sum($product_price);	
+			
+			$total += $values;
+		}	
+	}
+	
+	echo "$" .$total;	
+}
+
 function getGens()
 {
 	global $con;
@@ -92,7 +168,7 @@ function getPro(){
 	global $con;
 	
 	// query
-	$get_pro = "select * from products order by RAND() LIMIT 0,6";
+	$get_pro = "select * from products";
 	
 	// run query on the connection
 	$run_pro = mysqli_query($con, $get_pro);
@@ -120,7 +196,7 @@ function getPro(){
 					
 					<a href='index.php?add_cart=$pro_id'><button style='float:right'>Add to Cart</button></a>
 					
-					<a href ='comments.php' style = 'float:right'>Comments</a>
+					<a href ='comments.php' style = 'float:left'>Comments</a>
 				</div>			
 		";	
 	}
