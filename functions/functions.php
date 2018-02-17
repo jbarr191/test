@@ -147,7 +147,7 @@ function getGens()
 {
 	global $con;
 
-	//$get_gens = "select * from genres";
+	$get_gens = "select * from genres";
 
 	//run sql query
 	$run_gens = mysqli_query($con, $get_gens);
