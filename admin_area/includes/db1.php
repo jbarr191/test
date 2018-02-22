@@ -1,6 +1,6 @@
 <?php
 
-$con = mysqli_connect("localhost","root","","onlinebookstore");
+$con = mysqli_connect("localhost","root","wow.SQL","onlinebookstore");
 
 //if (mysqli_connect_errno())
 //{
