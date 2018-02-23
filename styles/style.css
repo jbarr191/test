@@ -107,8 +107,9 @@ body {background:white;}
 }
 #comment_insert{
 	width:400px;
-	float:right;
+	float:left;
 	height:300px;
+	color:white;
 }
 
 #comment_text{
