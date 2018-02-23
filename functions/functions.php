@@ -2,7 +2,7 @@
 
 //fill the third parameter with whatever database server you're working on,
 //or leave it blank if working on localhost
-$con = mysqli_connect("localhost","root","","onlinebookstore");
+$con = mysqli_connect("localhost","root","wow.SQL","onlinebookstore");
 
 //function getAccount($email, $password){
 
@@ -152,7 +152,7 @@ function getGens()
 	//run sql query
 	$run_gens = mysqli_query($con, $get_gens);
 
-	//fetch query and save to row_cats variable
+	//fetch query and save to row_gens variable
 	while ($row_gens = mysqli_fetch_array($run_gens))
 	{
 		//row_gen gets the data from table and stores it in variable
@@ -198,7 +198,9 @@ function getPro(){
 					
 
 					<a href ='comments.php?pro_id=$pro_id' style = 'float:left'>Comments</a>
-
+					
+					<a href = 'details.php' style = 'float:center;width:42px;height:42px'>&nbsp Details &nbsp</a>
+					
 	
 				</div>			
 		";	

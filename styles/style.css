@@ -81,6 +81,7 @@ body {background:white;}
 
 .content_wrapper {
 	width: 1000px;
+	height:auto;
 	margin: auto;
 	background: orange;
 }
