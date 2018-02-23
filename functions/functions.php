@@ -2,7 +2,7 @@
 
 //fill the third parameter with whatever database server you're working on,
 //or leave it blank if working on localhost
-$con = mysqli_connect("localhost","root","wow.SQL","onlinebookstore");
+$con = mysqli_connect("localhost","root","","onlinebookstore");
 
 //function getAccount($email, $password){
 
@@ -199,7 +199,7 @@ function getPro(){
 
 					<a href ='comments.php?pro_id=$pro_id' style = 'float:left'>Comments</a>
 					
-					<a href = 'details.php' style = 'float:center;width:42px;height:42px'>&nbsp Details &nbsp</a>
+					<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp Details &nbsp</a>
 					
 	
 				</div>			
