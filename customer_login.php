@@ -1,4 +1,12 @@
 <!DOCTYPE>
+<?php
+
+session_start();
+
+include("includes/db.php");
+
+?>
+
 <html>
 	<head>
 		<title>My Online Shop</title>
@@ -76,6 +84,26 @@
 					</div>
 
 				</form>
+
+				<?php
+
+				if (isset($_POST['login'])){
+
+					$email = $_POST['c_email'];
+					$pass = $_POST['c_pass'];
+					$sel_customer = "select * from accounts where password = '$pass' AND email = '$email'";
+
+					$run = mysqli_query($con, $sel_customer);
+
+					$check_customer = mysqli_num_rows($run);
+
+					if($check_customer == 0) {
+
+						echo "<script>alert('Password or email is incorrect')</script>";
+					}
+				}
+
+				?>
 
 			</div>
 
