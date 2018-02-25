@@ -100,6 +100,10 @@ include("includes/db.php");
 					if($check_customer == 0) {
 
 						echo "<script>alert('Password or email is incorrect')</script>";
+					} else {
+
+						$_SESSION['customer_email']=$email;
+						echo "<script>window.open('index.php','_self')</script>";
 					}
 				}
 
