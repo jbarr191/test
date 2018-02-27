@@ -74,18 +74,22 @@ include("functions/functions.php");
 				<div id="products_box">
 				
 					<?php
+					$search_query = $_GET['user_query'];
 					
-					if(isset($_GET['search'])){
+					
+					if(isset($_GET['search']))
+					{
 						
 						$search_query = $_GET['user_query'];
 						
-						if($search_query == 0)
+						if($search_query == '')
 						{
-							echo "<h2 style='padding:20px;'>No search results found!</h2>";
+								echo "<h2 style='padding:20px;'>Your search was empty!</h2>";
+								
 						}
+							
 						else
 						{
-						
 							$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
 																	or product_price like '%$search_query%'
@@ -137,6 +141,9 @@ include("functions/functions.php");
 								}	
 						}
 					}
+				   
+					
+				
 							
 					?>
 				
