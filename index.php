@@ -34,7 +34,7 @@ include("functions/functions.php");
 			<?php
 			if (isset($_SESSION['customer_email'])){
 
-				echo "<li><a href='customer_account.php'>My Account</a></li>";
+				echo "<li><a href='customer/customer_account.php'>My Account</a></li>";
 
 			} else {
 
@@ -81,7 +81,12 @@ include("functions/functions.php");
 						<?php
 						if (isset($_SESSION['customer_email'])){
 
-							echo "";
+							$user = $_SESSION['customer_email'];
+
+							$result = mysqli_query($con,"select first_name from accounts where email = '$user'");
+							$row_img = mysqli_fetch_array($result);
+							$name = $row_img['first_name'];
+							echo "Welcome $name!";
 
 						} else {
 

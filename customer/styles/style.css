@@ -88,14 +88,14 @@ body {background:white;}
 
 #content_area {
 	width:800px;
-	float:right;
+	float:left;
 	background:orange;
 }
 
 #sidebar {
 	width:200px;
 	background:black;
-	float:left;
+	float:right;
 }
 #sidebar_title{
 	background:white;
@@ -120,9 +120,9 @@ body {background:white;}
 }
 
 #gens{
-	text-align:center;
+	text-align:left;
 }
-#gens li { list-style:none; margin:10px;}
+#gens li { list-style:none; margin:5px;}
 
 #gens a {color:white; padding:15px; font-size: 20x; font-family: Comic Sans Ms;}
 
