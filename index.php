@@ -49,7 +49,8 @@ include("functions/functions.php");
 		<div id="form">
 			<form method="get" action="results.php" enctype="multipart/form-data">
 				<input type="text" name="user_query" placeholder="Search for stuff" />
-				<input type="submit" name="search" value="Search" />
+				<input type="submit" name="search_asc" value="Search Ascending" />
+				<input type="submit" name="search_desc" value="Search Descending" />
 			</form>
 		</div>
 
