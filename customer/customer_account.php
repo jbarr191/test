@@ -33,7 +33,7 @@ include("functions/functions.php");
 				<?php
 				if (isset($_SESSION['customer_email'])){
 
-					echo "<li><a href='customer/customer_account.php'>My Account</a></li>";
+					echo "<li><a href='customer_account.php'>My Account</a></li>";
 
 				} else {
 
@@ -87,39 +87,71 @@ include("functions/functions.php");
 
 					<div id="shopping_cart">
 
-							<span style="float:right; font-size:18px; padding:5px; line-height:40px;">
+						<span style="float:right; font-size:18px; padding:5px; line-height:40px;">
 
-								<?php
-								if (isset($_SESSION['customer_email'])){
+							<?php
+							if (isset($_SESSION['customer_email'])){
 
-									$user = $_SESSION['customer_email'];
+								$user = $_SESSION['customer_email'];
 
-									$result = mysqli_query($con,"select first_name from accounts where email = '$user'");
-									$row_img = mysqli_fetch_array($result);
-									$name = $row_img['first_name'];
-									echo "Welcome $name!";
+								$result = mysqli_query($con,"select first_name from accounts where email = '$user'");
+								$row_img = mysqli_fetch_array($result);
+								$name = $row_img['first_name'];
+								echo "Welcome $name!";
 
-								} else {
+							} else {
 
-									echo "Welcome Guest!";
+								echo "Welcome Guest!";
+							}
+							?>
+							<b style="color:yellow">Shopping Cart -</b> Total Items: <?php total_items();?>
+							Total Price: <?php total_price(); ?> <a href="../cart.php" style="color:yellow">Go to Cart</a>
+
+							<?php
+							if (!isset($_SESSION['customer_email'])){
+
+								echo "<a href='customer_login.php' style='color:orange'>Login</a>";
+
+							} else {
+
+								echo "<a href='../customer_logout.php' style='color:orange'>Logout</a>";
+							}
+
+							?>
+						</span>
+					</div>
+
+					<div id="products_box">
+
+						<form action="customer_account.php" method="post" enctype="multipart/form-data">
+							<td align="right">Profile Image: </td>
+							<td><input type="file" name="c_image" /></td>
+							<input type="submit" name="change" value="Change picture"/>
+
+							<?php
+
+							if (isset($_POST['change'])){
+
+								$user = $_SESSION['customer_email'];
+								$c_image = $_FILES['c_image']['name'];
+								$c_image_tmp = $_FILES['c_image']['tmp_name'];
+
+								move_uploaded_file($c_image_tmp,"customer_images/$c_image");
+
+								$update_c = "update accounts set user_image='$c_image' where email='$user'";
+
+								$run_c = mysqli_query($con, $update_c);
+
+								if($run_c) {
+									echo "<script>alert('Changes done succesfully')</script>";
+									echo "<script>window.open('customer_account.php','_self')</script>";
 								}
-								?>
-								<b style="color:yellow">Shopping Cart -</b> Total Items: <?php total_items();?>
-								Total Price: <?php total_price(); ?> <a href="../cart.php" style="color:yellow">Go to Cart</a>
 
-								<?php
-								if (!isset($_SESSION['customer_email'])){
+							}
 
-									echo "<a href='customer_login.php' style='color:orange'>Login</a>";
-
-								} else {
-
-									echo "<a href='../customer_logout.php' style='color:orange'>Logout</a>";
-								}
-
-								?>
-							</span>
-						</div>
+							?>
+						</form>
+					</div>
 
 				</div>
 		</div>
