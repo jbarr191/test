@@ -44,25 +44,13 @@ include("functions/functions.php");
 	</div>
 
 		<!--content_wrapper starts here-->
-		<div class="content_wrapper">
 
-			<div id ="sidebar">
-			
-				<div id="sidebar_title">Genres</div>
-				
-				<ul id="gens">
-				
-					<?php getGens(); ?>	
-					
-				</ul>
-
-			</div>	
 		
-			<div id="content_area">
+			<div class = "comment_content">
 			
 				<?php cart(); ?>
 				
-				<div id="shopping_cart">
+				<div id="shopping_cart" style= "float:right">
 			
 						<span style="float:right; font-size:18px; padding:5px; line-height:40px;">
 					
@@ -72,52 +60,87 @@ include("functions/functions.php");
 						</span>
 				
 				</div>
+				
+				<div id= "comment_insert">
 			
+					<form action= "comments.php" method = "post" enctype = "multipart/form-data">
+
+					<table align ="left"  bgcolor="orange">
+			<!-- insert into table  -->			
+			<tr>
+				<!-- column 1 -->
+				<td align = "right"><b>INSERT COMMENT</b></td>
+				<!-- column 2 -->
+				<td><input type="text" name="comment_text" size="20"/></td>
+			</tr>
+		
+		
+			<tr>
+				<td align = "right"><b>USER</b></td>
+				<td>
+					<select name = "customer_name">
+						
+						<option>Select</option>
+					
+						<option value='nickname'>Nickname</option>
+						
+						<option value = 'anonymous'>Anonymous</option>
+												
+				
+					</select>
+				
+				
+				</td>
+			</tr>
+				<tr>
+				<td align = "right"><b>RATING</b></td>
+				<td>
+					<select name = "rating">
+						
+						<option>Select</option>
+					
+						<option value='nickname'>1</option>
+						
+						<option value = 'anonymous'>2</option>
+						
+						<option value = 'anonymous'>3</option>
+						
+						<option value = 'anonymous'>4</option>
+						
+						<option value = 'anonymous'>5</option>
+												
+				
+					</select>
+				
+				
+				</td>
+			</tr>
+		
+			<!--insert button -->
+			<tr align="right">
+				<td colspan="7"><input type="submit" name="comment_post" value= "Insert Now"/></td>
+			</tr>
+			
+			
+		
+			</div>
+			
+			
+			<div id = "comment_text">	
+				<ul id="comments">
+				
+				
 				<?php
-				
-				if(isset($_GET['pro_id'])){
-					$product_id = $_GET['pro_id'];
-					
-				
-				$get_pro = "select * from comments where book_id = '$product_id'";
-	
-	
-				$run_pro = mysqli_query($con, $get_pro);
-	
-				while($row_pro=mysqli_fetch_array($run_pro)){
-		
-					$pro_id = $row_pro['book_id'];
-					$pro_user = $row_pro['user_email'];
-					$pro_text = $row_pro['comment_text'];
-					$pro_rating = $row_pro['rating'];
-					
-		
-					echo "
-					
-				
-					<h3>$pro_user</h3>
-					
-					<h4>$pro_text</h4>
-					<h5>Rating: $pro_rating</h5>
-								
-		";	
-	}
-				}
-?>
-				
-			
+					getComments();
+				?>
+				</ul>
+			</div>
 			</div>
 
-		</div>
 		<!--content_wrapper ends here-->
 
 
-		<div id="footer">
-		
-		<h2 style = "text-align:center; padding-top:30px;">&copy; 2018
-		by software engineering TEAM 1</h2>
-		
-		</div>
+	
 
 	</div>
 	<!--Main Container ends here-->

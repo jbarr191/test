@@ -83,7 +83,8 @@ body {background:white;}
 	width: 1000px;
 	height:auto;
 	margin: auto;
-	background: orange;
+	background:orange;
+	
 }
 
 #content_area {
@@ -106,21 +107,46 @@ body {background:white;}
 	text-align:center;
 
 }
+
+
+.comment_content{
+	width:1000px;
+	height:auto;
+	margin:auto;
+	background:orange;
+	display:inline-block;
+}
+
+
 #comment_insert{
-	width:400px;
-	float:left;
-	height:300px;
-	color:white;
+float:right;
+width:80%;
+
 }
 
 #comment_text{
-	padding:15px;
-	float:right;
+
+float:left;
+width:30%;
 
 }
 
+
+#comments{
+	text-align:right;
+
+}
+#comments li{
+	list-style:none; 
+	padding:20px;
+	color:black;
+	padding:15px;
+	float:right;
+}
+
+
 #gens{
-	text-align:center;
+	text-align:right;
 }
 #gens li { list-style:none; margin:10px;}
 
@@ -139,11 +165,17 @@ body {background:white;}
 
 #single_product img {border:2px solid black;}
 
+	
+#shopping_cart {width:800px; height:50px; background:black; color:white; }
+
+
 #shopping_cart {width:800px; height:50px; background:black; color:white;}
+
 
 #footer {
 	width: 1000px;
 	height: 100px;
 	background: gray;
 	clear: both;
+	
 }
