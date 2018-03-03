@@ -83,20 +83,19 @@ body {background:white;}
 	width: 1000px;
 	height:auto;
 	margin: auto;
-	background:orange;
-	
+	background: orange;
 }
 
 #content_area {
 	width:800px;
-	float:right;
+	float:left;
 	background:orange;
 }
 
 #sidebar {
 	width:200px;
 	background:black;
-	float:left;
+	float:right;
 }
 #sidebar_title{
 	background:white;
@@ -107,48 +106,23 @@ body {background:white;}
 	text-align:center;
 
 }
-
-
-.comment_content{
-	width:1000px;
-	height:auto;
-	margin:auto;
-	background:orange;
-	display:inline-block;
-}
-
-
 #comment_insert{
-float:right;
-width:80%;
-
+	width:400px;
+	float:left;
+	height:300px;
+	color:white;
 }
 
 #comment_text{
-
-float:left;
-width:30%;
-
-}
-
-
-#comments{
-	text-align:right;
-
-}
-#comments li{
-	list-style:none; 
-	padding:20px;
-	color:black;
 	padding:15px;
 	float:right;
-}
 
+}
 
 #gens{
-	text-align:right;
+	text-align:left;
 }
-#gens li { list-style:none; margin:10px;}
+#gens li { list-style:none; margin:5px;}
 
 #gens a {color:white; padding:15px; font-size: 20x; font-family: Comic Sans Ms;}
 
@@ -165,17 +139,11 @@ width:30%;
 
 #single_product img {border:2px solid black;}
 
-	
-#shopping_cart {width:800px; height:50px; background:black; color:white; }
-
-
 #shopping_cart {width:800px; height:50px; background:black; color:white;}
-
 
 #footer {
 	width: 1000px;
 	height: 100px;
 	background: gray;
 	clear: both;
-	
 }
