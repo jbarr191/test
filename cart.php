@@ -102,6 +102,8 @@ include("functions/functions.php");
 							
 							<?php
 							$total = 0;
+							
+							global $con;
 	
 							$ip = getIp();
 	
@@ -142,11 +144,11 @@ include("functions/functions.php");
 							?>
 							
 							<tr align="center">
-								<td><input = type="checkbox" name="remove[]"/></td>
+								<td><input = type="checkbox" name="remove[]" value="<?php echo $pro_id;?>"/></td>
 								<td><?php echo $product_title; ?><br>
 								<img src="admin_area/product_images/<?php echo $product_image;?>" width="60" height="60" />
 								</td>
-								<td><input type="text" size="4" name="qty" /></td>
+								<td><input type="text" size="4" name="qty"/></td>
 								<td><?php echo "$" . $single_price; ?></td>
 							</tr>
 										
@@ -154,14 +156,47 @@ include("functions/functions.php");
 							    }  // close brackets of above while loops 
 						?>
 						
-							<tr align="right">
-								<td colspan="4"><b>Sub Total:</b></td>
+							<tr>
+								<td colspan="4" align="right"><b>Sub Total:</b></td>
 								<td><?php echo "$" . $total;?></td>
+							</tr>
+							
+							<tr align="center">
+								<td colspan="2"><input type="submit" name="update_cart" value="Update Cart"/></td>
+								<td><input type="submit" name="continue" value="Continue Shopping"/></td>
+								<td><button><a href="checkout.php" style="text-decoration:none; color:black;">Checkout</a></button></td>
 							</tr>
 					
 						</table>
 				
 					</form>
+					
+					<?php
+
+						$ip = getIp();
+						
+						// if update cart button is clicked
+						if(isset($_POST['update_cart'])){
+							// delete relevant items from the cart database
+							foreach($_POST['remove'] as $remove_id){
+								
+								$delete_product = "delete from cart where p_id='$remove_id' AND ip_add='$ip'";
+								
+								$run_delete = mysqli_query($con, $delete_product);
+								
+								if($run_delete){
+									
+									echo "<script>window.open('cart.php','_self')</script>";
+								}
+							}					
+						}
+						// if continue shopping button is clicked, go to index.php
+						if(isset($_POST['continue'])){
+							
+							echo "<script>window.open('index.php','_self')</script>";					
+						}
+
+					?>
 
 				</div>
 
