@@ -76,38 +76,38 @@ include("functions/functions.php");
 
 				<div id="shopping_cart">
 
-						<span style="float:right; font-size:18px; padding:5px; line-height:40px;">
+					<span style="float:right; font-size:18px; padding:5px; line-height:40px;">
 
-						<?php
-						if (isset($_SESSION['customer_email'])){
+					<?php
+					if (isset($_SESSION['customer_email'])){
 
-							$user = $_SESSION['customer_email'];
+						$user = $_SESSION['customer_email'];
 
-							$result = mysqli_query($con,"select first_name from accounts where email = '$user'");
-							$row_img = mysqli_fetch_array($result);
-							$name = $row_img['first_name'];
-							echo "Welcome $name!";
+						$result = mysqli_query($con,"select first_name from accounts where email = '$user'");
+						$row_img = mysqli_fetch_array($result);
+						$name = $row_img['first_name'];
+						echo "Welcome $name!";
 
-						} else {
+					} else {
 
-							echo "Welcome Guest!";
-						}
-						?>
-						<b style="color:yellow">Shopping Cart -</b> Total Items: <?php total_items();?>
-						Total Price: <?php total_price(); ?> <a href="cart.php" style="color:yellow">Go to Cart</a>
+						echo "Welcome Guest!";
+					}
+					?>
+					<b style="color:yellow">Shopping Cart -</b> Total Items: <?php total_items();?>
+					Total Price: <?php total_price(); ?> <a href="cart.php" style="color:yellow">Go to Cart</a>
 
-						<?php
-						if (!isset($_SESSION['customer_email'])){
+					<?php
+					if (!isset($_SESSION['customer_email'])){
 
-							echo "<a href='customer_login.php' style='color:orange'>Login</a>";
+						echo "<a href='customer_login.php' style='color:orange'>Login</a>";
 
-						} else {
+					} else {
 
-							echo "<a href='customer_logout.php' style='color:orange'>Logout</a>";
-						}
+						echo "<a href='customer_logout.php' style='color:orange'>Logout</a>";
+					}
 
-						?>
-						</span>
+					?>
+					</span>
 
 				</div>
 
