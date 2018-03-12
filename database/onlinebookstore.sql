@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2018 at 03:38 AM
+<<<<<<< HEAD
+-- Generation Time: Mar 13, 2018 at 12:14 AM
+=======
+-- Generation Time: Mar 10, 2018 at 11:29 AM
+>>>>>>> 9bb9403707c6c76cb4ed8d6472d8e5ec7ac686d5
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -30,11 +34,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `accounts` (
   `email` varchar(50) NOT NULL,
+  `id_number` int(8) NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `password` varchar(16) NOT NULL,
-  `user_image` text NOT NULL
+  `user_image` text NOT NULL,
+  `username` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`email`, `first_name`, `last_name`, `password`, `user_image`) VALUES
+('a@mail.com', 'Jane', 'Doe', '1234', 'IMG_0014.JPG');
 
 -- --------------------------------------------------------
 
@@ -90,6 +103,19 @@ CREATE TABLE `cart` (
   `ip_add` varchar(255) NOT NULL,
   `qty` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`p_id`, `ip_add`, `qty`) VALUES
+<<<<<<< HEAD
+(6, '::1', 0);
+=======
+(6, '::1', 0),
+(9, '::1', 0),
+(8, '::1', 0);
+>>>>>>> 9bb9403707c6c76cb4ed8d6472d8e5ec7ac686d5
 
 -- --------------------------------------------------------
 
@@ -152,6 +178,28 @@ INSERT INTO `products` (`product_id`, `product_title`, `product_image`, `product
 (8, 'The Great Gatsby', 'greatGatsby.jpg', 'Francis Fitzgerald', 'Jay Gatsby is the man who has everything. But one thing will always be out of his reach. Everybody who is anybody is seen at his glittering parties. Day and night his Long Island mansion buzzes with bright young things drinking, dancing, and debating his mysterious character. ', 3.99, 'Francis Scott Key Fitzgerald was an American writer of novels and short stories, whose works have been seen as evocative of the Jazz Age, a term he himself allegedly coined. He is regarded as one of the greatest twentieth century writers.', '2', 'Charles Scribners Sons', '1925-04-10'),
 (9, 'The Book Thief', 'bookthief.jpg', 'Markus Zusak', 'Itâ€™s just a small story really, about among other things: a girl, some words, an accordionist, some fanatical Germans, a Jewish fist-fighter, and quite a lot of thievery ...', 5.29, 'Markus Zusak was born in 1975 and is the author of five books, including the international bestseller, The Book Thief , which is translated into more than forty languages.', '2', '', '0000-00-00');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `search`
+--
+
+CREATE TABLE `search` (
+  `search_id` int(100) NOT NULL,
+  `search_cat` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `search`
+--
+
+INSERT INTO `search` (`search_id`, `search_cat`) VALUES
+(1, 'Title'),
+(2, 'Author'),
+(3, 'Price'),
+(4, 'Publication'),
+(5, 'Release');
+
 --
 -- Indexes for dumped tables
 --
@@ -160,19 +208,14 @@ INSERT INTO `products` (`product_id`, `product_title`, `product_image`, `product
 -- Indexes for table `accounts`
 --
 ALTER TABLE `accounts`
-  ADD PRIMARY KEY (`email`);
+  ADD PRIMARY KEY (`email`,`id_number`),
+  ADD UNIQUE KEY `id_number` (`id_number`);
 
 --
 -- Indexes for table `author`
 --
 ALTER TABLE `author`
   ADD PRIMARY KEY (`authorNum`);
-
---
--- Indexes for table `cart`
---
-ALTER TABLE `cart`
-  ADD PRIMARY KEY (`p_id`);
 
 --
 -- Indexes for table `genres`
@@ -187,6 +230,12 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`);
 
 --
+-- Indexes for table `search`
+--
+ALTER TABLE `search`
+  ADD PRIMARY KEY (`search_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -195,6 +244,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `genres`
   MODIFY `gen_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `search`
+--
+ALTER TABLE `search`
+  MODIFY `search_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -81,6 +81,10 @@ include("includes/db.php");
 								<td><input type="text" name="c_email" /></td>
 							</tr>
 							<tr>
+								<td align="right">Username: </td>
+								<td ><input type="text" name="c_username" /></td>
+							</tr>
+							<tr>
 								<td align="right">Password: </td>
 								<td><input type="password" name="c_pass" /></td>
 							</tr>
@@ -118,9 +122,11 @@ include("includes/db.php");
 		$isEmail = (boolean) true;
 		$isNewEmail = (boolean) true;
 		$correctPass = (boolean) true;
+		$isNewUsername = (boolean) true;
 		$c_name = $_POST['c_name'];
 		$c_last = $_POST['c_last'];
 		$c_email = strtolower(trim($_POST['c_email']));
+		$c_username = $_POST['c_username'];
 		$c_pass = $_POST['c_pass'];
 		$c_cpass = $_POST['c_cpass'];
 		$c_image = $_FILES['c_image']['name'];
@@ -128,7 +134,7 @@ include("includes/db.php");
 
 		//Checks if the given email is a legitimate email
 		if(!(filter_var($c_email, FILTER_VALIDATE_EMAIL))){
-			echo "Please enter a valid email.\n";
+			echo "Please enter a valid email.<br>";
 			$isEmail = false;
 		}
 
@@ -140,22 +146,60 @@ include("includes/db.php");
 		//Tests if any matches were found when looking for already-registed emails
 		if($num_rows > 0)
 		{
-			echo "That email is already being used.\n";
+			echo "That email is already being used.<br>";
 			$isNewEmail = false;
+		}
+
+		//Checks if the given username is the same to any other one already registered
+		$usernameQuery = sprintf("select * from accounts where lower(username)= '%s' ", $c_username);
+		$result = mysqli_query($con, $usernameQuery);
+		$num_rows = mysqli_num_rows($result);
+
+		//Tests if any matches were found when looking for already-registed username
+		if($num_rows > 0)
+		{
+			echo "That username is already being used.<br>";
+			$isNewUsername = false;
 		}
 
 		//Checks if the two given passwords are the same
 		if($c_pass != $c_cpass){
-			echo "Passwords do not match.\n";
+			echo "Passwords do not match.<br>";
 			$correctPass = false;
 		}
 
+		//checks if the password is of the correct length
+		if((strlen($c_pass) < 8) || (strlen($c_pass) > 16) ){
+			echo "Password must be between 8 and 16 characters long.<br>";
+			$correctPass = false;
+		}
+
+		//checks if the password is strong
+		if((!preg_match("#[0-9]+#", $c_pass)) || (!preg_match("#[a-z]+#", $c_pass)) || (!preg_match("#[a-z]+#", $c_pass))){
+			echo "Password must have a combination of at least one number, and one capital and lower case letter.<br>";
+			$correctPass = false;
+		}
+
+		//creates a unique ID number for the account
+		$id = rand(1,999999);
+		$idQuery = sprintf("select * from accounts where lower(id_number)= '%s' ", $id);
+		$result = mysqli_query($con, $idQuery);
+		$num_rows = mysqli_num_rows($result);
+
+		while($num_rows > 0)
+		{
+			$id = rand(1,999999);
+			$idQuery = sprintf("select * from accounts where lower(id_number)= '%s' ", $id);
+			$result = mysqli_query($con, $idQuery);
+			$num_rows = mysqli_num_rows($result);
+		}
+
 		//Creates an account if all validations go through
-		if($isEmail && $isNewEmail && $correctPass) {
+		if($isEmail && $isNewEmail && $correctPass && $isNewUsername) {
 
 			move_uploaded_file($c_image_tmp,"customer/customer_images/$c_image");
 
-			echo $insert_c = "insert into accounts (email, first_name, last_name, password, user_image) values ('$c_email','$c_name','$c_last','$c_pass','$c_image')";
+			echo $insert_c = "insert into accounts (email, id_number, first_name, last_name, password, user_image, username) values ('$c_email', '$id', '$c_name','$c_last','$c_pass','$c_image', '$c_username')";
 
 			$run_c = mysqli_query($con, $insert_c);
 
