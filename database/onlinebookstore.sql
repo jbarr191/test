@@ -4,7 +4,11 @@
 --
 -- Host: 127.0.0.1
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Generation Time: Mar 13, 2018 at 12:14 AM
+=======
+-- Generation Time: Mar 10, 2018 at 11:29 AM
+>>>>>>> 9bb9403707c6c76cb4ed8d6472d8e5ec7ac686d5
 =======
 -- Generation Time: Mar 10, 2018 at 11:29 AM
 >>>>>>> 9bb9403707c6c76cb4ed8d6472d8e5ec7ac686d5
@@ -110,7 +114,13 @@ CREATE TABLE `cart` (
 
 INSERT INTO `cart` (`p_id`, `ip_add`, `qty`) VALUES
 <<<<<<< HEAD
+<<<<<<< HEAD
 (6, '::1', 0);
+=======
+(6, '::1', 0),
+(9, '::1', 0),
+(8, '::1', 0);
+>>>>>>> 9bb9403707c6c76cb4ed8d6472d8e5ec7ac686d5
 =======
 (6, '::1', 0),
 (9, '::1', 0),
