@@ -3,7 +3,6 @@
 
 include("functions/functions.php");
 include("includes/db.php");
-
 ?>
 
 <html>

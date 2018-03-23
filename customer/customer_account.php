@@ -12,6 +12,7 @@ include("functions/functions.php");
 		<title>My Online Shop</title>
 
 		<link rel="stylesheet" href="styles/style.css" media="all" />
+
 	</head>
 <body>
 
@@ -123,34 +124,55 @@ include("functions/functions.php");
 
 					<div id="products_box">
 
-						<form action="customer_account.php" method="post" enctype="multipart/form-data">
-							<td align="right">Profile Image: </td>
-							<td><input type="file" name="c_image" /></td>
-							<input type="submit" name="change" value="Change picture"/>
+						<button class="collapsible">Change my picture</button>
+						<div class="collapseContent">
+							
+							<form action="customer_account.php" method="post" enctype="multipart/form-data">
+								<td align="right">Profile Image: </td>
+								<td><input type="file" name="c_image" /></td>
+								<input type="submit" name="change" value="Change picture"/>
 
-							<?php
+								<?php
+								if (isset($_POST['change'])){
 
-							if (isset($_POST['change'])){
+									$user = $_SESSION['customer_email'];
+									$c_image = $_FILES['c_image']['name'];
+									$c_image_tmp = $_FILES['c_image']['tmp_name'];
 
-								$user = $_SESSION['customer_email'];
-								$c_image = $_FILES['c_image']['name'];
-								$c_image_tmp = $_FILES['c_image']['tmp_name'];
+									move_uploaded_file($c_image_tmp,"customer_images/$c_image");
 
-								move_uploaded_file($c_image_tmp,"customer_images/$c_image");
+									$update_c = "update accounts set user_image='$c_image' where email='$user'";
 
-								$update_c = "update accounts set user_image='$c_image' where email='$user'";
+									$run_c = mysqli_query($con, $update_c);
 
-								$run_c = mysqli_query($con, $update_c);
-
-								if($run_c) {
-									echo "<script>alert('Changes done succesfully')</script>";
-									echo "<script>window.open('customer_account.php','_self')</script>";
+									if($run_c) {
+										echo "<script>alert('Changes done succesfully')</script>";
+										echo "<script>window.open('customer_account.php','_self')</script>";
+									}
 								}
+								?>
+							</form>
+						</div>
 
+						<!--script for collapsible sections of html-->
+						<script>
+							var coll = document.getElementsByClassName("collapsible");
+							var i;
+
+							for (i = 0; i < coll.length; i++) {
+								 coll[i].addEventListener("click", function() {
+									  this.classList.toggle("active");
+									  var collapseContent = this.nextElementSibling;
+									  if (collapseContent.style.display === "block") {
+											collapseContent.style.display = "none";
+									  } else {
+											collapseContent.style.display = "block";
+									  }
+								 });
 							}
+						</script>
+						<!--script ends here-->
 
-							?>
-						</form>
 					</div>
 
 				</div>
