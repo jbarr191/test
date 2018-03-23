@@ -28,7 +28,7 @@ include("includes/db.php");
 
 		<ul id="menu">
 			<li><a href="index.php">Home</a></li>
-			<li><a href="">All Products</a></li>
+			<li><a href="index.php">All Products</a></li>
 			<?php
 			if (isset($_SESSION['customer_email'])){
 
@@ -40,7 +40,7 @@ include("includes/db.php");
 				echo "<li><a href='customer_register.php'>Register</a></li>";
 			}
 			?>
-			<li><a href="">Shopping Cart</a></li>
+			<li><a href="cart.php">Shopping Cart</a></li>
 			<li><a href="">Contact Us</a></li>
 		</ul>
 
