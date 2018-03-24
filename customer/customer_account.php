@@ -5,6 +5,7 @@ session_start();
 
 include("includes/db.php");
 include("functions/functions.php");
+
 ?>
 
 <html>
@@ -124,16 +125,144 @@ include("functions/functions.php");
 
 					<div id="products_box">
 
+						<!--Collapsible section of html for changing account details-->
+						<button class="collapsible">Change my username</button>
+						<div class="collapseContent">
+							<br>
+							<form action="customer_account.php" method="post" enctype="multipart/form-data">
+
+								<table align="center" width="600">
+									<tr>
+										<td align="right">New username: </td>
+										<td><input type="password" name="c_username" /></td>
+									</tr>
+									<tr>
+										<td align="right">Password: </td>
+										<td><input type="password" name="c_upass" /></td>
+									</tr>
+								</table>
+
+								<input type="submit" name="change_username" value="Submit"/>
+								<?php
+
+								if (isset($_POST['change_username'])){
+
+									$user = $_SESSION['customer_email'];
+									$c_username = $_POST['c_username'];
+									$c_password = $_POST['c_upass'];
+
+									//Checks if the given username is the same to any other one already registered
+									$usernameQuery = sprintf("select * from accounts where lower(username)= '%s' ", $c_username);
+									$result = mysqli_query($con, $usernameQuery);
+									$num_rows = mysqli_num_rows($result);
+
+									//Tests if any matches were found when looking for already-registed username
+									if($num_rows > 0)
+									{
+										echo "<script>alert('That username is already being used')</script>";
+
+									} else {
+
+										//Checks if the given password is correct
+										$sel_customer = "select * from accounts where password = '$c_password' AND email = '$user'";
+										$run = mysqli_query($con, $sel_customer);
+										$check_customer = mysqli_num_rows($run);
+
+										if($check_customer == 0) {
+
+											echo "<script>alert('Password is incorrect; cannot change username')</script>";
+
+										} else {
+											//If the username is available and the password is correct, the username change goes through
+											$update_c = "update accounts set username='$c_username' where email='$user'";
+											$run_c = mysqli_query($con, $update_c);
+
+											if($run_c) {
+												echo "<script>alert('Username changed succesfully')</script>";
+												echo "<script>window.open('customer_account.php','_self')</script>";
+											} else {
+												echo "<script>alert('Change was not succesful. Likely to character size')</script>";
+											}
+										}
+									}
+
+								}
+								?>
+
+							</form>
+							<br>
+						</div>
+
+						<button class="collapsible">Change my email</button>
+						<div class="collapseContent">
+							<br>
+							<form action="customer_account.php" method="post" enctype="multipart/form-data">
+
+								<table align="center" width="600">
+									<tr>
+										<td align="right">New email: </td>
+										<td><input type="password" name="c_email" /></td>
+									</tr>
+									<tr>
+										<td align="right">Password: </td>
+										<td><input type="password" name="c_epass" /></td>
+									</tr>
+								</table>
+
+								<input type="submit" name="change_email" value="Submit"/>
+								<?php
+
+								if(!(filter_var($c_email, FILTER_VALIDATE_EMAIL))){
+									echo "Please enter a valid email.<br>";
+									$isEmail = false;
+								}
+
+							 	?>
+
+
+							</form>
+							<br>
+						</div>
+
+						<button class="collapsible">Change my password</button>
+						<div class="collapseContent">
+							<br>
+							<form action="customer_account.php" method="post" enctype="multipart/form-data">
+
+								<table align="center" width="600">
+									<tr>
+										<td align="right">Current password: </td>
+										<td><input type="password" name="c_pass" /></td>
+									</tr>
+									<tr>
+										<td align="right">New password: </td>
+										<td><input type="password" name="c_npass" /></td>
+									</tr>
+									<tr>
+										<td align="right">Confirm new password: </td>
+										<td><input type="password" name="c_cnpass" /></td>
+									</tr>
+								</table>
+
+								<input type="submit" name="change_pass" value="Submit"/>
+								<?php
+
+								 ?>
+
+							</form>
+							<br>
+						</div>
+
 						<button class="collapsible">Change my picture</button>
 						<div class="collapseContent">
-							
+							<br>
 							<form action="customer_account.php" method="post" enctype="multipart/form-data">
 								<td align="right">Profile Image: </td>
 								<td><input type="file" name="c_image" /></td>
-								<input type="submit" name="change" value="Change picture"/>
+								<input type="submit" name="change_pic" value="Change picture"/>
 
 								<?php
-								if (isset($_POST['change'])){
+								if (isset($_POST['change_pic'])){
 
 									$user = $_SESSION['customer_email'];
 									$c_image = $_FILES['c_image']['name'];
@@ -148,11 +277,15 @@ include("functions/functions.php");
 									if($run_c) {
 										echo "<script>alert('Changes done succesfully')</script>";
 										echo "<script>window.open('customer_account.php','_self')</script>";
+									} else {
+										echo "<script>alert('Change was not succesful. Likely to character size')</script>";
 									}
 								}
 								?>
 							</form>
+							<br>
 						</div>
+						<!--Collapsible section of html for changing account details ends here-->
 
 						<!--script for collapsible sections of html-->
 						<script>

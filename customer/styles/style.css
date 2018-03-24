@@ -154,7 +154,7 @@ body {background:white;}
   color: #444;
   cursor: pointer;
   padding: 18px;
-  width: 100%;
+  width: 736px;
   border: none;
   text-align: left;
   outline: none;
@@ -168,6 +168,7 @@ body {background:white;}
 
 /* Style the collapsible content. Note: hidden by default */
 .collapseContent {
+  width: 700px;
   padding: 0 18px;
   display: none;
   overflow: hidden;
