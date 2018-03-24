@@ -50,7 +50,7 @@ include("functions/functions.php");
 			
 				<?php cart(); ?>
 				
-				<div id="shopping_cart" style= "float:right">
+				<div id="shopping_cart" style= "float:right";>
 			
 						<span style="float:right; font-size:18px; padding:5px; line-height:40px;">
 					
@@ -62,10 +62,15 @@ include("functions/functions.php");
 				</div>
 				
 				<div id= "comment_insert">
-			
-					<form action= "comments.php" method = "post" enctype = "multipart/form-data">
-
-					<table align ="left"  bgcolor="orange">
+			<?php
+					
+					if(isset($_GET['pro_id'])){
+					$product_id = $_GET['pro_id'];
+					echo "<form action= 'comments.php?pro_id=$product_id' method = 'post' enctype = 'multipart/form-data'>
+					";
+					}
+			?>
+					<table align ="right"  bgcolor="orange">
 			<!-- insert into table  -->			
 			<tr>
 				<!-- column 1 -->
@@ -99,15 +104,15 @@ include("functions/functions.php");
 						
 						<option>Select</option>
 					
-						<option value='nickname'>1</option>
+						<option value='1'>1</option>
 						
-						<option value = 'anonymous'>2</option>
+						<option value = '2'>2</option>
 						
-						<option value = 'anonymous'>3</option>
+						<option value = '3'>3</option>
 						
-						<option value = 'anonymous'>4</option>
+						<option value = '4'>4</option>
 						
-						<option value = 'anonymous'>5</option>
+						<option value = '5'>5</option>
 												
 				
 					</select>
@@ -131,8 +136,15 @@ include("functions/functions.php");
 				
 				
 				<?php
-					getComments();
-				?>
+					
+					if(isset($_GET['pro_id'])){
+					$product_id = $_GET['pro_id'];
+					getComments($product_id);
+					}
+
+					
+					
+		?>
 				</ul>
 			</div>
 			</div>
@@ -147,3 +159,32 @@ include("functions/functions.php");
 
 </body>
 </html>
+
+<?php
+					
+							//if something is submitted insert using post(), then execute
+					
+			
+					if(isset($_POST['comment_post'])){
+		//get text data from fields
+					$rating= $_POST['rating'];
+					$customer_name= $_POST['customer_name'];
+					$comment_text= $_POST['comment_text'];
+
+					if(isset($_GET['pro_id'])){
+					$product_id = $_GET['pro_id'];
+					}
+					
+				
+					$insert_comments = "insert into comments(book_id, user_email, comment_text,rating) 
+											values('$product_id','$customer_name','$comment_text','$rating')";
+					$insert_com = mysqli_query($con, $insert_comments);
+					if($insert_com)
+					{
+					echo "<script>alert('Comment has been inserted!')</script>";
+					//refresh page to avoid duplicate data
+					echo "<script>window.open('comments.php?pro_id=$product_id','_self')</script>";
+					}
+					}
+					
+?>

@@ -207,15 +207,11 @@ function getPro(){
 	}
 }
 
-function getComments(){
+function getComments($product_id){
 				global $con;
-				
-				if(isset($_GET['pro_id'])){
-					$product_id = $_GET['pro_id'];
-					
-				
-				$get_pro = "select * from comments where book_id = '$product_id'";
 	
+				$get_pro = "select * from comments where book_id = '$product_id'";
+				
 	
 				$run_pro = mysqli_query($con, $get_pro);
 	
@@ -232,14 +228,14 @@ function getComments(){
 					<li>
 					<h3>$pro_user</h3>
 					
-					<h4>$pro_text</h4>
+					<p>$pro_text</p>
 					<h5>Rating: $pro_rating</h5>
 					</li>
 		";	
 	}
 				}
 	
-}
+
 
 
 ?>
