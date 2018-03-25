@@ -107,9 +107,9 @@ include("functions/functions.php");
 							
 							<br><b>Author : $pro_author</b><br>
 							<br><b>Book Description : </b>
-							<p align='left'>$pro_desc</p>
+							<p align='center'>$pro_desc</p>
 							<br><b>Author Biography : </b>
-							<p align='left'>$pro_bio</p>
+							<p align='center'>$pro_bio</p>
 							<br><b>Genre : </b>
 							<p align='center'>$pro_gen</p>
 						
@@ -118,10 +118,8 @@ include("functions/functions.php");
 							
 							<a href='index.php?add_cart=$pro_id'><button style='float:right'>Add to Cart</button></a>
 							
-
-							<a href ='comments.php?pro_id=$pro_id' style = 'float:left'>Comments</a>
 							
-							<a href = 'index.php? style = 'float:center;width:42px;height:42px'>&nbsp Go Back &nbsp</a>
+							<a href = 'index.php? style = 'float:left;height:42px'>&nbsp Go Back &nbsp</a>
 						
 	
 						</div>			
@@ -131,7 +129,101 @@ include("functions/functions.php");
 					?>	
 								
 										
+			
+				
+		
 				</div>
+				
+				<div id= "comment_insert">
+
+			<?php
+					
+					if(isset($_GET['pro_id'])){
+					$product_id = $_GET['pro_id'];
+					echo "<form action= 'details.php?pro_id=$product_id' method = 'post' enctype = 'multipart/form-data'>
+					";
+					}
+			?>
+					<table align ="center"  bgcolor="orange">
+			<!-- insert into table  -->			
+			<tr>
+				<!-- column 1 -->
+				<td align = "right"><b>INSERT COMMENT</b></td>
+				<!-- column 2 -->
+				<td><input type="text" name="comment_text" size="20"/></td>
+			</tr>
+		
+		
+			<tr>
+				<td align = "right"><b>USER</b></td>
+				<td>
+					<select name = "customer_name">
+						
+						<option>Select</option>
+					
+						<option value='nickname'>Nickname</option>
+						
+						<option value = 'anonymous'>Anonymous</option>
+												
+				
+					</select>
+				
+				
+				</td>
+			</tr>
+				<tr>
+				<td align = "right"><b>RATING</b></td>
+				<td>
+					<select name = "rating">
+						
+						<option>Select</option>
+					
+						<option value='1'>1</option>
+						
+						<option value = '2'>2</option>
+						
+						<option value = '3'>3</option>
+						
+						<option value = '4'>4</option>
+						
+						<option value = '5'>5</option>
+												
+				
+					</select>
+				
+				
+				</td>
+			</tr>
+		
+			<!--insert button -->
+			<tr align="right">
+				<td colspan="7"><input type="submit" name="comment_post" value= "Insert Now"/></td>
+			</tr>
+			
+			
+		
+			</div>
+			
+			
+			<div id = "comment_text">	
+			<h3 style="text-align:center;">COMMENTS</h3>
+				<ul id="comments">
+				
+				
+				<?php
+					
+					if(isset($_GET['pro_id'])){
+					$product_id = $_GET['pro_id'];
+					getComments($product_id);
+					}
+
+					
+					
+				?>
+				</ul>
+			</div>
+				
+				
 					
 			</div>
 
@@ -151,3 +243,33 @@ include("functions/functions.php");
 
 </body>
 </html>
+
+
+<?php
+					
+							//if something is submitted insert using post(), then execute
+					
+			
+					if(isset($_POST['comment_post'])){
+		//get text data from fields
+					$rating= $_POST['rating'];
+					$customer_name= $_POST['customer_name'];
+					$comment_text= $_POST['comment_text'];
+
+					if(isset($_GET['pro_id'])){
+					$product_id = $_GET['pro_id'];
+					}
+					
+				
+					$insert_comments = "insert into comments(book_id, user_email, comment_text,rating) 
+											values('$product_id','$customer_name','$comment_text','$rating')";
+					$insert_com = mysqli_query($con, $insert_comments);
+					if($insert_com)
+					{
+					echo "<script>alert('Comment has been inserted!')</script>";
+					//refresh page to avoid duplicate data
+					echo "<script>window.open('details.php?pro_id=$product_id','_self')</script>";
+					}
+					}
+					
+?>
