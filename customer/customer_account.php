@@ -134,7 +134,7 @@ include("functions/functions.php");
 								<table align="center" width="600">
 									<tr>
 										<td align="right">New username: </td>
-										<td><input type="password" name="c_username" /></td>
+										<td><input type="text" name="c_username" /></td>
 									</tr>
 									<tr>
 										<td align="right">Password: </td>
@@ -201,7 +201,7 @@ include("functions/functions.php");
 								<table align="center" width="600">
 									<tr>
 										<td align="right">New email: </td>
-										<td><input type="password" name="c_email" /></td>
+										<td><input type="text" name="c_email" /></td>
 									</tr>
 									<tr>
 										<td align="right">Password: </td>
@@ -212,9 +212,54 @@ include("functions/functions.php");
 								<input type="submit" name="change_email" value="Submit"/>
 								<?php
 
-								if(!(filter_var($c_email, FILTER_VALIDATE_EMAIL))){
-									echo "Please enter a valid email.<br>";
-									$isEmail = false;
+								if (isset($_POST['change_email'])){
+
+									$user = $_SESSION['customer_email'];
+									$c_email = $_POST['c_email'];
+									$c_password = $_POST['c_epass'];
+
+									//Checks if the given email is valid
+									if(!(filter_var($c_email, FILTER_VALIDATE_EMAIL))){
+
+										echo "<script>alert('Please enter a valid email')</script>";
+
+									} else {
+										//Checks if the given email is the same to any other one already registered
+										$emailQuery = sprintf("select * from accounts where lower(email)= '%s' ", $c_email);
+										$result = mysqli_query($con, $emailQuery);
+										$num_rows = mysqli_num_rows($result);
+
+										//Tests if any matches were found when looking for already-registed emails
+										if($num_rows > 0)
+										{
+											echo "<script>alert('The given email is already being used')</script>";
+
+										} else {
+											//Lastly, checks if password was correct
+											$sel_customer = "select * from accounts where password = '$c_password' AND email = '$user'";
+											$run = mysqli_query($con, $sel_customer);
+											$check_customer = mysqli_num_rows($run);
+
+											if($check_customer == 0) {
+												echo "<script>alert('Password is incorrect; cannot change email')</script>";
+
+											} else {
+												//updates the user's email
+												$update_c = "update accounts set email='$c_email' where email='$user'";
+												$run_c = mysqli_query($con, $update_c);
+
+												if($run_c) {
+													echo "<script>alert('Email changed succesfully')</script>";
+													echo "<script>window.open('../customer_logout.php','_self')</script>";
+												} else {
+													echo "<script>alert('Change was not succesful. Likely to character size')</script>";
+												}
+
+											}
+
+										}
+
+									}
 								}
 
 							 	?>
@@ -247,7 +292,55 @@ include("functions/functions.php");
 								<input type="submit" name="change_pass" value="Submit"/>
 								<?php
 
-								 ?>
+								if (isset($_POST['change_pass'])){
+
+									$user = $_SESSION['customer_email'];
+									$c_password = $_POST['c_pass'];
+									$c_npassword = $_POST['c_npass'];
+									$c_cnpassword = $_POST['c_cnpass'];
+
+									//first, check if the given password is correct
+									$sel_customer = "select * from accounts where password = '$c_password' AND email = '$user'";
+									$run = mysqli_query($con, $sel_customer);
+									$check_customer = mysqli_num_rows($run);
+
+									if($check_customer == 0) {
+										echo "<script>alert('Password is incorrect; cannot change password')</script>";
+
+									} else {
+
+										$correctNewPass = true;
+
+										//Checks if the two given passwords are the same
+										if($c_npassword != $c_cnpassword){
+											$correctNewPass = false;
+										}
+										//checks if the password is of the correct length
+										if((strlen($c_npassword) < 8) || (strlen($c_npassword) > 16) ){
+											$correctNewPass = false;
+										}
+										//checks if the password is strong
+										if((!preg_match("#[0-9]+#", $c_npassword)) || (!preg_match("#[a-z]+#", $c_npassword)) || (!preg_match("#[A-Z]+#", $c_npassword))){
+											$correctNewPass = false;
+										}
+
+										if(!($correctNewPass == true))
+										{
+												echo "<script>alert('Please make sure the passwords match, and that they have at least one number, and one lower case and capital letter')</script>";
+										} else {
+											//If the password meets all the criteria, then the password is changed
+											$update_c = "update accounts set password='$c_npassword' where email='$user'";
+											$run_c = mysqli_query($con, $update_c);
+
+											if($run_c) {
+												echo "<script>alert('Password changed succesfully')</script>";
+												echo "<script>window.open('customer_account.php','_self')</script>";
+											}
+										}
+
+									}
+								}
+								?>
 
 							</form>
 							<br>

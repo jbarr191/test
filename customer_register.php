@@ -174,7 +174,7 @@ include("includes/db.php");
 		}
 
 		//checks if the password is strong
-		if((!preg_match("#[0-9]+#", $c_pass)) || (!preg_match("#[a-z]+#", $c_pass)) || (!preg_match("#[a-z]+#", $c_pass))){
+		if((!preg_match("#[0-9]+#", $c_pass)) || (!preg_match("#[a-z]+#", $c_pass)) || (!preg_match("#[A-Z]+#", $c_pass))){
 			echo "Password must have a combination of at least one number, and one capital and lower case letter.<br>";
 			$correctPass = false;
 		}
