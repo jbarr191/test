@@ -39,7 +39,6 @@ include("functions/functions.php");
 	      Genres <i class="fa fa-caret-down"></i>
 	    </a>
 	    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-	      <a href="#" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Skinny</a>
 	      <a href="#" class="w3-bar-item w3-button">Sci-fi</a>
 	      <a href="#" class="w3-bar-item w3-button">Fiction</a>
 	      <a href="#" class="w3-bar-item w3-button">Genre 3</a>
@@ -60,22 +59,22 @@ include("functions/functions.php");
 
 	  <!-- Top header -->
 	  <header class="w3-container w3-xlarge">
-	    <p class="w3-left" style="padding:8px"><a href="index.php">Home</a></p>
-		 <p class="w3-left" style="padding:8px">All Products</p>
+	    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
+		 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
 		 <?php
 		 if (isset($_SESSION['customer_email'])){
 
-			 echo "<p class='w3-left' style='padding:8px'><a href='customer/customer_account.php'>My Account</a></p>";
+			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
 
 		 } else {
 
-			 echo "<p class='w3-left' style='padding:8px'><a href='customer_login.php'>Log In</a></p>";
-			 echo "<p class='w3-left' style='padding:8px'><a href='customer_register.php'>Register</a></p>";
+			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_login.php'>Log In</a></p>";
+			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_register.php'>Register</a></p>";
 		 }
 		 ?>
-		 <p class="w3-left" style="padding:8px"><a href="cart.php">Shopping Cart</a></p>
+		 <p class="w3-left" style="padding:8px; font-size:20px"><a href="cart.php">Shopping Cart</a></p>
 	    <p class="w3-right">
-			 <div id="form" style="line-height: 20px">
+			 <div id="form" style="line-height:20px; padding-top:24px; float:right">
 	 			<form method="get" action="results.php" enctype="multipart/form-data">
 	 				<input type="text" name="user_query" placeholder="Search for stuff" style="width:200" />
 	 				<input type="submit" name="search" value="Search" />
@@ -87,11 +86,11 @@ include("functions/functions.php");
 
 	  <!-- Image header -->
 	  <div class="w3-display-container w3-container">
-	    <img src="/w3images/jeans.jpg" alt="Jeans" style="width:100%">
+	    <img src="images/harrypottercover.jpg" alt="Jeans" style="width:100%">
 	    <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
 	      <h1 class="w3-jumbo w3-hide-small">New arrivals</h1>
 	      <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1>
-	      <h1 class="w3-hide-small">COLLECTION 2016</h1>
+	      <h1 class="w3-hide-small">COLLECTION 2016 (CHANGE LATER)</h1>
 	      <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
 	    </div>
 	  </div>
@@ -161,17 +160,6 @@ include("functions/functions.php");
 <!--
 	<div class="main_wrapper">
 
-	<div class="menubar">
-
-
-		<div id="form">
-			<form method="get" action="results.php" enctype="multipart/form-data">
-				<input type="text" name="user_query" placeholder="Search for stuff" />
-				<input type="submit" name="search" value="Search" />
-			</form>
-		</div>
-
-	</div>
 -->
 		<!--content_wrapper starts here-->
 <!--
@@ -250,6 +238,34 @@ include("functions/functions.php");
 	</div>
 
 	<!--Main Container ends here-->
+
+	<script>
+		// Accordion
+		function myAccFunc() {
+		    var x = document.getElementById("demoAcc");
+		    if (x.className.indexOf("w3-show") == -1) {
+		        x.className += " w3-show";
+		    } else {
+		        x.className = x.className.replace(" w3-show", "");
+		    }
+		}
+
+		// Click on the "Jeans" link on page load to open the accordion for demo purposes
+		document.getElementById("myBtn").click();
+
+		// Script to open and close sidebar
+
+		function w3_close() {
+		    document.getElementById("mySidebar").style.display = "none";
+		    document.getElementById("myOverlay").style.display = "none";
+		}
+
+		function w3_open() {
+		    document.getElementById("mySidebar").style.display = "block";
+		    document.getElementById("myOverlay").style.display = "block";
+		}
+
+	</script>
 
 </body>
 </html>
