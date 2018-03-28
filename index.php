@@ -231,10 +231,7 @@ include("functions/functions.php");
 		<!--content_wrapper ends here-->
 
 
-		<footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
-
-			  <div class="w3-black w3-center w3-padding-24">&copy; 2018 by Software Engineering TEAM 1</div>
-		</footer>
+		<div class="w3-black w3-center w3-padding-24">&copy; 2018 by Software Engineering TEAM 1</div>
 	</div>
 
 	<!--Main Container ends here-->

@@ -110,8 +110,6 @@ include("includes/db.php");
 							<td colspan="6"><input type="submit" name="login" value="Sign In" /></td>
 						</tr>
 
-
-
 					</table>
 
 					<div style="float:left">
@@ -120,7 +118,7 @@ include("includes/db.php");
 					<div style="float:left">
 						Don't have an account? <a href="customer_register.php">Join us </a>
 					</div>
-
+					<br>
 				</form>
 
 				<?php
@@ -152,10 +150,35 @@ include("includes/db.php");
 		</div>
 		<!--content_wrapper ends here-->
 
-		<div id="footer">footer</div>
+		<div class="w3-black w3-center w3-padding-24">&copy; 2018 by Software Engineering TEAM 1</div>
 
 	</div>
 	<!--Main Container ends here-->
+	<script>
+			// Accordion
+			function myAccFunc() {
+			    var x = document.getElementById("demoAcc");
+			    if (x.className.indexOf("w3-show") == -1) {
+			        x.className += " w3-show";
+			    } else {
+			        x.className = x.className.replace(" w3-show", "");
+			    }
+			}
+
+			document.getElementById("myBtn").click();
+
+			// Script to open and close sidebar
+
+			function w3_close() {
+			    document.getElementById("mySidebar").style.display = "none";
+			    document.getElementById("myOverlay").style.display = "none";
+			}
+
+			function w3_open() {
+			    document.getElementById("mySidebar").style.display = "block";
+			    document.getElementById("myOverlay").style.display = "block";
+			}
+	</script>
 
 </body>
 </html>
