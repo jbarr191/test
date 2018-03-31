@@ -127,7 +127,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:100%">
 					<span class="w3-tag w3-display-topleft">New</span>
 					<div class="w3-display-middle w3-display-hover">
-						<a href="index.php?add_cart=<?php $pro_id ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+						<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
 					</div>
 				</div>
 				<p><?php echo $pro_title; ?><br><b>$<?php echo $pro_price; ?></b></p>
