@@ -5,6 +5,8 @@ session_start();
 
 include("functions/functions.php");
 
+$con = mysqli_connect("localhost","root","","onlinebookstore");
+
 ?>
 
 <html>
@@ -100,62 +102,44 @@ include("functions/functions.php");
 	  </div>
 
 	  <!-- Product grid -->
+	  <?php cart(); ?>
+	  
 	  <div class="w3-row w3-grayscale">
-	    <div class="w3-col l3 s6">
-	      <div class="w3-container">
-	        <img src="/w3images/jeans1.jpg" style="width:100%">
-	        <p>Ripped Skinny Jeans<br><b>$24.99</b></p>
-	      </div>
-	      <div class="w3-container">
-	        <img src="/w3images/jeans2.jpg" style="width:100%">
-	        <p>Mega Ripped Jeans<br><b>$19.99</b></p>
-	      </div>
-	    </div>
+	  <?php
+		$get_pro = "select * from products";
 
-	    <div class="w3-col l3 s6">
-	      <div class="w3-container">
-	        <div class="w3-display-container">
-	          <img src="/w3images/jeans2.jpg" style="width:100%">
-	          <span class="w3-tag w3-display-topleft">New</span>
-	          <div class="w3-display-middle w3-display-hover">
-	            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
-	          </div>
-	        </div>
-	        <p>Mega Ripped Jeans<br><b>$19.99</b></p>
-	      </div>
-	      <div class="w3-container">
-	        <img src="/w3images/jeans3.jpg" style="width:100%">
-	        <p>Washed Skinny Jeans<br><b>$20.50</b></p>
-	      </div>
-	    </div>
+		$run_pro = mysqli_query($con, $get_pro);
+		
+		while($row_pro=mysqli_fetch_array($run_pro)){
+			$pro_id = $row_pro['product_id'];
+			$pro_title = $row_pro['product_title'];
+			$pro_image = $row_pro['product_image'];
+			$pro_author = $row_pro['product_author'];
+			$pro_desc= $row_pro['product_desc'];
+			$pro_price = $row_pro['product_price'];
+			$pro_bio = $row_pro['product_bio'];
+			$pro_gen = $row_pro['product_genre'];
+			$pro_release = $row_pro['product_release'];
+	  ?>	
+		<div class="w3-col l3 s6">
+			<div class="w3-container">
+				<div class="w3-display-container">
+					<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:100%">
+					<span class="w3-tag w3-display-topleft">New</span>
+					<div class="w3-display-middle w3-display-hover">
+						<a href="index.php?add_cart=<?php $pro_id ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+					</div>
+				</div>
+				<p><?php echo $pro_title; ?><br><b>$<?php echo $pro_price; ?></b></p>
+			</div>
 
-	    <div class="w3-col l3 s6">
-	      <div class="w3-container">
-	        <img src="/w3images/jeans3.jpg" style="width:100%">
-	        <p>Washed Skinny Jeans<br><b>$20.50</b></p>
-	      </div>
-	      <div class="w3-container">
-	        <div class="w3-display-container">
-	          <img src="/w3images/jeans4.jpg" style="width:100%">
-	          <span class="w3-tag w3-display-topleft">Sale</span>
-	          <div class="w3-display-middle w3-display-hover">
-	            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
-	          </div>
-	        </div>
-	        <p>Vintage Skinny Jeans<br><b class="w3-text-red">$14.99</b></p>
-	      </div>
+			
 	    </div>
-
-	    <div class="w3-col l3 s6">
-	      <div class="w3-container">
-	        <img src="/w3images/jeans4.jpg" style="width:100%">
-	        <p>Vintage Skinny Jeans<br><b>$14.99</b></p>
-	      </div>
-	      <div class="w3-container">
-	        <img src="/w3images/jeans1.jpg" style="width:100%">
-	        <p>Ripped Skinny Jeans<br><b>$24.99</b></p>
-	      </div>
-	    </div>
+		
+		
+	  <?php
+		}
+	  ?>
 	  </div>
 <!--
 	<div class="main_wrapper">

@@ -185,7 +185,7 @@ function getPro(){
 		$pro_gen = $row_pro['product_genre'];
 		$pro_release = $row_pro['product_release'];
 
-		echo "
+	    echo "
 				<div id='single_product'>
 
 					<h3>$pro_title</h3>
@@ -203,7 +203,34 @@ function getPro(){
 
 
 				</div>
-		";
+		"; 
+	
+
+	/*	echo "
+		
+			<div class="w3-col l3 s6">
+			
+				<div class="w3-container">
+				
+					<div class="w3-display-container">
+					
+						<span class="w3-tag w3-display-topleft">New</span>
+						
+						<img src="admin_area/product_images/$pro_image" style="width:100%">
+						
+						<div class="w3-display-middle w3-display-hover">
+							<a href='index.php?add_cart=$pro_id'><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+						</div>
+						
+					</div>
+					
+					<p>$pro_title<br><b>$ $pro_price </b></p>
+					
+				</div>
+			
+			</div>
+		
+		";  */
 	}
 }
 
@@ -225,15 +252,15 @@ function getComments($product_id){
 		
 					echo "
 					
-					<li>
-					<h3>$pro_user</h3>
+						<li>
+						<h3>$pro_user</h3>
 					
-					<p>$pro_text</p>
-					<h5>Rating: $pro_rating</h5>
-					</li>
-		";	
-	}
+						<p>$pro_text</p>
+						<h5>Rating: $pro_rating</h5>
+						</li>
+					";	
 				}
+}
 	
 
 
