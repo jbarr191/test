@@ -45,187 +45,219 @@ include("includes/db.php");
 		  <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact Us</a>
 		</nav>
 
-	<div class="menubar">
+		<!--Main Container starts here-->
+		<!-- Overlay effect when opening sidebar on small screens -->
+		<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-		<ul id="menu">
-			<li><a href="index.php">Home</a></li>
-			<li><a href="index.php">All Products</a></li>
-			<?php
-			if (isset($_SESSION['customer_email'])){
+		<!-- !PAGE CONTENT! -->
+		<div class="w3-main" style="margin-left:250px">
 
-				echo "<li><a href='customer/customer_account.php'>My Account</a></li>";
+		  <!-- Push down content on small screens -->
+		  <div class="w3-hide-large" style="margin-top:83px"></div>
 
-			} else {
+		  <!-- Top header -->
+		  <header class="w3-container w3-xlarge">
+		    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
+			 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
+			 <?php
+			 if (isset($_SESSION['customer_email'])){
 
-				echo "<li><a href='customer_login.php'>Log In</a></li>";
-				echo "<li><a href='customer_register.php'>Register</a></li>";
-			}
-			?>
-			<li><a href="cart.php">Shopping Cart</a></li>
-			<li><a href="">Contact Us</a></li>
-		</ul>
+				 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
 
-		<div id="form">
-			<form method="get" action="results.php" enctype="multipart/form-data">
-				<input type="text" name="user_query" placeholder="Search for stuff" />
-				<input type="submit" name="search" value="Search" />
+			 } else {
+
+				 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_login.php'>Log In</a></p>";
+				 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_register.php'>Register</a></p>";
+			 }
+			 ?>
+			 <p class="w3-left" style="padding:8px; font-size:20px"><a href="cart.php">Shopping Cart</a></p>
+		    <p class="w3-right">
+				 <div id="form" style="line-height:20px; padding-top:24px; float:right">
+		 			<form method="get" action="results.php" enctype="multipart/form-data">
+		 				<input type="text" name="user_query" placeholder="Search for stuff" style="width:200" />
+		 				<input type="submit" name="search" value="Search" />
+		 			</form>
+		 		</div>
+		      <!--<i class="fa fa-search"></i>-->
+		    </p>
+		  </header>
+
+		  <?php
+		  	if (isset($_POST['register'])){
+
+		  		$isEmail = (boolean) true;
+		  		$isNewEmail = (boolean) true;
+		  		$correctPass = (boolean) true;
+		  		$isNewUsername = (boolean) true;
+		  		$c_name = $_POST['c_name'];
+		  		$c_last = $_POST['c_last'];
+		  		$c_email = strtolower(trim($_POST['c_email']));
+		  		$c_username = $_POST['c_username'];
+		  		$c_pass = $_POST['c_pass'];
+		  		$c_cpass = $_POST['c_cpass'];
+		  		$c_image = $_FILES['c_image']['name'];
+		  		$c_image_tmp = $_FILES['c_image']['tmp_name'];
+
+		  		//Checks if the given email is a legitimate email
+		  		if(!(filter_var($c_email, FILTER_VALIDATE_EMAIL))){
+		  			echo "<div style='text-align:center; color:orange'>Please enter a valid email.</div>";
+		  			$isEmail = false;
+		  		}
+
+		  		//Checks if the given email is the same to any other one already registered
+		  		$emailQuery = sprintf("select * from accounts where lower(email)= '%s' ", $c_email);
+		  		$result = mysqli_query($con, $emailQuery);
+		  		$num_rows = mysqli_num_rows($result);
+
+		  		//Tests if any matches were found when looking for already-registed emails
+		  		if($num_rows > 0)
+		  		{
+		  			echo "<div style='text-align:center; color:orange'>That email is already being used.</div>";
+		  			$isNewEmail = false;
+		  		}
+
+		  		//Checks if the given username is the same to any other one already registered
+		  		$usernameQuery = sprintf("select * from accounts where lower(username)= '%s' ", $c_username);
+		  		$result = mysqli_query($con, $usernameQuery);
+		  		$num_rows = mysqli_num_rows($result);
+
+		  		//Tests if any matches were found when looking for already-registed username
+		  		if($num_rows > 0)
+		  		{
+		  			echo "<div style='text-align:center; color:orange'>That username is already being used.</div>";
+		  			$isNewUsername = false;
+		  		}
+
+		  		//Checks if the two given passwords are the same
+		  		if($c_pass != $c_cpass){
+		  			echo "<div style='text-align:center; color:orange'>Passwords do not match.</div>";
+		  			$correctPass = false;
+		  		}
+
+		  		//checks if the password is of the correct length
+		  		if((strlen($c_pass) < 8) || (strlen($c_pass) > 16) ){
+		  			echo "<div style='text-align:center; color:orange'>Password must be between 8 and 16 characters long.</div>";
+		  			$correctPass = false;
+		  		}
+
+		  		//checks if the password is strong
+		  		if((!preg_match("#[0-9]+#", $c_pass)) || (!preg_match("#[a-z]+#", $c_pass)) || (!preg_match("#[A-Z]+#", $c_pass))){
+		  			echo "<div style='text-align:center; color:orange'>Password must have a combination of at least one number, and one capital and lower case letter.</div>";
+		  			$correctPass = false;
+		  		}
+
+		  		//creates a unique ID number for the account
+		  		$id = rand(1,999999);
+		  		$idQuery = sprintf("select * from accounts where lower(id_number)= '%s' ", $id);
+		  		$result = mysqli_query($con, $idQuery);
+		  		$num_rows = mysqli_num_rows($result);
+
+		  		while($num_rows > 0)
+		  		{
+		  			$id = rand(1,999999);
+		  			$idQuery = sprintf("select * from accounts where lower(id_number)= '%s' ", $id);
+		  			$result = mysqli_query($con, $idQuery);
+		  			$num_rows = mysqli_num_rows($result);
+		  		}
+
+		  		//Creates an account if all validations go through
+		  		if($isEmail && $isNewEmail && $correctPass && $isNewUsername) {
+
+		  			move_uploaded_file($c_image_tmp,"customer/customer_images/$c_image");
+
+		  			echo $insert_c = "insert into accounts (email, id_number, first_name, last_name, password, user_image, username) values ('$c_email', '$id', '$c_name','$c_last','$c_pass','$c_image', '$c_username')";
+
+		  			$run_c = mysqli_query($con, $insert_c);
+
+		  			if($run_c) {
+		  				echo "<script>alert('registration successful')</script>";
+		  			}
+		  		}
+		  	}
+		   ?>
+
+		  <div>
+
+				<form action="customer_register.php" method="post" enctype="multipart/form-data">
+
+					<table align="center" width="750">
+
+					<tr align="center">
+						<td colspan="6"><h2>Create an Acount</h2></td>
+					</tr>
+					<tr>
+						<td align="right">First Name: </td>
+						<td ><input type="text" name="c_name" /></td>
+					</tr>
+					<tr>
+						<td align="right">Last Name: </td>
+						<td ><input type="text" name="c_last" /></td>
+					</tr>
+					<tr>
+						<td align="right">Customer Email: </td>
+						<td><input type="text" name="c_email" /></td>
+					</tr>
+					<tr>
+						<td align="right">Username: </td>
+						<td ><input type="text" name="c_username" /></td>
+					</tr>
+					<tr>
+						<td align="right">Password: </td>
+						<td><input type="password" name="c_pass" /></td>
+					</tr>
+					<tr>
+						<td align="right">Confirm Password: </td>
+						<td><input type="password" name="c_cpass" /></td>
+					</tr>
+					<tr>
+						<td align="right">Profile Image: </td>
+						<td><input type="file" name="c_image" /></td>
+					</tr>
+					<tr align="center">
+						<td colspan="6"><input type="submit" name="register" value="Create Account" /></td>
+					</tr>
+
+				</table>
+
 			</form>
+
 		</div>
+
+		<div class="w3-black w3-center w3-padding-24">&copy; 2018 by Software Engineering TEAM 1</div>
 
 	</div>
-
-		<!--content_wrapper starts here-->
-		<div class="content_wrapper">
-
-			<div id="sidebar">sidebar</div>
-
-			<div>
-
-					<form action="customer_register.php" method="post" enctype="multipart/form-data">
-
-						<table align="center" width="750">
-
-							<tr align="center">
-								<td colspan="6"><h2>Create an Acount</h2></td>
-							</tr>
-							<tr>
-								<td align="right">First Name: </td>
-								<td ><input type="text" name="c_name" /></td>
-							</tr>
-							<tr>
-								<td align="right">Last Name: </td>
-								<td ><input type="text" name="c_last" /></td>
-							</tr>
-							<tr>
-								<td align="right">Customer Email: </td>
-								<td><input type="text" name="c_email" /></td>
-							</tr>
-							<tr>
-								<td align="right">Username: </td>
-								<td ><input type="text" name="c_username" /></td>
-							</tr>
-							<tr>
-								<td align="right">Password: </td>
-								<td><input type="password" name="c_pass" /></td>
-							</tr>
-							<tr>
-								<td align="right">Confirm Password: </td>
-								<td><input type="password" name="c_cpass" /></td>
-							</tr>
-							<tr>
-								<td align="right">Profile Image: </td>
-								<td><input type="file" name="c_image" /></td>
-							</tr>
-							<tr align="center">
-								<td colspan="6"><input type="submit" name="register" value="Create Account" /></td>
-							</tr>
-
-						</table>
-
-					</form>
-			</div>
-
-		</div>
 		<!--content_wrapper ends here-->
 
 		<div id="footer">footer</div>
 
 	<!--Main Container ends here-->
+	<script>
+		// Accordion
+		function myAccFunc() {
+			 var x = document.getElementById("demoAcc");
+			 if (x.className.indexOf("w3-show") == -1) {
+				  x.className += " w3-show";
+			 } else {
+				  x.className = x.className.replace(" w3-show", "");
+			 }
+		}
+
+		// Click on the "Jeans" link on page load to open the accordion for demo purposes
+		document.getElementById("myBtn").click();
+
+		// Script to open and close sidebar
+
+		function w3_close() {
+			 document.getElementById("mySidebar").style.display = "none";
+			 document.getElementById("myOverlay").style.display = "none";
+		}
+
+		function w3_open() {
+			 document.getElementById("mySidebar").style.display = "block";
+			 document.getElementById("myOverlay").style.display = "block";
+		}
+
+	</script>
 
 	</body>
 </html>
-
-<?php
-	if (isset($_POST['register'])){
-
-		$isEmail = (boolean) true;
-		$isNewEmail = (boolean) true;
-		$correctPass = (boolean) true;
-		$isNewUsername = (boolean) true;
-		$c_name = $_POST['c_name'];
-		$c_last = $_POST['c_last'];
-		$c_email = strtolower(trim($_POST['c_email']));
-		$c_username = $_POST['c_username'];
-		$c_pass = $_POST['c_pass'];
-		$c_cpass = $_POST['c_cpass'];
-		$c_image = $_FILES['c_image']['name'];
-		$c_image_tmp = $_FILES['c_image']['tmp_name'];
-
-		//Checks if the given email is a legitimate email
-		if(!(filter_var($c_email, FILTER_VALIDATE_EMAIL))){
-			echo "Please enter a valid email.<br>";
-			$isEmail = false;
-		}
-
-		//Checks if the given email is the same to any other one already registered
-		$emailQuery = sprintf("select * from accounts where lower(email)= '%s' ", $c_email);
-		$result = mysqli_query($con, $emailQuery);
-		$num_rows = mysqli_num_rows($result);
-
-		//Tests if any matches were found when looking for already-registed emails
-		if($num_rows > 0)
-		{
-			echo "That email is already being used.<br>";
-			$isNewEmail = false;
-		}
-
-		//Checks if the given username is the same to any other one already registered
-		$usernameQuery = sprintf("select * from accounts where lower(username)= '%s' ", $c_username);
-		$result = mysqli_query($con, $usernameQuery);
-		$num_rows = mysqli_num_rows($result);
-
-		//Tests if any matches were found when looking for already-registed username
-		if($num_rows > 0)
-		{
-			echo "That username is already being used.<br>";
-			$isNewUsername = false;
-		}
-
-		//Checks if the two given passwords are the same
-		if($c_pass != $c_cpass){
-			echo "Passwords do not match.<br>";
-			$correctPass = false;
-		}
-
-		//checks if the password is of the correct length
-		if((strlen($c_pass) < 8) || (strlen($c_pass) > 16) ){
-			echo "Password must be between 8 and 16 characters long.<br>";
-			$correctPass = false;
-		}
-
-		//checks if the password is strong
-		if((!preg_match("#[0-9]+#", $c_pass)) || (!preg_match("#[a-z]+#", $c_pass)) || (!preg_match("#[A-Z]+#", $c_pass))){
-			echo "Password must have a combination of at least one number, and one capital and lower case letter.<br>";
-			$correctPass = false;
-		}
-
-		//creates a unique ID number for the account
-		$id = rand(1,999999);
-		$idQuery = sprintf("select * from accounts where lower(id_number)= '%s' ", $id);
-		$result = mysqli_query($con, $idQuery);
-		$num_rows = mysqli_num_rows($result);
-
-		while($num_rows > 0)
-		{
-			$id = rand(1,999999);
-			$idQuery = sprintf("select * from accounts where lower(id_number)= '%s' ", $id);
-			$result = mysqli_query($con, $idQuery);
-			$num_rows = mysqli_num_rows($result);
-		}
-
-		//Creates an account if all validations go through
-		if($isEmail && $isNewEmail && $correctPass && $isNewUsername) {
-
-			move_uploaded_file($c_image_tmp,"customer/customer_images/$c_image");
-
-			echo $insert_c = "insert into accounts (email, id_number, first_name, last_name, password, user_image, username) values ('$c_email', '$id', '$c_name','$c_last','$c_pass','$c_image', '$c_username')";
-
-			$run_c = mysqli_query($con, $insert_c);
-
-			if($run_c) {
-				echo "<script>alert('registration successful')</script>";
-			}
-		}
-	}
-
- ?>
