@@ -1,6 +1,7 @@
 <!DOCTYPE>
-<?php
 
+<?php
+session_start();
 include("functions/functions.php");
 ?>
 
@@ -157,13 +158,13 @@ include("functions/functions.php");
 			<tr>
 				<td align = "right"><b>USER</b></td>
 				<td>
-					<select name = "customer_name">
+					<select name = "anonymous">
 						
 						<option>Select</option>
 					
-						<option value='nickname'>Nickname</option>
+						<option value='0'>Use Username</option>
 						
-						<option value = 'anonymous'>Anonymous</option>
+						<option value = '1'>Post Anonymous</option>
 												
 				
 					</select>
@@ -250,19 +251,17 @@ include("functions/functions.php");
 							//if something is submitted insert using post(), then execute
 					
 			
-					if(isset($_POST['comment_post'])){
-		//get text data from fields
+					if(isset($_POST['comment_post']) && isset($_GET['pro_id'])&& isset($_SESSION['customer_email'])){
+					//get text data from fields
 					$rating= $_POST['rating'];
-					$customer_name= $_POST['customer_name'];
+					$anonymous= $_POST['anonymous'];
 					$comment_text= $_POST['comment_text'];
-
-					if(isset($_GET['pro_id'])){
 					$product_id = $_GET['pro_id'];
-					}
+					$user_id = getUserID();
 					
 				
-					$insert_comments = "insert into comments(book_id, user_email, comment_text,rating) 
-											values('$product_id','$customer_name','$comment_text','$rating')";
+					$insert_comments = "insert into comments(book_id, anonymous, comment_text,rating, user_id) 
+											values('$product_id','$anonymous','$comment_text','$rating',$user_id)";
 					$insert_com = mysqli_query($con, $insert_comments);
 					if($insert_com)
 					{

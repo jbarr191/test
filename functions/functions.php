@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //fill the third parameter with whatever database server you're working on,
 //or leave it blank if working on localhost
 $con = mysqli_connect("localhost","root","","onlinebookstore");
@@ -244,25 +244,48 @@ function getComments($product_id){
 	
 				while($row_pro=mysqli_fetch_array($run_pro)){
 		
-					$pro_id = $row_pro['book_id'];
-					$pro_user = $row_pro['user_email'];
-					$pro_text = $row_pro['comment_text'];
-					$pro_rating = $row_pro['rating'];
 					
-		
+					$user_id = $row_pro['user_id'];
+					$comment_text = $row_pro['comment_text'];
+					$rating = $row_pro['rating'];
+					$anonymous = $row_pro['Anonymous'];
+					
+					if($anonymous =='1'){
+						$user = "Anonymous";
+					}
+					else{
+					
+						
+						$result = mysqli_query($con,"select username from accounts where id_number = '$user_id'");
+						$row_img = mysqli_fetch_array($result);
+						$user = $row_img['username'];
+					}
 					echo "
 					
 						<li>
-						<h3>$pro_user</h3>
+						<h3>$user</h3>
 					
-						<p>$pro_text</p>
-						<h5>Rating: $pro_rating</h5>
+						<p>$comment_text</p>
+						<h5>Rating:$rating</h5>
 						</li>
 					";	
 				}
 }
 	
+	
+function getUserID(){
+		global $con;
+		if (isset($_SESSION['customer_email'])){
 
+						$user = $_SESSION['customer_email'];
 
+						$result = mysqli_query($con,"select id_number from accounts where email = '$user'");
+						$row_img = mysqli_fetch_array($result);
+						$userID = $row_img['id_number'];
+						return $userID;
+
+				}
+		
+}
 
 ?>
