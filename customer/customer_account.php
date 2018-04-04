@@ -11,50 +11,57 @@ include("functions/functions.php");
 <html>
 	<head>
 		<title>My Online Shop</title>
-
-		<link rel="stylesheet" href="styles/style.css" media="all" />
-
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!--<link rel="stylesheet" href="styles/style.css" media="all" />-->
+		<style>
+			.w3-sidebar a {font-family: "Roboto", sans-serif}
+			body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+		</style>
 	</head>
-<body>
+	<body class="w3-content" style="max-width:1200px">
 
-	<!--Main Container starts here-->
-	<div class="main_wrapper">
+		<!--Main Container starts here-->
+		<!-- Overlay effect when opening sidebar on small screens -->
+		<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-		<div class="header_wrapper">
+		<!-- !PAGE CONTENT! -->
+		<div class="w3-main" style="margin-left:250px">
 
-			<img id="logo" src="images/logo.jpg" width="375" height="175" />
-			<img id="banner" src="images/banner.jpg" width"800" height="175" />
+		  <!-- Push down content on small screens -->
+		  <div class="w3-hide-large" style="margin-top:83px"></div>
 
-		</div>
+		  <!-- Top header -->
+		  <header class="w3-container w3-xlarge">
+		    <p class="w3-left" style="padding:8px; font-size:20px"><a href="../index.php">Home</a></p>
+			 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
+			 <?php
+			 if (isset($_SESSION['customer_email'])){
 
-		<div class="menubar">
+				 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_account.php'>My Account</a></p>";
 
-			<ul id="menu">
-				<li><a href="../index.php">Home</a></li>
-				<li><a href="">All Products</a></li>
-				<?php
-				if (isset($_SESSION['customer_email'])){
+			 } else {
 
-					echo "<li><a href='customer_account.php'>My Account</a></li>";
+				 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='../customer_login.php'>Log In</a></p>";
+				 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='../customer_register.php'>Register</a></p>";
+			 }
+			 ?>
+			 <p class="w3-left" style="padding:8px; font-size:20px"><a href="../cart.php">Shopping Cart</a></p>
+		    <p class="w3-right">
+				 <div id="form" style="line-height:20px; padding-top:24px; float:right">
+		 			<form method="get" action="../results.php" enctype="multipart/form-data">
+		 				<input type="text" name="user_query" placeholder="Search for stuff" style="width:200" />
+		 				<input type="submit" name="search" value="Search" />
+		 			</form>
+		 		</div>
+		      <!--<i class="fa fa-search"></i>-->
+		    </p>
+		  </header>
 
-				} else {
-
-					echo "<li><a href='customer_login.php'>Log In</a></li>";
-					echo "<li><a href='customer_register.php'>Register</a></li>";
-				}
-				?>
-				<li><a href="">Shopping Cart</a></li>
-				<li><a href="">Contact Us</a></li>
-			</ul>
-
-			<div id="form">
-				<form method="get" action="../results.php" enctype="multipart/form-data">
-					<input type="text" name="user_query" placeholder="Search for stuff" />
-					<input type="submit" name="search" value="Search" />
-				</form>
-			</div>
-
-		</div>
 
 		<!--content_wrapper starts here-->
 		<div class="content_wrapper">
