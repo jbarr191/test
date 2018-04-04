@@ -1,7 +1,7 @@
 <!DOCTYPE>
 
 <?php
-session_start();
+
 include("functions/functions.php");
 ?>
 
@@ -258,8 +258,14 @@ include("functions/functions.php");
 					$comment_text= $_POST['comment_text'];
 					$product_id = $_GET['pro_id'];
 					$user_id = getUserID();
-					
 				
+
+					$run = mysqli_query($con, "select * from purchase where user_id ='$user_id' and book_id = '$product_id'" );
+
+					$purchased = mysqli_num_rows($run);
+
+					if($purchased != 0) {
+					
 					$insert_comments = "insert into comments(book_id, anonymous, comment_text,rating, user_id) 
 											values('$product_id','$anonymous','$comment_text','$rating',$user_id)";
 					$insert_com = mysqli_query($con, $insert_comments);
@@ -268,7 +274,16 @@ include("functions/functions.php");
 					echo "<script>alert('Comment has been inserted!')</script>";
 					//refresh page to avoid duplicate data
 					echo "<script>window.open('details.php?pro_id=$product_id','_self')</script>";
+					
 					}
 					}
+					else echo "<script>alert('You cannot comment on books you have not purchased')</script>";
+					
+					
+					}
+					else if(!(isset($_SESSION['customer_email']))){
+						echo "<script>alert('Please log in to comment')</script>";
+					}
+					
 					
 ?>
