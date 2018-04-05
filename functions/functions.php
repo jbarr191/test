@@ -1,5 +1,4 @@
 <?php
-session_start();
 //fill the third parameter with whatever database server you're working on,
 //or leave it blank if working on localhost
 $con = mysqli_connect("localhost","root","","onlinebookstore");
