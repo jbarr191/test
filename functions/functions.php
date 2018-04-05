@@ -250,6 +250,10 @@ function getComments($product_id){
 					$rating = $row_pro['rating'];
 					$anonymous = $row_pro['Anonymous'];
 					
+					if($rating == '0'){
+						$rating = "None";
+					}
+					
 					if($anonymous =='1'){
 						$user = "Anonymous";
 					}
@@ -262,11 +266,11 @@ function getComments($product_id){
 					}
 					echo "
 					
-						<li>
-						<h3>$user</h3>
-					
+						<li style ='list-style:none;padding:20px;'>
+						<h3 style = 'float:left;'>$user</h3>
 						<p>$comment_text</p>
-						<h5>Rating:$rating</h5>
+						<h5>Rating: $rating</h5>
+						<h3>-----------------------------------------------------------------------------------------</h3>
 						</li>
 					";	
 				}
