@@ -268,7 +268,7 @@ function getComments($product_id){
 					
 						<li style ='list-style:none;padding:20px;'>
 						<h3 style = 'float:left;'>$user</h3>
-						<p>$comment_text</p>
+						<p style = 'overflow-wrap: break-word;'>$comment_text</p>
 						<h5>Rating: $rating</h5>
 						<h3>-----------------------------------------------------------------------------------------</h3>
 						</li>

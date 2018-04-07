@@ -80,7 +80,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					$pro_release = $row_pro['product_release'];
 					echo "
 					
-						<div id='single_product'>
+						<div>
 						
 							<h3>$pro_title</h3>
 							
