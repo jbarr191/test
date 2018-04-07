@@ -42,6 +42,9 @@ function cart(){
 		// get the id of the product that was added
 		$pro_id = $_GET['add_cart'];
 
+		// quantity defaults to 1
+		$qty = 1;
+		
 		// check if the product has already been added for that user
 		$check_pro = "select * from cart where ip_add='$ip' AND p_id='$pro_id'";
 
@@ -56,7 +59,7 @@ function cart(){
 		else { // insert the product; since it does not already exist
 
 			// insert product id, and the ip address of the user
-			$insert_pro = "insert into cart (p_id, ip_add) values ('$pro_id', '$ip')";
+			$insert_pro = "insert into cart (p_id, ip_add, qty) values ('$pro_id', '$ip', '$qty')";
 
 			$run_pro = mysqli_query($con, $insert_pro);
 

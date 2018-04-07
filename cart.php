@@ -98,7 +98,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  
 		<form action="" method="post" enctype="multipart/form-data">
 				
-			<table align="center" width="700" bgcolor="skyblue">
+			<table class="w3-table" align="center" width="700" bgcolor="white">
 						
 				<tr align="center">
 					<th>Remove</th>
@@ -119,12 +119,16 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	
 							// run the above query
 							$run_price = mysqli_query($con, $sel_price);
-	
+
 							// while there's additional rows to fetch from the query results
 							while($p_price=mysqli_fetch_array($run_price)){
 		
 								// get the product id from the cart
 								$pro_id = $p_price['p_id'];
+								
+								
+								// get the quantity from the cart
+								$pro_qty = $p_price['qty'];
 		
 								// retrieve the product with the matching id from products table
 								$pro_price = "select * from products where product_id = '$pro_id'";
@@ -150,17 +154,21 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 							
 							?>
 							
-				<tr align="center">
-					<td><input = type="checkbox" name="remove[]" value="<?php echo $pro_id;?>"/></td>
-					<td><?php echo $product_title; ?><br>
-					<img src="admin_area/product_images/<?php echo $product_image;?>" width="60" height="60" />
-					</td>
-					<td><input type="text" size="4" name="qty"/></td>
-					<td><?php echo "$" . $single_price; ?></td>
-				</tr>
-										
-						<?php      } 
-							    }  // close brackets of above while loops 
+									<tr align="center">
+										<td><input type="image" src="images/removebtn.png" name="remove" class="btTxt submit" id="saveForm" value="<?php echo $pro_id;?>"/></td>
+										<td><?php echo $product_title; ?><br>
+										<img src="admin_area/product_images/<?php echo $product_image;?>" width="60" height="60" />
+										</td>
+										<td>
+											<input type="text" size="3" name="qty" value="<?php echo $pro_qty;?>" id="<?php echo $pro_id;?>"/>
+											<!--<input type="text" size="3" name="qty"/>
+											<input type="image" src="images/removebtn.png" name="update" class="btTxt submit" id="saveForm" value="<?php echo $pro_id;?>"/> -->
+										</td>
+										<td><?php echo "$" . $single_price; ?></td>
+
+									</tr>
+						<?php   } 
+							}  // close brackets of above while loops 
 						?>
 						
 				<tr>
@@ -183,7 +191,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 						$ip = getIp();
 						
 						// if update cart button is clicked
-						if(isset($_POST['update_cart'])){
+						/*if(isset($_POST['update_cart'])){
 							// delete relevant items from the cart database
 							foreach($_POST['remove'] as $remove_id){
 								
@@ -196,15 +204,45 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 									echo "<script>window.open('cart.php','_self')</script>";
 								}
 							}					
-						}
+						} */
+						
 						// if continue shopping button is clicked, go to index.php
 						if(isset($_POST['continue'])){
 							
 							echo "<script>window.open('index.php','_self')</script>";					
 						}
 
+						if(isset($_POST['remove'])){
+							
+							$remove_id = $_POST['remove'];
+							
+							$delete_product = "delete from cart where p_id='$remove_id' AND ip_add='$ip'";
+								
+							$run_delete = mysqli_query($con, $delete_product);
+								
+							if($run_delete){
+									
+								echo "<script>window.open('cart.php','_self')</script>";
+							}							
+						}
+						
+						/*if(isset($_POST['update'])){
+							
+							$update_id = $_POST['update'];
+							$item_qty = $_POST['qty'];
+
+							$update_qty = "update cart set qty='$item_qty' where p_id='$update_id' AND ip_add='$ip'";
+
+							$run_update = mysqli_query($con, $update_qty);
+								
+							if($run_update){
+									
+								echo "<script>window.open('cart.php','_self')</script>";
+							}
+						} */
+						
+
 			?>
-					
 	  </div>
 <!--
 	<div class="main_wrapper">
