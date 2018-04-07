@@ -1,64 +1,80 @@
 <!DOCTYPE>
-<?php
 
+<?php
 include("functions/functions.php");
-$con = mysqli_connect("localhost","root","","onlinebookstore");
 ?>
 
 <html>
 	<head>
 		<title>My Online Shop</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<!--<link rel="stylesheet" href="styles/style.css" media="all" />-->
-		<style>
-			.w3-sidebar a {font-family: "Roboto", sans-serif}
-			body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
-		</style>
+
+		<link rel="stylesheet" href="styles/style.css" media="all" />
 	</head>
-<body class="w3-content" style="max-width:1200px">
+<body>
 
 	<!--Main Container starts here-->
-	<!-- Overlay effect when opening sidebar on small screens -->
-	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+	<div class="main_wrapper">
 
-	<!-- !PAGE CONTENT! -->
-	<div class="w3-main" style="margin-left:250px">
+		<div class="header_wrapper">
 
-	  <!-- Push down content on small screens -->
-	  <div class="w3-hide-large" style="margin-top:83px"></div>
+			<img id="logo" src="images/logo.jpg" width="375" height="175" />
+			<img id="banner" src="images/banner.jpg" width"800" height="175" />
 
-	  <!-- Top header -->
-	  <header class="w3-container w3-xlarge">
-	    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
-		 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
-		 <?php
-		 if (isset($_SESSION['customer_email'])){
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
-		 } else {
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_login.php'>Log In</a></p>";
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_register.php'>Register</a></p>";
-		 }
-		 ?>
-		 <p class="w3-left" style="padding:8px; font-size:20px"><a href="cart.php">Shopping Cart</a></p>
-	    <p class="w3-right">
-			 <div id="form" style="line-height:20px; padding-top:24px; float:right">
-	 			<form method="get" action="results.php" enctype="multipart/form-data">
-	 				<input type="text" name="user_query" placeholder="Search for stuff" style="width:200" />
-	 				<input type="submit" name="search" value="Search" />
-	 			</form>
-	 		</div>
-	      <!--<i class="fa fa-search"></i>-->
-	    </p>
-	  </header>
 
-	  <!-- Image header -->
-	  <div class="w3-display-container w3-container" style = "text-align:center;">
-	    		
+		</div>
+
+	<div class="menubar">
+
+		<ul id="menu">
+			<li><a href="index.php">Home</a></li>
+			<li><a href="">All Products</a></li>
+			<li><a href="">My Account</a></li>
+			<li><a href="customer_login.php">Log In</a></li>
+			<li><a href="">Shopping Cart</a></li>
+			<li><a href="">Contact Us</a></li>
+		</ul>
+
+		<div id="form">
+			<form method="get" action="results.php" enctype="multipart/form-data">
+				<input type="text" name="user_query" placeholder="Search for stuff" />
+				<input type="submit" name="search" value="Search" />
+			</form>
+		</div>
+
+	</div>
+
+		<!--content_wrapper starts here-->
+		<div class="content_wrapper">
+
+			<div id ="sidebar">
+			
+				<div id="sidebar_title">Genres</div>
+				
+				<ul id="gens">
+				
+					<?php getGens(); ?>	
+					
+				</ul>
+
+			</div>	
+		
+			<div id="content_area">
+			
+				<?php cart(); ?>
+				
+				<div id="shopping_cart">
+			
+						<span style="float:right; font-size:18px; padding:5px; line-height:40px;">
+					
+						Welcome Guest! <b style="color:yellow">Shopping Cart -</b> Total Items: <?php total_items();?> 
+						Total Price: <?php total_price(); ?> <a href="cart.php" style="color:yellow">Go to Cart</a>
+					
+						</span>
+				
+				</div>
+			
+				<div id="products_box">
+						
 					<?php 
 					if(isset($_GET['pro_id'])){
 					$product_id = $_GET['pro_id'];
@@ -102,41 +118,22 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 							<a href='index.php?add_cart=$pro_id'><button style='float:right'>Add to Cart</button></a>
 							
 							
-							<a href = 'index.php? style = 'float:center;height:42px'>&nbsp Go Back &nbsp</a>
+							<a href = 'index.php? style = 'float:left;height:42px'>&nbsp Go Back &nbsp</a>
 						
 	
 						</div>			
 					";
 					
 					}
-					?>
-	  </div>
-
-
-	  <!-- Product grid -->
-	  <?php cart(); ?>
-
-	  <div class="w3-row w3-grayscale">
-	 
-		
-		<h3 style="text-align:left;"><u>COMMENTS</u></h3>
-				<ul style ="text-align:center;">
+					?>	
+								
+										
+			
 				
-				
-				<?php
-					
-					if(isset($_GET['pro_id'])){
-					$product_id = $_GET['pro_id'];
-					getComments($product_id);
-					}
-					
-					
-				?>
-				</ul>
-					
 		
-	  </div>
-			<div>
+				</div>
+				
+				<div id= "comment_insert">
 
 			<?php
 					
@@ -146,11 +143,11 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					";
 					}
 			?>
-					<table  bgcolor="white">
+					<table align ="center"  bgcolor="orange">
 			<!-- insert into table  -->			
 			<tr>
 				<!-- column 1 -->
-				<td><b>INSERT COMMENT</b></td>
+				<td align = "right"><b>INSERT COMMENT</b></td>
 				<!-- column 2 -->
 				<td><input type="text" name="comment_text" size="20"/></td>
 			</tr>
@@ -203,6 +200,49 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 			</tr>
 			
 			
+		
+			</div>
+			
+			
+			<div id = "comment_text">	
+			<h3 style="text-align:center;">COMMENTS</h3>
+				<ul id="comments">
+				
+				
+				<?php
+					
+					if(isset($_GET['pro_id'])){
+					$product_id = $_GET['pro_id'];
+					getComments($product_id);
+					}
+					
+					
+				?>
+				</ul>
+			</div>
+				
+				
+					
+			</div>
+
+		</div>
+		<!--content_wrapper ends here-->
+
+
+		<div id="footer">
+		
+		<h2 style = "text-align:center; padding-top:30px;">&copy; 2018
+		by software engineering TEAM 1</h2>
+		
+		</div>
+
+	</div>
+	<!--Main Container ends here-->
+
+</body>
+</html>
+
+
 <?php
 					
 							//if something is submitted insert using post(), then execute
@@ -241,36 +281,3 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					
 					
 ?>
-		
-			</div>
-
-		<div class="w3-black w3-center w3-padding-24">&copy; 2018 by Software Engineering TEAM 1</div>
-	</div>
-
-	<!--Main Container ends here-->
-
-	<script>
-		// Accordion
-		function myAccFunc() {
-		    var x = document.getElementById("demoAcc");
-		    if (x.className.indexOf("w3-show") == -1) {
-		        x.className += " w3-show";
-		    } else {
-		        x.className = x.className.replace(" w3-show", "");
-		    }
-		}
-		// Click on the "Jeans" link on page load to open the accordion for demo purposes
-		document.getElementById("myBtn").click();
-		// Script to open and close sidebar
-		function w3_close() {
-		    document.getElementById("mySidebar").style.display = "none";
-		    document.getElementById("myOverlay").style.display = "none";
-		}
-		function w3_open() {
-		    document.getElementById("mySidebar").style.display = "block";
-		    document.getElementById("myOverlay").style.display = "block";
-		}
-	</script>
-
-</body>
-</html>

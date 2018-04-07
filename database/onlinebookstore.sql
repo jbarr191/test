@@ -3,13 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
-
--- Generation Time: Mar 13, 2018 at 12:14 AM
-
--- Generation Time: Mar 10, 2018 at 11:29 AM
-
--- Generation Time: Mar 10, 2018 at 11:29 AM
-
+-- Generation Time: Apr 04, 2018 at 10:58 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -48,8 +42,8 @@ CREATE TABLE `accounts` (
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`email`, `first_name`, `last_name`, `password`, `user_image`) VALUES
-('a@mail.com', 'Jane', 'Doe', '1234', 'IMG_0014.JPG');
+INSERT INTO `accounts` (`email`, `id_number`, `first_name`, `last_name`, `password`, `user_image`, `username`) VALUES
+('a@mail.com', 0, 'Jane', 'Doe', '1234', 'IMG_0014.JPG', 'a_username');
 
 -- --------------------------------------------------------
 
@@ -97,33 +91,24 @@ INSERT INTO `author` (`authorNum`, `authorLast`, `authorFirst`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart`
---
-
-CREATE TABLE `cart` (
-  `p_id` int(10) NOT NULL,
-  `ip_add` varchar(255) NOT NULL,
-  `qty` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `cart`
---
-
-
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `comments`
 --
 
 CREATE TABLE `comments` (
   `book_id` int(100) NOT NULL,
-  `user_email` varchar(50) NOT NULL,
+  `user_id` int(50) NOT NULL,
   `comment_text` text,
-  `rating` int(11) DEFAULT NULL
+  `rating` int(11) DEFAULT NULL,
+  `Anonymous` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`book_id`, `user_id`, `comment_text`, `rating`, `Anonymous`) VALUES
+(5, 0, 'Great book!', 4, 0),
+(5, 0, 'I am leaving an anonymous comment now', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -173,28 +158,6 @@ INSERT INTO `products` (`product_id`, `product_title`, `product_image`, `product
 (8, 'The Great Gatsby', 'greatGatsby.jpg', 'Francis Fitzgerald', 'Jay Gatsby is the man who has everything. But one thing will always be out of his reach. Everybody who is anybody is seen at his glittering parties. Day and night his Long Island mansion buzzes with bright young things drinking, dancing, and debating his mysterious character. ', 3.99, 'Francis Scott Key Fitzgerald was an American writer of novels and short stories, whose works have been seen as evocative of the Jazz Age, a term he himself allegedly coined. He is regarded as one of the greatest twentieth century writers.', '2', 'Charles Scribners Sons', '1925-04-10'),
 (9, 'The Book Thief', 'bookthief.jpg', 'Markus Zusak', 'Itâ€™s just a small story really, about among other things: a girl, some words, an accordionist, some fanatical Germans, a Jewish fist-fighter, and quite a lot of thievery ...', 5.29, 'Markus Zusak was born in 1975 and is the author of five books, including the international bestseller, The Book Thief , which is translated into more than forty languages.', '2', '', '0000-00-00');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `search`
---
-
-CREATE TABLE `search` (
-  `search_id` int(100) NOT NULL,
-  `search_cat` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `search`
---
-
-INSERT INTO `search` (`search_id`, `search_cat`) VALUES
-(1, 'Title'),
-(2, 'Author'),
-(3, 'Price'),
-(4, 'Publication'),
-(5, 'Release');
-
 --
 -- Indexes for dumped tables
 --
@@ -225,12 +188,6 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`);
 
 --
--- Indexes for table `search`
---
-ALTER TABLE `search`
-  ADD PRIMARY KEY (`search_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -239,12 +196,6 @@ ALTER TABLE `search`
 --
 ALTER TABLE `genres`
   MODIFY `gen_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `search`
---
-ALTER TABLE `search`
-  MODIFY `search_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

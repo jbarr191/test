@@ -28,12 +28,12 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	<!-- Sidebar/menu -->
 	<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
-	  <div class="w3-container w3-display-container w3-padding-16">
-	    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-		 <a href="index.php">
-		 	<img id="logo" src="images/logo.jpg" width="240" height="120" />
-		</a>
-	  </div>
+		<div class="w3-container w3-display-container w3-padding-16">
+			<i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+		 	<a href="index.php">
+		 		<img id="logo" src="images/logo.jpg" width="240" height="120" />
+			</a>
+	  	</div>
 	  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
 	    <a href="#" class="w3-bar-item w3-button">Best-Sellers</a>
 	    <a href="#" class="w3-bar-item w3-button">Top-Rated</a>
@@ -103,13 +103,13 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	  <!-- Product grid -->
 	  <?php cart(); ?>
-	  
+
 	  <div class="w3-row w3-grayscale">
 	  <?php
 		$get_pro = "select * from products";
 
 		$run_pro = mysqli_query($con, $get_pro);
-		
+
 		while($row_pro=mysqli_fetch_array($run_pro)){
 			$pro_id = $row_pro['product_id'];
 			$pro_title = $row_pro['product_title'];
@@ -120,7 +120,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 			$pro_bio = $row_pro['product_bio'];
 			$pro_gen = $row_pro['product_genre'];
 			$pro_release = $row_pro['product_release'];
-	  ?>	
+	  ?>
 		<div class="w3-col l3 s6">
 			<div class="w3-container">
 				<div class="w3-display-container">
@@ -133,10 +133,10 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 				<p><?php echo $pro_title; ?><br><b>$<?php echo $pro_price; ?></b></p>
 			</div>
 
-			
+
 	    </div>
-		
-		
+
+
 	  <?php
 		}
 	  ?>

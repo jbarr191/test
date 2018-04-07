@@ -1,5 +1,4 @@
 <?php
-
 //fill the third parameter with whatever database server you're working on,
 //or leave it blank if working on localhost
 $con = mysqli_connect("localhost","root","","onlinebookstore");
@@ -43,6 +42,9 @@ function cart(){
 		// get the id of the product that was added
 		$pro_id = $_GET['add_cart'];
 
+		// quantity defaults to 1
+		$qty = 1;
+		
 		// check if the product has already been added for that user
 		$check_pro = "select * from cart where ip_add='$ip' AND p_id='$pro_id'";
 
@@ -57,7 +59,7 @@ function cart(){
 		else { // insert the product; since it does not already exist
 
 			// insert product id, and the ip address of the user
-			$insert_pro = "insert into cart (p_id, ip_add) values ('$pro_id', '$ip')";
+			$insert_pro = "insert into cart (p_id, ip_add, qty) values ('$pro_id', '$ip', '$qty')";
 
 			$run_pro = mysqli_query($con, $insert_pro);
 
@@ -244,25 +246,52 @@ function getComments($product_id){
 	
 				while($row_pro=mysqli_fetch_array($run_pro)){
 		
-					$pro_id = $row_pro['book_id'];
-					$pro_user = $row_pro['user_email'];
-					$pro_text = $row_pro['comment_text'];
-					$pro_rating = $row_pro['rating'];
 					
-		
+					$user_id = $row_pro['user_id'];
+					$comment_text = $row_pro['comment_text'];
+					$rating = $row_pro['rating'];
+					$anonymous = $row_pro['Anonymous'];
+					
+					if($rating == '0'){
+						$rating = "None";
+					}
+					
+					if($anonymous =='1'){
+						$user = "Anonymous";
+					}
+					else{
+					
+						
+						$result = mysqli_query($con,"select username from accounts where id_number = '$user_id'");
+						$row_img = mysqli_fetch_array($result);
+						$user = $row_img['username'];
+					}
 					echo "
 					
-						<li>
-						<h3>$pro_user</h3>
-					
-						<p>$pro_text</p>
-						<h5>Rating: $pro_rating</h5>
+						<li style ='list-style:none;padding:20px;'>
+						<h3 style = 'float:left;'>$user</h3>
+						<p>$comment_text</p>
+						<h5>Rating: $rating</h5>
+						<h3>-----------------------------------------------------------------------------------------</h3>
 						</li>
 					";	
 				}
 }
 	
+	
+function getUserID(){
+		global $con;
+		if (isset($_SESSION['customer_email'])){
 
+						$user = $_SESSION['customer_email'];
 
+						$result = mysqli_query($con,"select id_number from accounts where email = '$user'");
+						$row_img = mysqli_fetch_array($result);
+						$userID = $row_img['id_number'];
+						return $userID;
+
+				}
+		
+}
 
 ?>
