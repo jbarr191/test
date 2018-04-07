@@ -21,22 +21,67 @@ include("functions/functions.php");
 		<style>
 			.w3-sidebar a {font-family: "Roboto", sans-serif}
 			body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+
+			/* Style the button that is used to open and close the collapsible content */
+			.collapsible {
+			  background-color: #eee;
+			  color: #444;
+			  cursor: pointer;
+			  padding: 18px;
+			  width: 850px;
+			  border: none;
+			  text-align: left;
+			  outline: none;
+			  font-size: 15px;
+			}
+			/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+			.active, .collapsible:hover {
+			  background-color: #ccc;
+			}
+			/* Style the collapsible content. Note: hidden by default */
+			.collapseContent {
+			  width: 850px;
+			  padding: 0 18px;
+			  display: none;
+			  overflow: hidden;
+			  background-color: #f1f1f1;
+			}
+			#sidebar {
+				width:200px;
+				float:right;
+			}
+			#sidebar_title{
+				background:white;
+				color:black;
+				font-size:22px;
+				font-family:arial;
+				text-align:center;
+			}
+
 		</style>
 	</head>
 	<body class="w3-content" style="max-width:1200px">
+
+		<nav class="w3-bar-block w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+			<div class="w3-container w3-display-container w3-padding-16">
+			 	<a href="../index.php">
+			 		<img id="logo" src="../images/logo.jpg" width="240" height="120" />
+				</a>
+		  	</div>
+		</nav>
 
 		<!--Main Container starts here-->
 		<!-- Overlay effect when opening sidebar on small screens -->
 		<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 		<!-- !PAGE CONTENT! -->
-		<div class="w3-main" style="margin-left:250px">
+		<div class="w3-main" >
 
 		  <!-- Push down content on small screens -->
 		  <div class="w3-hide-large" style="margin-top:83px"></div>
 
 		  <!-- Top header -->
-		  <header class="w3-container w3-xlarge">
+		  <header class="w3-container w3-xlarge" style="margin-left:250px">
 		    <p class="w3-left" style="padding:8px; font-size:20px"><a href="../index.php">Home</a></p>
 			 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
 			 <?php
@@ -66,11 +111,10 @@ include("functions/functions.php");
 		<!--content_wrapper starts here-->
 		<div class="content_wrapper">
 
-			<div id="sidebar">
+			<div id="sidebar" style="background-color: #eee">
 
-				<div id="sidebar_title"> My Account: </div>
+				<div id="sidebar_title" style="background-color: #eee; padding-top: 10px;"> My Account: </div>
 
-					<ul id="gens">
 
 						<?php
 						$user = $_SESSION['customer_email'];
@@ -81,12 +125,14 @@ include("functions/functions.php");
 						$c_image = $row_img['user_image'];
 						$c_name = $row_img['first_name'];
 
-						echo "<p style='text-align:center'><img src='customer_images/$c_image'
+						echo "<div style='text-align:center'>$user</div>";
+						echo "<p style='align:center'><img src='customer_images/$c_image'
 						width='150' height='150'/></p>";
 
 						?>
-
-					</ul>
+				<div id="sidebar_title" style="background-color: #eee; font-size:18px; text-align:left">Account Financials: </div>
+				<li style=padding-left:13px;><a href="../addresses.php">Credit Cards</a></li>
+				<li style=padding-left:13px;><a href="../customer_cards.php">Addresses</a></li>
 
 				</div>
 
@@ -96,7 +142,7 @@ include("functions/functions.php");
 
 					<div id="shopping_cart">
 
-						<span style="float:right; font-size:18px; padding:5px; line-height:40px;">
+						<span style="float:right; font-size:18px; padding:5px; line-height:40px; font-size:15px">
 
 							<?php
 							if (isset($_SESSION['customer_email'])){
@@ -113,8 +159,8 @@ include("functions/functions.php");
 								echo "Welcome Guest!";
 							}
 							?>
-							<b style="color:yellow">Shopping Cart -</b> Total Items: <?php total_items();?>
-							Total Price: <?php total_price(); ?> <a href="../cart.php" style="color:yellow">Go to Cart</a>
+							<b style="color:orange">Shopping Cart -</b> Total Items: <?php total_items();?>
+							- Total Price: <?php total_price(); ?> <a href="../cart.php" style="color:orange">Go to Cart</a>
 
 							<?php
 							if (!isset($_SESSION['customer_email'])){
@@ -412,7 +458,8 @@ include("functions/functions.php");
 		</div>
 		<!--content_wrapper ends here-->
 
-		<div id="footer">footer</div>
+		<br><br>
+		<div class="w3-black w3-center w3-padding-24">&copy; 2018 by Software Engineering TEAM 1</div>
 
 	</div>
 	<!--Main Container ends here-->

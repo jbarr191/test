@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2018 at 10:58 PM
+-- Generation Time: Apr 07, 2018 at 03:36 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -91,6 +91,28 @@ INSERT INTO `author` (`authorNum`, `authorLast`, `authorFirst`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `p_id` int(10) NOT NULL,
+  `ip_add` varchar(255) NOT NULL,
+  `qty` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`p_id`, `ip_add`, `qty`) VALUES
+(5, '::1', 0),
+(8, '::1', 0),
+(6, '::1', 0),
+(9, '::1', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `comments`
 --
 
@@ -108,7 +130,13 @@ CREATE TABLE `comments` (
 
 INSERT INTO `comments` (`book_id`, `user_id`, `comment_text`, `rating`, `Anonymous`) VALUES
 (5, 0, 'Great book!', 4, 0),
-(5, 0, 'I am leaving an anonymous comment now', 5, 1);
+(5, 0, 'I am leaving an anonymous comment now', 5, 1),
+(5, 0, 'I just purchased this book', 5, 0),
+(5, 0, 'k', 5, 1),
+(5, 0, 'Doublechecking', 4, 1),
+(5, 0, 'testing', 0, 0),
+(5, 0, 'this book is great wow so good trying to make a very long comment to see how far it will go along the page dsaldfjkl jldsfj  kljdflkj lkjadf kljdflkj lkjadsflkj kljdf kj dlkj kfjgklel dkfj lksdfj lkjsfdgklj lksdjfg lkj sedfklgj lkdfjg klj dfgj kjkjkjkjkjkjkjkj ', 0, 0),
+(5, 0, 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -158,6 +186,46 @@ INSERT INTO `products` (`product_id`, `product_title`, `product_image`, `product
 (8, 'The Great Gatsby', 'greatGatsby.jpg', 'Francis Fitzgerald', 'Jay Gatsby is the man who has everything. But one thing will always be out of his reach. Everybody who is anybody is seen at his glittering parties. Day and night his Long Island mansion buzzes with bright young things drinking, dancing, and debating his mysterious character. ', 3.99, 'Francis Scott Key Fitzgerald was an American writer of novels and short stories, whose works have been seen as evocative of the Jazz Age, a term he himself allegedly coined. He is regarded as one of the greatest twentieth century writers.', '2', 'Charles Scribners Sons', '1925-04-10'),
 (9, 'The Book Thief', 'bookthief.jpg', 'Markus Zusak', 'Itâ€™s just a small story really, about among other things: a girl, some words, an accordionist, some fanatical Germans, a Jewish fist-fighter, and quite a lot of thievery ...', 5.29, 'Markus Zusak was born in 1975 and is the author of five books, including the international bestseller, The Book Thief , which is translated into more than forty languages.', '2', '', '0000-00-00');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchase`
+--
+
+CREATE TABLE `purchase` (
+  `user_id` int(50) NOT NULL,
+  `book_id` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `purchase`
+--
+
+INSERT INTO `purchase` (`user_id`, `book_id`) VALUES
+(0, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `search`
+--
+
+CREATE TABLE `search` (
+  `search_id` int(100) NOT NULL,
+  `search_cat` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `search`
+--
+
+INSERT INTO `search` (`search_id`, `search_cat`) VALUES
+(1, 'Title'),
+(2, 'Author'),
+(3, 'Price'),
+(4, 'Publication'),
+(5, 'Release');
+
 --
 -- Indexes for dumped tables
 --
@@ -188,6 +256,18 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`);
 
 --
+-- Indexes for table `purchase`
+--
+ALTER TABLE `purchase`
+  ADD UNIQUE KEY `user_id` (`user_id`,`book_id`);
+
+--
+-- Indexes for table `search`
+--
+ALTER TABLE `search`
+  ADD PRIMARY KEY (`search_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -196,6 +276,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `genres`
   MODIFY `gen_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `search`
+--
+ALTER TABLE `search`
+  MODIFY `search_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
