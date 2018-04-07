@@ -1,12 +1,8 @@
 <!DOCTYPE>
 <?php
-
 session_start();
-
 include("functions/functions.php");
-
 $con = mysqli_connect("localhost","root","","onlinebookstore");
-
 ?>
 
 <html>
@@ -65,11 +61,8 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 		 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
 		 <?php
 		 if (isset($_SESSION['customer_email'])){
-
 			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
-
 		 } else {
-
 			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_login.php'>Log In</a></p>";
 			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_register.php'>Register</a></p>";
 		 }
@@ -107,9 +100,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  <div class="w3-row w3-grayscale">
 	  <?php
 		$get_pro = "select * from products";
-
 		$run_pro = mysqli_query($con, $get_pro);
-
 		while($row_pro=mysqli_fetch_array($run_pro)){
 			$pro_id = $row_pro['product_id'];
 			$pro_title = $row_pro['product_title'];
@@ -130,7 +121,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 						<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
 					</div>
 				</div>
-				<p><?php echo $pro_title; ?><br><b>$<?php echo $pro_price; ?></b></p>
+				<p><?php echo "<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?><br><b>$<?php echo $pro_price; ?></b></p>
 			</div>
 
 
@@ -143,73 +134,46 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  </div>
 <!--
 	<div class="main_wrapper">
-
 -->
 		<!--content_wrapper starts here-->
 <!--
 		<div class="content_wrapper">
-
 			<div id ="sidebar">
-
 				<div id="sidebar_title">Genres</div>
-
 				<ul id="gens">
-
 					<?php getGens(); ?>
-
 				</ul>
-
 			</div>
-
 			<div id="content_area">
-
 				<?php cart(); ?>
-
 				<div id="shopping_cart">
-
 					<span style="float:right; font-size:18px; padding:5px; line-height:40px;">
-
 					<?php
 					if (isset($_SESSION['customer_email'])){
-
 						$user = $_SESSION['customer_email'];
-
 						$result = mysqli_query($con,"select first_name from accounts where email = '$user'");
 						$row_img = mysqli_fetch_array($result);
 						$name = $row_img['first_name'];
 						echo "Welcome $name!";
-
 					} else {
-
 						echo "Welcome Guest!";
 					}
 					?>
 					<b style="color:yellow">Shopping Cart -</b> Total Items: <?php total_items();?>
 					Total Price: <?php total_price(); ?> <a href="cart.php" style="color:yellow">Go to Cart</a>
-
 					<?php
 					if (!isset($_SESSION['customer_email'])){
-
 						echo "<a href='customer_login.php' style='color:orange'>Login</a>";
-
 					} else {
-
 						echo "<a href='customer_logout.php' style='color:orange'>Logout</a>";
 					}
-
 					?>
 					</span>
-
 				</div>
-
 				<div id="products_box">
-
 					<?php getPro(); ?>
-
 				</div>
-
 			</div>
-
 		</div>
 -->
 		<!--content_wrapper ends here-->
@@ -230,22 +194,17 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 		        x.className = x.className.replace(" w3-show", "");
 		    }
 		}
-
 		// Click on the "Jeans" link on page load to open the accordion for demo purposes
 		document.getElementById("myBtn").click();
-
 		// Script to open and close sidebar
-
 		function w3_close() {
 		    document.getElementById("mySidebar").style.display = "none";
 		    document.getElementById("myOverlay").style.display = "none";
 		}
-
 		function w3_open() {
 		    document.getElementById("mySidebar").style.display = "block";
 		    document.getElementById("myOverlay").style.display = "block";
 		}
-
 	</script>
 
 </body>
