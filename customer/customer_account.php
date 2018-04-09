@@ -131,8 +131,8 @@ include("functions/functions.php");
 
 						?>
 				<div id="sidebar_title" style="background-color: #eee; font-size:18px; text-align:left">Account Financials: </div>
-				<li style=padding-left:13px;><a href="../addresses.php">Credit Cards</a></li>
-				<li style=padding-left:13px;><a href="../customer_cards.php">Addresses</a></li>
+				<li style=padding-left:13px;><a href="../customer_cards.php">Credit Cards</a></li>
+				<li style=padding-left:13px;><a href="../addresses.php">Addresses</a></li>
 
 				</div>
 
