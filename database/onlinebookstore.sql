@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2018 at 03:36 AM
+-- Generation Time: Apr 09, 2018 at 11:55 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -43,7 +43,22 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`email`, `id_number`, `first_name`, `last_name`, `password`, `user_image`, `username`) VALUES
-('a@mail.com', 0, 'Jane', 'Doe', '1234', 'IMG_0014.JPG', 'a_username');
+('a@mail.com', 0, 'Jane', 'Doe', '1234', 'IMG_0014.JPG', 'a_username'),
+('test@test.com', 903341, 'Jose', 'Perez', 'Test9999', '165202.png', 'test');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `addresses`
+--
+
+CREATE TABLE `addresses` (
+  `streetAddr` varchar(250) NOT NULL,
+  `zip` int(6) NOT NULL,
+  `city` varchar(250) NOT NULL,
+  `state` varchar(25) NOT NULL,
+  `userId` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -87,6 +102,20 @@ INSERT INTO `author` (`authorNum`, `authorLast`, `authorFirst`) VALUES
 ('23', 'O\'Rourke', 'Randy'),
 ('24', 'Kidder', 'Tracy'),
 ('25', 'Schleining', 'Lon');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cards`
+--
+
+CREATE TABLE `cards` (
+  `cardNum` int(16) NOT NULL,
+  `expMo` int(2) NOT NULL,
+  `expYr` int(4) NOT NULL,
+  `cardHolderName` varchar(150) NOT NULL,
+  `userId` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
