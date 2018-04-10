@@ -111,7 +111,62 @@ include("includes/db.php");
 		    </p>
 		  </header>
 
+		  <?php
+
+		  if (isset($_POST['add_address'])){
+
+			  //gets the user id from the database
+			  $user = $_SESSION['customer_email'];
+			  $result = mysqli_query($con,"select id_number from accounts where email = '$user'");
+			  $row = mysqli_fetch_array($result);
+			  $id = $row['id_number'];
+
+			  //gets all the data the user input
+			  $address = $_POST['streetAddr'];
+			  $zip = $_POST['zip'];
+			  $city = $_POST['city'];
+			  $state = $_POST['state'];
+
+			  $anyEmpty = (boolean) false;
+			  $wrongZip = (boolean) false;
+
+			  //checks if address or city were left empty
+			  if($address == '')
+			  {
+				  echo "<div style='text-align:center; color:orange'>Please enter a valid street address.</div>";
+				  $anyEmpty = true;
+			  }
+			  if($city == '')
+			  {
+				  echo "<div style='text-align:center; color:orange'>Please enter a valid city name.</div>";
+				  $anyEmpty = true;
+			  }
+
+			  //checks if the given zip code is valid
+			  if( ((!preg_match("#[0-9]+#", $zip)) || (preg_match("#[a-z]+#", $zip)) || (preg_match("#[A-Z]+#", $zip)))
+			  || (!(strlen($zip) == 5)))
+			  {
+				  echo "<div style='text-align:center; color:orange'>Please enter a valid zip code.</div>";
+				  $wrongZip = true;
+			  }
+
+			  //if everything is correct, the address is added to the database
+			  if((!$anyEmpty) && (!$wrongZip))
+			  {
+				  $insert_c = "insert into addresses (streetAddr, zip, city, state, userId) values ('$address', '$zip', '$city','$state','$id')";
+
+				  $run_c = mysqli_query($con, $insert_c);
+
+				  if($run_c)
+				  {
+					  echo "<script>alert('registration successful')</script>";
+				  }
+			  }
+		  }
+		  ?>
+
 		<!--content_wrapper starts here-->
+		<div align="center">
 		<button class="collapsible">Add a new shipping address</button>
 		<div class="collapseContent">
 			<br>
@@ -130,7 +185,7 @@ include("includes/db.php");
 					</tr>
 					<tr>
 						<td align="right">State: </td>
-						<td><select style="width:200">
+						<td><select name="state" style="width:200">
 							<option value="AL">Alabama</option>
 							<option value="AK">Alaska</option>
 							<option value="AZ">Arizona</option>
@@ -189,18 +244,6 @@ include("includes/db.php");
 					</tr>
 				</table>
 
-				<?php
-
-				if (isset($_POST['add_address'])){
-
-					$user = $_SESSION['customer_email'];
-					$result = mysqli_query($con,"select id_number from accounts where email = '$user'");
-					$row = mysqli_fetch_array($result);
-					$id = $row['id_number'];
-					echo "$id";
-				}
-				?>
-
 				<!--script for collapsible sections of html-->
 				<script>
 					var coll = document.getElementsByClassName("collapsible");
@@ -222,6 +265,7 @@ include("includes/db.php");
 
 			</form>
 		</div>
+	</div>
 		<!--content_wrapper ends here-->
 
 		<br><br>
