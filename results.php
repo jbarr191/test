@@ -1,8 +1,6 @@
 <!DOCTYPE>
 <?php
-
 session_start();
-
 include("functions/functions.php");
 ?>
 
@@ -178,7 +176,7 @@ include("functions/functions.php");
 									{
 										$search_id = $row_search['search_id'];
 										$search_cat = $row_search['search_cat'];
-							
+									
 									echo "<option value='$search_id'>$search_cat</option>";
 									}
 												
