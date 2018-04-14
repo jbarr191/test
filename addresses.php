@@ -109,17 +109,46 @@ include("includes/db.php");
 		 		</div>
 		      <!--<i class="fa fa-search"></i>-->
 		    </p>
-		  </header>
+		 </header>
 
-		  <?php
-
-		  if (isset($_POST['add_address'])){
-
+		 <div style="background-color: #eee">
+			 <h1 style="padding-left:22px; padding-top:2px">My addresses</h1>
+			  <?php
 			  //gets the user id from the database
 			  $user = $_SESSION['customer_email'];
 			  $result = mysqli_query($con,"select id_number from accounts where email = '$user'");
 			  $row = mysqli_fetch_array($result);
 			  $id = $row['id_number'];
+
+			  $addressQuery = sprintf("select * from addresses where userId= '%s' ", $id);
+			  $result = mysqli_query($con, $addressQuery);
+			  $num_rows = mysqli_num_rows($result);
+
+			  //Tests if any matches were found when looking for already-registed emails
+			  if($num_rows == 0)
+			  {
+				  echo "<div style='text-align:center; color:orange'>You do not have any addresses saved.</div>";
+			  } else {
+
+				  while($current_row=mysqli_fetch_array($result))
+				  {
+					  echo "<table style='padding:8px'>";
+					  $cur_addr = $current_row['streetAddr'];
+					  $cur_city = $current_row['city'];
+					  $cur_state = $current_row['state'];
+					  $cur_zip = $current_row['zip'];
+					  echo "</tr><td>$cur_addr</td></tr>";
+					  echo "<tr><td>$cur_city, $cur_state $cur_zip</td></tr>";
+					  echo "</tr></table>";
+				  }
+			  }
+			  ?>
+		  </div>
+		  <br>
+
+		  <?php
+
+		  if (isset($_POST['add_address'])){
 
 			  //gets all the data the user input
 			  $address = $_POST['streetAddr'];
@@ -159,7 +188,8 @@ include("includes/db.php");
 
 				  if($run_c)
 				  {
-					  echo "<script>alert('registration successful')</script>";
+					  echo "<script>alert('New address added')</script>";
+					  echo "<script>window.open('addresses.php','_self')</script>";
 				  }
 			  }
 		  }

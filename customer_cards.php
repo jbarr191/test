@@ -111,12 +111,93 @@ include("includes/db.php");
 		    </p>
 		  </header>
 
-		<!--content_wrapper starts here-->
-		<div class="content_wrapper">
+		  <div align="center">
+			  <button class="collapsible">Add a new credit card</button>
+			  <div class="collapseContent">
+				  <br>
+				  <form action="customer_cards.php" method="post" enctype="multipart/form-data">
 
-		</div>
-		<!--content_wrapper ends here-->
+		  				<table align="center" width="600">
+		  					<tr>
+		  						<td align="right">Credit card number: </td>
+		  						<td><input type="text" name="CardNum" style="width:200px"/></td>
+		  					</tr>
+		  					<tr>
+		  						<td align="right">Cardholder's name: </td>
+		  						<td><input type="text" name="cardsName" style="width:250px"/></td>
+		  					</tr>
+		  					<tr>
+		  						<td align="right">Exp. Month: </td>
+		  						<td><select name="month" style="width:65">
+		  							<option value="01">01</option>
+		  							<option value="02">02</option>
+		  							<option value="03">03</option>
+									<option value="04">04</option>
+									<option value="05">05</option>
+									<option value="06">06</option>
+									<option value="07">07</option>
+									<option value="08">08</option>
+									<option value="09">09</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+		  						</select></td>
+							</tr>
+							<tr>
+								<td align="right">Exp. Year: </td>
+								<td><select name="year" style="width:80">
+									<option value="2018">2018</option>
+									<option value="2019">2019</option>
+									<option value="2020">2020</option>
+									<option value="2021">2021</option>
+									<option value="2022">2022</option>
+									<option value="2023">2023</option>
+									<option value="2024">2024</option>
+									<option value="2025">2025</option>
+									<option value="2026">2026</option>
+									<option value="2027">2027</option>
+									<option value="2028">2028</option>
+									<option value="2029">2029</option>
+									<option value="2030">2030</option>
+									<option value="2031">2031</option>
+									<option value="2032">2032</option>
+									<option value="2033">2033</option>
+									<option value="2034">2034</option>
+									<option value="2035">2035</option>
+									<option value="2036">2036</option>
+									<option value="2037">2037</option>
+									<option value="2038">2038</option>
+								</select></td>
+		  					</tr>
+		  					<tr>
+		  						<td align="center"><input type="submit" name="add_card" value="Submit"/></td>
+		  					</tr>
+		  				</table>
 
+		  				<!--script for collapsible sections of html-->
+		  				<script>
+		  					var coll = document.getElementsByClassName("collapsible");
+		  					var i;
+
+		  					for (i = 0; i < coll.length; i++) {
+		  						 coll[i].addEventListener("click", function() {
+		  							  this.classList.toggle("active");
+		  							  var collapseContent = this.nextElementSibling;
+		  							  if (collapseContent.style.display === "block") {
+		  									collapseContent.style.display = "none";
+		  							  } else {
+		  									collapseContent.style.display = "block";
+		  							  }
+		  						 });
+		  					}
+		  				</script>
+		  				<!--script ends here-->
+
+		  			</form>
+		  		</div>
+  	</div>
+
+		<br><br>
 		<div class="w3-black w3-center w3-padding-24">&copy; 2018 by Software Engineering TEAM 1</div>
 
 	</div>
