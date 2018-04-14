@@ -165,7 +165,7 @@ include("includes/db.php");
 
 		  			move_uploaded_file($c_image_tmp,"customer/customer_images/$c_image");
 
-		  			echo $insert_c = "insert into accounts (email, id_number, first_name, last_name, password, user_image, username) values ('$c_email', '$id', '$c_name','$c_last','$c_pass','$c_image', '$c_username')";
+		  			$insert_c = "insert into accounts (email, id_number, first_name, last_name, password, user_image, username) values ('$c_email', '$id', '$c_name','$c_last','$c_pass','$c_image', '$c_username')";
 
 		  			$run_c = mysqli_query($con, $insert_c);
 

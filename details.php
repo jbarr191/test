@@ -1,6 +1,6 @@
 <!DOCTYPE>
 <?php
-
+session_start();
 include("functions/functions.php");
 $con = mysqli_connect("localhost","root","","onlinebookstore");
 ?>
