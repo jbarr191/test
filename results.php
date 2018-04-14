@@ -243,20 +243,18 @@ include("functions/functions.php");
 								
 									echo "
 										
-										<div class='w3-col l3 s6'>
-			<div class='w3-container'>
-				<div class='w3-display-container'>
-					<img src='admin_area/product_images/<?php echo $pro_image; ?>' style='width:100%'>
-					<span class='w3-tag w3-display-topleft'>New</span>
-					<div class='w3-display-middle w3-display-hover'>
-						<a href='index.php?add_cart=<?php echo $pro_id; ?>'><button class='w3-button w3-black'>Buy now <i class='fa fa-shopping-cart'></i></button>
-					</div>
-				</div>
-				<p><?php echo $pro_title; ?><br><b>$<?php echo $pro_price; ?></b></p>
-			</div>
-
-			
-	    </div>
+										<div id='single_product'>
+						
+											<h3>$pro_title</h3>
+						
+											<img src='admin_area/product_images/$pro_image' width='180' height='180' />
+						
+											<p><b> Price: $ $pro_price </b></p>
+						
+											<a href='details.php?pro_id=$pro_id' style='float:left;'>Details</a>
+											<a href='index.php?add_cart=$pro_id'><button style='float:right'>Add to Cart</button></a>
+					
+										</div>
 		";
 		
 								}	
