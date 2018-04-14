@@ -294,46 +294,6 @@ function getUserID(){
 		
 }
 
-function getAuthor(){
 
-	global $con;
-
-	// query
-	$get_pro = "select * from products";
-
-	// run query on the connection
-	$run_pro = mysqli_query($con, $get_pro);
-
-	while($row_pro=mysqli_fetch_array($run_pro)){
-
-		$pro_id = $row_pro['product_id'];
-		$pro_title = $row_pro['product_title'];
-		$pro_image = $row_pro['product_image'];
-		$pro_author = $row_pro['product_author'];
-		$pro_desc= $row_pro['product_desc'];
-		$pro_price = $row_pro['product_price'];
-		$pro_bio = $row_pro['product_bio'];
-		$pro_gen = $row_pro['product_genre'];
-		$pro_release = $row_pro['product_release'];
-
-	    echo "
-				<div id='single_product'>
-
-					<h3>$pro_title</h3>
-
-					<img src='admin_area/product_images/$pro_image' width='180' height='277' />
-
-					<p><b> Price: $ $pro_price  </b></p>
-
-					<a href='index.php?add_cart=$pro_id'><button style='float:right'>Add to Cart</button></a>
-
-
-					<a href ='comments.php?pro_id=$pro_id' style = 'float:left'>Comments</a>
-
-					<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp Details &nbsp</a>
-
-
-				</div>
-		"; 
 
 ?>
