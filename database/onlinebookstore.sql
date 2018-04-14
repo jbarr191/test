@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2018 at 11:55 AM
--- Server version: 10.1.30-MariaDB
+-- Generation Time: Apr 14, 2018 at 04:41 AM
+-- Server version: 5.7.20-log
 -- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -44,21 +44,7 @@ CREATE TABLE `accounts` (
 
 INSERT INTO `accounts` (`email`, `id_number`, `first_name`, `last_name`, `password`, `user_image`, `username`) VALUES
 ('a@mail.com', 0, 'Jane', 'Doe', '1234', 'IMG_0014.JPG', 'a_username'),
-('test@test.com', 903341, 'Jose', 'Perez', 'Test9999', '165202.png', 'test');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `addresses`
---
-
-CREATE TABLE `addresses` (
-  `streetAddr` varchar(250) NOT NULL,
-  `zip` int(6) NOT NULL,
-  `city` varchar(250) NOT NULL,
-  `state` varchar(25) NOT NULL,
-  `userId` int(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+('asd@gmail.com', 88832, 'Liz', 'asd', 'Idkbro123', 'totoro.png', 'Liz');
 
 -- --------------------------------------------------------
 
@@ -106,20 +92,6 @@ INSERT INTO `author` (`authorNum`, `authorLast`, `authorFirst`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cards`
---
-
-CREATE TABLE `cards` (
-  `cardNum` int(16) NOT NULL,
-  `expMo` int(2) NOT NULL,
-  `expYr` int(4) NOT NULL,
-  `cardHolderName` varchar(150) NOT NULL,
-  `userId` int(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `cart`
 --
 
@@ -134,10 +106,9 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`p_id`, `ip_add`, `qty`) VALUES
-(5, '::1', 0),
-(8, '::1', 0),
-(6, '::1', 0),
-(9, '::1', 0);
+(5, '::1', 1),
+(6, '::1', 1),
+(9, '::1', 1);
 
 -- --------------------------------------------------------
 
@@ -213,7 +184,8 @@ INSERT INTO `products` (`product_id`, `product_title`, `product_image`, `product
 (5, 'To Kill a Mockingbird', 'mockingbird.jpg', 'Harper Lee', 'The unforgettable novel of a childhood in a sleepy Southern town and the crisis of conscience that rocked it, To Kill A Mockingbird became both an instant bestseller and a critical success when it was first published in 1960. It went on to win the Pulitzer Prize in 1961 and was later made into an Academy Award-winning film, also a classic.', 6.61, 'Nelle Harper Lee (April 28, 1926 â€“ February 19, 2016), better known by her pen name Harper Lee, was an American novelist widely known for To Kill a Mockingbird, published in 1960. Immediately successful, it won the 1961 Pulitzer Prize and has become a classic of modern American literature.', '2', 'Warner Books, Inc.', '1960-07-11'),
 (6, 'Pride and Prejudice', 'pride.jpg', 'Jane Austen', 'â€œIt is a truth universally acknowledged, that a single man in possession of a good fortune must be in want of a wife.â€ So begins Pride and Prejudice, Jane Austenâ€™s witty comedy of mannersâ€”one of the most popular novels of all timeâ€”that features splendidly civilized sparring between the proud Mr. Darcy and the prejudiced Elizabeth Bennet', 6.99, 'Jane Austen (16 December 1775 â€“ 18 July 1817) was an English novelist known primarily for her six major novels, which interpret, critique and comment upon the British landed gentry at the end of the 18th century. ', '2', 'Thomas Egerton', '1813-01-28'),
 (8, 'The Great Gatsby', 'greatGatsby.jpg', 'Francis Fitzgerald', 'Jay Gatsby is the man who has everything. But one thing will always be out of his reach. Everybody who is anybody is seen at his glittering parties. Day and night his Long Island mansion buzzes with bright young things drinking, dancing, and debating his mysterious character. ', 3.99, 'Francis Scott Key Fitzgerald was an American writer of novels and short stories, whose works have been seen as evocative of the Jazz Age, a term he himself allegedly coined. He is regarded as one of the greatest twentieth century writers.', '2', 'Charles Scribners Sons', '1925-04-10'),
-(9, 'The Book Thief', 'bookthief.jpg', 'Markus Zusak', 'Itâ€™s just a small story really, about among other things: a girl, some words, an accordionist, some fanatical Germans, a Jewish fist-fighter, and quite a lot of thievery ...', 5.29, 'Markus Zusak was born in 1975 and is the author of five books, including the international bestseller, The Book Thief , which is translated into more than forty languages.', '2', '', '0000-00-00');
+(9, 'The Book Thief', 'bookthief.jpg', 'Markus Zusak', 'Itâ€™s just a small story really, about among other things: a girl, some words, an accordionist, some fanatical Germans, a Jewish fist-fighter, and quite a lot of thievery ...', 5.29, 'Markus Zusak was born in 1975 and is the author of five books, including the international bestseller, The Book Thief , which is translated into more than forty languages.', '2', '', '0000-00-00'),
+(10, 'Sense and Sensibility', 'SenseandSensibility.jpg', 'Jane Austen', 'Henry Dashwood, his second wife, and their three daughters live for many years with Henry\'s wealthy bachelor uncle. That uncle decides, in late life, to will the use and income only of his property first to Henry, then to Henry\'s first son John Dashwood (by his first marriage), so that the property should pass intact to John\'s three-year-old son Harry. ', 6.99, 'It is a truth universally acknowledged, that a single man in possession of a good fortune must be in want of a wife.â€ So begins Pride and Prejudice, Jane Austenâ€™s witty comedy of mannersâ€”one of the most popular novels of all timeâ€”that features splendidly civilized sparring between the proud Mr. Darcy and the prejudiced Elizabeth Bennet', '2', 'Thomas Egerton', '1811-01-28');
 
 -- --------------------------------------------------------
 

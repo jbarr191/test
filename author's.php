@@ -2,7 +2,7 @@
 <?php
 session_start();
 include("functions/functions.php");
-$con = mysqli_connect("localhost","root","","onlinebookstore");
+$con = mysqli_connect("localhost","root","wow.SQL","onlinebookstore");
 ?>
 
 <html>
@@ -60,10 +60,10 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  <div class="w3-display-container w3-container" style = "text-align:center;">
 	    		
 					<?php 
-					if(isset($_GET['pro_id'])){
-					$product_id = $_GET['pro_id'];
+					if(isset($_GET['pro_author'])){
+					$product_author = $_GET['pro_author'];
 					
-					$get_pro = "select * from products where product_id = '$product_id'";
+					$get_pro = "select * from products where product_id = '$product_author'";
 					
 					$run_pro = mysqli_query($con, $get_pro);
 					
@@ -88,8 +88,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 							
 							<p><b> Price: $ $pro_price  </b></p>
 							
-							<b> Author: </b><a href = 'authors.php?pro_author=$pro_author' style = 'float:center;width:42px;height:42px'>&nbsp$pro_author&nbsp</a>
-							
+							<a href='author's.php?add_cart=$pro_id'><button style='float:right'>Add to Cart</button></a>
 							<br><b>Book Description : </b>
 							<p align='center'>$pro_desc</p>
 							<br><b>Author Biography : </b>

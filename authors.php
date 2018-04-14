@@ -91,27 +91,35 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  </div>
 
 	  <div class="w3-container w3-text-grey" id="jeans">
-	    <p>8 items</p>
+	   
+		
 	  </div>
 
 	  <!-- Product grid -->
-	    <?php cart(); ?>
+	
 
 	  <div class="w3-row w3-grayscale">
-	  <?php
-		$get_pro = "select * from products";
-		$run_pro = mysqli_query($con, $get_pro);
-		while($row_pro=mysqli_fetch_array($run_pro)){
-			$pro_id = $row_pro['product_id'];
-			$pro_title = $row_pro['product_title'];
-			$pro_image = $row_pro['product_image'];
-			$pro_author = $row_pro['product_author'];
-			$pro_desc= $row_pro['product_desc'];
-			$pro_price = $row_pro['product_price'];
-			$pro_bio = $row_pro['product_bio'];
-			$pro_gen = $row_pro['product_genre'];
-			$pro_release = $row_pro['product_release'];
+	  
+	 	<?php 
+					if(isset($_GET['pro_author'])){
+					$product_author = $_GET['pro_author'];
+					
+					$get_pro = "select * from products where product_author = '$product_author'";
+					
+					$run_pro = mysqli_query($con, $get_pro);
+					
+					$row_pro=mysqli_fetch_array($run_pro);
+					$pro_id = $row_pro['product_id'];
+					$pro_title = $row_pro['product_title'];
+					$pro_image = $row_pro['product_image'];
+					$pro_author = $row_pro['product_author'];
+					$pro_desc= $row_pro['product_desc'];
+					$pro_price = $row_pro['product_price'];
+					$pro_bio = $row_pro['product_bio'];
+					$pro_gen = $row_pro['product_genre'];
+					$pro_release = $row_pro['product_release'];
 	  ?>
+	  <p><b>Books by: </b><?php echo"<b>$product_author</b>" ?>
 		<div class="w3-col l3 s6">
 			<div class="w3-container">
 				<div class="w3-display-container">
