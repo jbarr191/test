@@ -109,7 +109,9 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					$get_pro = "select * from products where product_author = '$product_author'";
 					 
 					$run_pro = mysqli_query($con, $get_pro);
-
+					?>
+						  <p><b>Books by: </b><?php echo"<b>$product_author</b>" ?>
+					<?php	  
 						while($row_pro=mysqli_fetch_array($run_pro))
 						{
 						
@@ -124,7 +126,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 						$pro_gen = $row_pro['product_genre'];
 						$pro_release = $row_pro['product_release'];
 						  ?>
-						  <p><b>Books by: </b><?php echo"<b>$product_author</b>" ?>
+						  
 							<div class="w3-col l3 s6">
 								<div class="w3-container">
 									<div class="w3-display-container">

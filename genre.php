@@ -24,7 +24,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	<!-- Sidebar/menu -->
 	<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
-		< div class="w3-container w3-display-container w3-padding-16">
+		<div class="w3-container w3-display-container w3-padding-16">
 			<i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
 		 	<a href="index.php">
 		 		<img id="logo" src="images/logo.jpg" width="240" height="120" />
@@ -37,7 +37,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	      Genres <i class="fa fa-caret-down"></i>
 	    </a>
 	    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-		
+	      
 		  <a href = 'genre.php?pro_genre=1' class="w3-bar-item w3-button":42px'>Sci-fi</a>
 		  <a href = 'genre.php?pro_genre=2' class="w3-bar-item w3-button":42px'>Fiction</a>
 	   
@@ -59,6 +59,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  <!-- Top header -->
 	  <header class="w3-container w3-xlarge">
 	    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
+		 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
 		 <?php
 		 if (isset($_SESSION['customer_email'])){
 			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
@@ -91,47 +92,63 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  </div>
 
 	  <div class="w3-container w3-text-grey" id="jeans">
-	    <p>8 items</p>
+	   
+		
 	  </div>
 
 	  <!-- Product grid -->
-	    <?php cart(); ?>
+	
 
 	  <div class="w3-row w3-grayscale">
-	  <?php
-		$get_pro = "select * from products";
-		$run_pro = mysqli_query($con, $get_pro);
-		while($row_pro=mysqli_fetch_array($run_pro)){
-			$pro_id = $row_pro['product_id'];
-			$pro_title = $row_pro['product_title'];
-			$pro_image = $row_pro['product_image'];
-			$pro_author = $row_pro['product_author'];
-			$pro_desc= $row_pro['product_desc'];
-			$pro_price = $row_pro['product_price'];
-			$pro_bio = $row_pro['product_bio'];
-			$pro_gen = $row_pro['product_genre'];
-			$pro_release = $row_pro['product_release'];
-	  ?>
-		<div class="w3-col l3 s6">
-			<div class="w3-container">
-				<div class="w3-display-container">
-					<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:100%">
-					<span class="w3-tag w3-display-topleft">New</span>
-					<div class="w3-display-middle w3-display-hover">
-						<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
-					</div>
-				</div>
-				<p><?php echo 
-				"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
-					<br><b>$<?php echo $pro_price; ?></b></p>
-			</div>
+	  
+	 	<?php 
+					if(isset($_GET['pro_genre']))
+					{
+						
+					$product_genre = $_GET['pro_genre'];
+					
+					$get_pro = "select * from products where product_genre = '$product_genre'";
+					 
+					$run_pro = mysqli_query($con, $get_pro);
+					?>
+						  <p><b>Books by: </b><?php echo"<b>$product_genre</b>" ?>
+					<?php	  
+						while($row_pro=mysqli_fetch_array($run_pro))
+						{
+						
+	  					
+						$pro_id = $row_pro['product_id'];
+						$pro_title = $row_pro['product_title'];
+						$pro_image = $row_pro['product_image'];
+						$pro_author = $row_pro['product_author'];
+						$pro_desc= $row_pro['product_desc'];
+						$pro_price = $row_pro['product_price'];
+						$pro_bio = $row_pro['product_bio'];
+						$pro_gen = $row_pro['product_genre'];
+						$pro_release = $row_pro['product_release'];
+						  ?>
+						  
+							<div class="w3-col l3 s6">
+								<div class="w3-container">
+									<div class="w3-display-container">
+										<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:100%">
+										<span class="w3-tag w3-display-topleft">New</span>
+										<div class="w3-display-middle w3-display-hover">
+											<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+										</div>
+									</div>
+									<p><?php echo 
+									"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
+										<br><b>$<?php echo $pro_price; ?></b></p>
+								</div>
+										 
 
+							</div>
+										 
 
-	    </div>
-
-
-	  <?php
-		}
+						  <?php
+						}
+					 }
 	  ?>
 	  </div>
 <!--
