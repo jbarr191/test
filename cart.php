@@ -104,7 +104,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					<th>Remove</th>
 					<th>Product(s)</th>
 					<th>Quantity</th>
-					<th>Total Price</th>
+					<th>Price</th>
 				</tr>
 							
 							<?php
@@ -171,9 +171,11 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 							}  // close brackets of above while loops 
 						?>
 						
-				<tr>
-					<td colspan="4" align="right"><b>Sub Total:</b></td>
-					<td><?php echo "$" . $total;?></td>
+				<tr align="center">
+					<th></th>
+					<th></th>
+					<th></th>
+					<td><b><?php echo "Total: $" . $total;?></b></td>
 				</tr>
 							
 				<tr align="center">

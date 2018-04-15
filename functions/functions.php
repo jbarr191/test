@@ -294,8 +294,8 @@ function getUserID(){
 		
 }
 
-function getAuthor(){
 
+<<<<<<< HEAD
 	global $con;
 
 	// query
@@ -336,5 +336,7 @@ function getAuthor(){
 				</div>
 	"; }
 }
+=======
+>>>>>>> e4c18b336b45b379c2021c9198604d0687d83587
 
 ?>
