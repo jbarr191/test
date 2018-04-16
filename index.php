@@ -37,10 +37,9 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	      Genres <i class="fa fa-caret-down"></i>
 	    </a>
 	    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-		
-		  <a href = 'genre.php?pro_genre=1' class="w3-bar-item w3-button":42px'>Sci-fi</a>
-		  <a href = 'genre.php?pro_genre=2' class="w3-bar-item w3-button":42px'>Fiction</a>
-	   
+	      <a href="#" class="w3-bar-item w3-button">Sci-fi</a>
+	      <a href="#" class="w3-bar-item w3-button">Fiction</a>
+	      <a href="#" class="w3-bar-item w3-button">Genre 3</a>
 	    </div>
 	  </div>
 	  <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact Us</a>
@@ -59,6 +58,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  <!-- Top header -->
 	  <header class="w3-container w3-xlarge">
 	    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
+		 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
 		 <?php
 		 if (isset($_SESSION['customer_email'])){
 			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
