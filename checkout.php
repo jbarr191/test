@@ -55,21 +55,20 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left:250px">
-
+	
 	  <!-- Push down content on small screens -->
 	  <div class="w3-hide-large" style="margin-top:83px"></div>
 
 	  <!-- Top header -->
+	  
 	  <header class="w3-container w3-xlarge">
 	    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
 		 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
 		 <?php
 		 if (isset($_SESSION['customer_email'])){
-
 			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
 
 		 } else {
-
 			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_login.php'>Log In</a></p>";
 			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_register.php'>Register</a></p>";
 		 }
@@ -91,160 +90,23 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	   
 	  </div>
 
-	  <!-- Product grid -->
-	  <?php cart(); ?>
-
 	  <div class="w3-row w3-grayscale">
 	  
-		<form action="" method="post" enctype="multipart/form-data">
-				
-			<table class="w3-table" align="center" width="700" bgcolor="white">
-						
-				<tr align="center">
-					<th>Remove</th>
-					<th>Product(s)</th>
-					<th>Quantity</th>
-					<th>Price</th>
-				</tr>
-							
-							<?php
-							$total = 0;
-							
-							global $con;
-	
-							$ip = getIp();
-	
-							// query the db to retrieve all items that belong to an ip
-							$sel_price = "select * from cart where ip_add='$ip'";
-	
-							// run the above query
-							$run_price = mysqli_query($con, $sel_price);
-
-							// while there's additional rows to fetch from the query results
-							while($p_price=mysqli_fetch_array($run_price)){
-		
-								// get the product id from the cart
-								$pro_id = $p_price['p_id'];
-								
-								
-								// get the quantity from the cart
-								$pro_qty = $p_price['qty'];
-		
-								// retrieve the product with the matching id from products table
-								$pro_price = "select * from products where product_id = '$pro_id'";
-		
-								// run the above query
-								$run_pro_price = mysqli_query($con, $pro_price);
-		
-								// while there's additional rows to fetch from the query results
-								while ($pp_price = mysqli_fetch_array($run_pro_price)){
-			
-									// store the details of each item
-									$product_price = array($pp_price['product_price']);
-									
-									$product_title = $pp_price['product_title'];
-									
-									$product_image = $pp_price['product_image'];
-									
-									$single_price = $pp_price['product_price'];
-									
-									$values = array_sum($product_price);
-									
-									$total += $values;
-							
-							?>
-							
-									<tr align="center">
-										<td><input type="image" src="images/removebtn.png" name="remove" class="btTxt submit" id="saveForm" value="<?php echo $pro_id;?>"/></td>
-										<td><?php echo $product_title; ?><br>
-										<img src="admin_area/product_images/<?php echo $product_image;?>" width="60" height="60" />
-										</td>
-										<td>
-											<input type="text" size="3" name="qty" value="<?php echo $pro_qty;?>" id="<?php echo $pro_id;?>"/>
-											<!--<input type="text" size="3" name="qty"/>
-											<input type="image" src="images/removebtn.png" name="update" class="btTxt submit" id="saveForm" value="<?php echo $pro_id;?>"/> -->
-										</td>
-										<td><?php echo "$" . $single_price; ?></td>
-
-									</tr>
-						<?php   } 
-							}  // close brackets of above while loops 
-						?>
-						
-				<tr align="center">
-					<th></th>
-					<th></th>
-					<th></th>
-					<td><b><?php echo "Total: $" . $total;?></b></td>
-				</tr>
-							
-				<tr align="center">
-					<td colspan="2"><input type="submit" name="update_cart" value="Update Cart"/></td>
-					<td><input type="submit" name="continue" value="Continue Shopping"/></td>
-					<td><button><a href="checkout.php" style="text-decoration:none; color:black;">Checkout</a></button></td>
-				</tr>
-					
-			</table>
-				
-		</form>	  
-		
-			<?php
-
-						$ip = getIp();
-						
-						// if update cart button is clicked
-						/*if(isset($_POST['update_cart'])){
-							// delete relevant items from the cart database
-							foreach($_POST['remove'] as $remove_id){
-								
-								$delete_product = "delete from cart where p_id='$remove_id' AND ip_add='$ip'";
-								
-								$run_delete = mysqli_query($con, $delete_product);
-								
-								if($run_delete){
-									
-									echo "<script>window.open('cart.php','_self')</script>";
-								}
-							}					
-						} */
-						
-						// if continue shopping button is clicked, go to index.php
-						if(isset($_POST['continue'])){
-							
-							echo "<script>window.open('index.php','_self')</script>";					
-						}
-
-						if(isset($_POST['remove'])){
-							
-							$remove_id = $_POST['remove'];
-							
-							$delete_product = "delete from cart where p_id='$remove_id' AND ip_add='$ip'";
-								
-							$run_delete = mysqli_query($con, $delete_product);
-								
-							if($run_delete){
-									
-								echo "<script>window.open('cart.php','_self')</script>";
-							}							
-						}
-						
-						/*if(isset($_POST['update'])){
-							
-							$update_id = $_POST['update'];
-							$item_qty = $_POST['qty'];
-
-							$update_qty = "update cart set qty='$item_qty' where p_id='$update_id' AND ip_add='$ip'";
-
-							$run_update = mysqli_query($con, $update_qty);
-								
-							if($run_update){
-									
-								echo "<script>window.open('cart.php','_self')</script>";
-							}
-						} */
-						
-
-			?>
+	  <!-- Do stuffs here -->
+	  <?php
+	  if(isset($_SESSION['customer_email'])){
+		  echo "Customer is signed in";
+		  //go to payment page;
+		  header("Location: payment.php");
+	  }
+	  else{
+		  echo "Need to sign in";
+		  //go to login page
+		  header("Location: customer_login.php");
+	  }
+	  
+	  ?>
+	  
 	  </div>
 	  
 		<div class="w3-black w3-center w3-padding-24">&copy; 2018 by Software Engineering TEAM 1</div>

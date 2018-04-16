@@ -24,7 +24,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	<!-- Sidebar/menu -->
 	<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
-		< div class="w3-container w3-display-container w3-padding-16">
+		<div class="w3-container w3-display-container w3-padding-16">
 			<i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
 		 	<a href="index.php">
 		 		<img id="logo" src="images/logo.jpg" width="240" height="120" />
