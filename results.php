@@ -191,7 +191,7 @@ include("functions/functions.php");
 					</form>
 				</div>
 			
-				<div id="products_box">
+				<div class="w3-row w3-container">
 				
 					<?php
 					$search_query = $_GET['user_query'];
@@ -223,9 +223,9 @@ include("functions/functions.php");
 								echo "<h2 style='padding:20px;'>No search results found!</h2>";
 								}
 									
-							else 
-									
-								while($row_pro = mysqli_fetch_array($run_pro))
+							else ?>
+									<div class="w3-row">
+								<?php while($row_pro = mysqli_fetch_array($run_pro))
 								{
 								
 									$pro_id = $row_pro['product_id'];
@@ -237,25 +237,26 @@ include("functions/functions.php");
 									$pro_bio = $row_pro['product_bio'];
 									$pro_gen = $row_pro['product_genre'];
 									$pro_release = $row_pro['product_release'];
+								?>
 								
-								
-									echo "
-										
-										<div id='single_product'>
-						
-											<h3>$pro_title</h3>
-						
-											<img src='admin_area/product_images/$pro_image' width='180' height='180' />
-						
-											<p><b> Price: $ $pro_price </b></p>
-						
-											<a href='details.php?pro_id=$pro_id' style='float:left;'>Details</a>
-											<a href='index.php?add_cart=$pro_id'><button style='float:right'>Add to Cart</button></a>
-					
+									<div class="w3-col l3 s6">
+										<div class="w3-container">
+											<div class="w3-display-container">
+												<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:100%">
+												<span class="w3-tag w3-display-topleft">New</span>
+												<div class="w3-display-middle w3-display-hover">
+													<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+												</div>
+											</div>
+										<p><?php echo 
+										"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
+										<br><b>$<?php echo $pro_price; ?></b></p>
 										</div>
-		";
+
+
+									</div> <?php
 		
-								}	
+								}	?> </div> <?php
 						}
 					}
 					
@@ -332,9 +333,9 @@ include("functions/functions.php");
 								echo "<h2 style='padding:20px;'>No search results found!</h2>";
 								}
 									
-							else 
-									
-								while($row_pro = mysqli_fetch_array($run_pro))
+							else ?>
+									<div class="w3-row">
+								<?php while($row_pro = mysqli_fetch_array($run_pro))
 								{
 								
 									$pro_id = $row_pro['product_id'];
@@ -346,24 +347,26 @@ include("functions/functions.php");
 									$pro_bio = $row_pro['product_bio'];
 									$pro_gen = $row_pro['product_genre'];
 									$pro_release = $row_pro['product_release'];
+								?>
 								
-								
-									echo "
-										
-										<div id='single_product'>
-						
-											<h3>$pro_title</h3>
-						
-											<img src='admin_area/product_images/$pro_image' width='180' height='180' />
-						
-											<p><b> Price: $ $pro_price </b></p>
-						
-											<a href='details.php?pro_id=$pro_id' style='float:left;'>Details</a>
-											<a href='index.php?add_cart=$pro_id'><button style='float:right'>Add to Cart</button></a>
-					
-										</div>";
+									<div class="w3-col l3 s6">
+										<div class="w3-container">
+											<div class="w3-display-container">
+												<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:100%">
+												<span class="w3-tag w3-display-topleft">New</span>
+												<div class="w3-display-middle w3-display-hover">
+													<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+												</div>
+											</div>
+										<p><?php echo 
+										"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
+										<br><b>$<?php echo $pro_price; ?></b></p>
+										</div>
+
+
+									</div> <?php
 		
-								}	
+								}	?> </div> <?php
 						}
 					}
 				   
@@ -438,10 +441,9 @@ include("functions/functions.php");
 								echo "<h2 style='padding:20px;'>No search results found!</h2>";
 								}
 									
-							else 
-								
-									
-								while($row_pro = mysqli_fetch_array($run_pro))
+							else ?>
+									<div class="w3-row">
+								<?php while($row_pro = mysqli_fetch_array($run_pro))
 								{
 								
 									$pro_id = $row_pro['product_id'];
@@ -453,24 +455,26 @@ include("functions/functions.php");
 									$pro_bio = $row_pro['product_bio'];
 									$pro_gen = $row_pro['product_genre'];
 									$pro_release = $row_pro['product_release'];
+								?>
 								
-								
-									echo "
-										
-										<div id='single_product'>
-						
-											<h3>$pro_title</h3>
-						
-											<img src='admin_area/product_images/$pro_image' width='180' height='180' />
-						
-											<p><b> Price: $ $pro_price </b></p>
-						
-											<a href='details.php?pro_id=$pro_id' style='float:left;'>Details</a>
-											<a href='index.php?add_cart=$pro_id'><button style='float:right'>Add to Cart</button></a>
-					
-										</div>";
+									<div class="w3-col l3 s6">
+										<div class="w3-container">
+											<div class="w3-display-container">
+												<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:100%">
+												<span class="w3-tag w3-display-topleft">New</span>
+												<div class="w3-display-middle w3-display-hover">
+													<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+												</div>
+											</div>
+										<p><?php echo 
+										"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
+										<br><b>$<?php echo $pro_price; ?></b></p>
+										</div>
+
+
+									</div> <?php
 		
-								}	
+								}	?> </div> <?php
 						}
 					}
 				
