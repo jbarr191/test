@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 14, 2018 at 04:41 AM
--- Server version: 5.7.20-log
+-- Generation Time: Apr 16, 2018 at 08:28 PM
+-- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -49,6 +49,20 @@ INSERT INTO `accounts` (`email`, `id_number`, `first_name`, `last_name`, `passwo
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `addresses`
+--
+
+CREATE TABLE `addresses` (
+  `streetAddr` int(150) NOT NULL,
+  `zip` int(6) NOT NULL,
+  `city` varchar(30) NOT NULL,
+  `state` varchar(16) NOT NULL,
+  `userId` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `author`
 --
 
@@ -88,6 +102,20 @@ INSERT INTO `author` (`authorNum`, `authorLast`, `authorFirst`) VALUES
 ('23', 'O\'Rourke', 'Randy'),
 ('24', 'Kidder', 'Tracy'),
 ('25', 'Schleining', 'Lon');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cards`
+--
+
+CREATE TABLE `cards` (
+  `cardNum` varchar(16) NOT NULL,
+  `expMo` int(2) NOT NULL,
+  `expYr` int(4) NOT NULL,
+  `cardHolderName` varchar(120) NOT NULL,
+  `userId` int(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
