@@ -334,7 +334,6 @@ function getAuthor(){
 
 
 				</div>
-	"; }
-}
+		"; 
 
 ?>
