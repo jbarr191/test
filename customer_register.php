@@ -171,6 +171,7 @@ include("includes/db.php");
 
 		  			if($run_c) {
 		  				echo "<script>alert('registration successful')</script>";
+						echo "<script>window.open('customer_login.php','_self')</script>";
 		  			}
 		  		}
 		  	}
