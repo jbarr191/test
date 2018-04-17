@@ -69,10 +69,10 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 				border-radius: 3px;
 			}
 
-			input[type=text] {
+			#fname, #email, #adr, #city, #state, #zip, #cname, #ccnum, #expmonth, #expyear, #cvv {
 				width: 100%;
 				margin-bottom: 20px;
-				padding: 12px;
+				padding: 4px;
 				border: 1px solid #ccc;
 				border-radius: 3px;
 			}
@@ -104,7 +104,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 				background-color: #45a049;
 			}		
 
-			a {
+			.blue {
 				color: #2196F3;
 			}
 
@@ -234,7 +234,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 									$total += $values;
 							
 							?>
-									<p><a href="#"><?php echo $product_title; ?></a> <span class="price"><?php echo "$" . $single_price; ?></span></p>
+									<p><a href="#" class="blue"><?php echo $product_title; ?></a> <span class="price"><?php echo "$" . $single_price; ?></span></p>
 						<?php   } 
 							}  // close brackets of above while loops 
 						?>  
@@ -242,6 +242,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 			<p>Total <span class="price" style="color:black"><b><?php echo "$" . $total;?></b></span></p>
 		</div>	
 	  </div>
+	  
 	  
 	  <form action="/action_page.php">
       
