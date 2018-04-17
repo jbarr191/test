@@ -185,15 +185,62 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  <div class="w3-row w3-grayscale">
 	  
 	  <div class="col-25">
+	  
 		<div class="container">
-			<h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span></h4>
-			<p><a href="#">Product 1</a> <span class="price">$15</span></p>
-			<p><a href="#">Product 2</a> <span class="price">$5</span></p>
-			<p><a href="#">Product 3</a> <span class="price">$8</span></p>
-			<p><a href="#">Product 4</a> <span class="price">$2</span></p>
+			<h4>Cart Summary <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></h4>
+		<?php
+							$total = 0;
+							
+							global $con;
+	
+							$ip = getIp();
+	
+							// query the db to retrieve all items that belong to an ip
+							$sel_price = "select * from cart where ip_add='$ip'";
+	
+							// run the above query
+							$run_price = mysqli_query($con, $sel_price);
+
+							// while there's additional rows to fetch from the query results
+							while($p_price=mysqli_fetch_array($run_price)){
+		
+								// get the product id from the cart
+								$pro_id = $p_price['p_id'];
+								
+								
+								// get the quantity from the cart
+								$pro_qty = $p_price['qty'];
+		
+								// retrieve the product with the matching id from products table
+								$pro_price = "select * from products where product_id = '$pro_id'";
+		
+								// run the above query
+								$run_pro_price = mysqli_query($con, $pro_price);
+		
+								// while there's additional rows to fetch from the query results
+								while ($pp_price = mysqli_fetch_array($run_pro_price)){
+			
+									// store the details of each item
+									$product_price = array($pp_price['product_price']);
+									
+									$product_title = $pp_price['product_title'];
+									
+									$product_image = $pp_price['product_image'];
+									
+									$single_price = $pp_price['product_price'];
+									
+									$values = array_sum($product_price);
+									
+									$total += $values;
+							
+							?>
+									<p><a href="#"><?php echo $product_title; ?></a> <span class="price"><?php echo "$" . $single_price; ?></span></p>
+						<?php   } 
+							}  // close brackets of above while loops 
+						?>  
 			<hr>
-			<p>Total <span class="price" style="color:black"><b>$30</b></span></p>
-		</div>
+			<p>Total <span class="price" style="color:black"><b><?php echo "$" . $total;?></b></span></p>
+		</div>	
 	  </div>
 	  
 	  <form action="/action_page.php">
@@ -253,7 +300,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
         <label>
           <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
         </label>
-        <input type="submit" value="Continue to checkout" class="btn">
+        <input type="submit" value="Place Order" class="btn">
       </form>
 
 	  </div>
