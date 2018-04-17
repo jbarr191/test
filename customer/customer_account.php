@@ -126,8 +126,13 @@ include("functions/functions.php");
 						$c_name = $row_img['first_name'];
 
 						echo "<div style='text-align:center'>$user</div>";
-						echo "<p style='align:center'><img src='customer_images/$c_image'
-						width='150' height='150'/></p>";
+						if($c_image == ''){
+							echo "<p style='padding-left: 25px'><img src='customer_images/default_pic.png'
+							width='150' height='150'/></p>";
+						} else {
+							echo "<p style='padding-left: 25px'><img src='customer_images/$c_image'
+							width='150' height='150'/></p>";
+						}
 
 						?>
 				<div id="sidebar_title" style="background-color: #eee; font-size:18px; text-align:left">Account Financials: </div>
