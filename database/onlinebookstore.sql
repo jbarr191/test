@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2018 at 08:28 PM
+-- Generation Time: Apr 17, 2018 at 09:42 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -53,7 +53,7 @@ INSERT INTO `accounts` (`email`, `id_number`, `first_name`, `last_name`, `passwo
 --
 
 CREATE TABLE `addresses` (
-  `streetAddr` int(150) NOT NULL,
+  `streetAddr` varchar(150) NOT NULL,
   `zip` int(6) NOT NULL,
   `city` varchar(30) NOT NULL,
   `state` varchar(16) NOT NULL,
@@ -116,6 +116,14 @@ CREATE TABLE `cards` (
   `cardHolderName` varchar(120) NOT NULL,
   `userId` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cards`
+--
+
+INSERT INTO `cards` (`cardNum`, `expMo`, `expYr`, `cardHolderName`, `userId`) VALUES
+('1221454585859696', 6, 2018, 'Jose Perez', 0),
+('1212333366668888', 12, 2018, 'This is my name', 0);
 
 -- --------------------------------------------------------
 
