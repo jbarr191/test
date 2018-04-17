@@ -1,8 +1,9 @@
+
 <?php
 //fill the third parameter with whatever database server you're working on,
 //or leave it blank if working on localhost
 $con = mysqli_connect("localhost","root","","onlinebookstore");
-
+echo"<link rel='stylesheet' href='styles/star.css' media='all' />";
 //function getAccount($email, $password){
 
 	//global $con;
@@ -236,6 +237,8 @@ function getPro(){
 	}
 }
 
+
+
 function getComments($product_id){
 				global $con;
 	
@@ -252,10 +255,47 @@ function getComments($product_id){
 					$rating = $row_pro['rating'];
 					$anonymous = $row_pro['Anonymous'];
 					
-					if($rating == '0'){
-						$rating = "None";
+				
+					if($rating =='0'){
+						$rating = "No Rating";
 					}
 					
+					if($rating == '1'){
+						$rating = "<span class='star-icon full'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>";
+					}
+					else if($rating == '2'){
+						$rating = "<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>";
+					}
+					else if($rating == '3'){
+						$rating = "<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>";
+					}
+					else if($rating == '4'){
+						$rating = "<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon'>☆</span>";
+					}
+					else if($rating == '5'){
+						$rating = "<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>";
+					}
+
 					if($anonymous =='1'){
 						$user = "Anonymous";
 					}
@@ -271,7 +311,8 @@ function getComments($product_id){
 						<li style ='list-style:none;padding:20px;'>
 						<h3 style = 'float:left;'>$user</h3>
 						<p style = 'overflow-wrap: break-word;'>$comment_text</p>
-						<h5>Rating: $rating</h5>
+						<h6 style = 'float:center;'>$rating</h6>
+						
 						<h3>-----------------------------------------------------------------------------------------</h3>
 						</li>
 					";	
