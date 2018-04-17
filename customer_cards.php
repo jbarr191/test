@@ -120,7 +120,7 @@ include("includes/db.php");
 				$row = mysqli_fetch_array($result);
 				$id = $row['id_number'];
 
-				$addressQuery = sprintf("select * from addresses where userId= '%s' ", $id);
+				$addressQuery = sprintf("select * from cards where userId= '%s' ", $id);
 				$result = mysqli_query($con, $addressQuery);
 				$num_rows = mysqli_num_rows($result);
 
@@ -133,12 +133,22 @@ include("includes/db.php");
 					while($current_row=mysqli_fetch_array($result))
 					{
 						echo "<table style='padding:8px'>";
-						$cur_addr = $current_row['streetAddr'];
-						$cur_city = $current_row['city'];
-						$cur_state = $current_row['state'];
-						$cur_zip = $current_row['zip'];
-						echo "</tr><td>$cur_addr</td></tr>";
-						echo "<tr><td>$cur_city, $cur_state $cur_zip</td></tr>";
+						$cur_card = $current_row['cardNum'];
+						$output_card = substr($cur_card, -4);
+						$cur_month = $current_row['expMo'];
+						$cur_year = $current_row['expYr'];
+						$cur_name = $current_row['cardHolderName'];
+
+						echo "</tr><td>XXXX-XXXX-XXXX-$output_card</td></tr>";
+						echo "<tr><td>$cur_name</td></tr>";
+						if($cur_month < 10)
+						{
+							echo "<tr><td>Expires: 0$cur_month/$cur_year</td></tr>";
+						}
+						else
+						{
+							echo "<tr><td>Expires: $cur_month/$cur_year</td></tr>";
+						}
 						echo "</tr></table>";
 					}
 				}
