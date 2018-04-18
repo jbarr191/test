@@ -95,7 +95,7 @@ include("functions/functions.php");
 				 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='../customer_register.php'>Register</a></p>";
 			 }
 			 ?>
-			 <p class="w3-left" style="padding:8px; font-size:20px"><a href="../cart.php">Shopping Cart</a></p>
+			 <p class="w3-left" style="padding:8px; font-size:20px"><a href="../cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
 		    <p class="w3-right">
 				 <div id="form" style="line-height:20px; padding-top:24px; float:right">
 		 			<form method="get" action="../results.php" enctype="multipart/form-data">
