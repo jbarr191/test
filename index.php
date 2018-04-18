@@ -37,7 +37,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	      Genres <i class="fa fa-caret-down"></i>
 	    </a>
 	    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-<<<<<<< HEAD
+
 		
 		  <a href = 'genre.php?pro_genre=1' class="w3-bar-item w3-button":42px'>Sci-fi</a>
 		  <a href = 'genre.php?pro_genre=2' class="w3-bar-item w3-button":42px'>Fiction</a>
@@ -45,11 +45,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 		  <a href = 'genre.php?pro_genre=4' class="w3-bar-item w3-button":42px'>Drama</a>
 		  <a href = 'genre.php?pro_genre=5' class="w3-bar-item w3-button":42px'>Poetry</a>
 	   
-=======
-	      <a href="#" class="w3-bar-item w3-button">Sci-fi</a>
-	      <a href="#" class="w3-bar-item w3-button">Fiction</a>
-	      <a href="#" class="w3-bar-item w3-button">Genre 3</a>
->>>>>>> 32b9d342dbb93e61faa137dc4745f15f53cbf23c
+
 	    </div>
 	  </div>
 	  <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact Us</a>
@@ -107,7 +103,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  <!-- Product grid -->
 	    <?php cart(); ?>
 
-	  <div class="w3-row w3-grayscale">
+	  <div class="w3-container w3-grayscale">
 	  <?php
 		$get_pro = "select * from products";
 		$run_pro = mysqli_query($con, $get_pro);
@@ -123,7 +119,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 			$pro_release = $row_pro['product_release'];
 	  ?>
 		<div class="w3-col l3 s6">
-			<div class="w3-container">
+			<div class="w3-container-topleft">
 				<div class="w3-display-container">
 					<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:100%">
 					<span class="w3-tag w3-display-topleft">New</span>
