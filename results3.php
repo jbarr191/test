@@ -61,7 +61,7 @@ include("functions/functions.php");
 	  <!-- Top header -->
 	  <header class="w3-container w3-xlarge">
 	    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
-		 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
+		
 		 <?php
 		 if (isset($_SESSION['customer_email'])){
 

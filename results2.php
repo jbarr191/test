@@ -29,7 +29,6 @@ include("functions/functions.php");
 
 		<ul id="menu">
 			<li><a href="index.php">Home</a></li>
-			<li><a href="">All Products</a></li>
 			<li><a href="">My Account</a></li>
 			<li><a href="customer_login.php">Log In</a></li>
 			<li><a href="">Shopping Cart</a></li>

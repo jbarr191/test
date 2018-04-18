@@ -66,7 +66,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  
 	  <header class="w3-container w3-xlarge">
 	    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
-		 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
+	
 		 <?php
 		 if (isset($_SESSION['customer_email'])){
 			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
