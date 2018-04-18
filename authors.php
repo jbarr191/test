@@ -110,7 +110,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					 
 					$run_pro = mysqli_query($con, $get_pro);
 					?>
-						  <p><b>Books by: </b><?php echo"<b>$product_author</b>" ?>
+						<?php echo "<p style='font-size:25px'><b> Books by: $product_author</b></p>"; ?>
 					<?php	  
 						while($row_pro=mysqli_fetch_array($run_pro))
 						{
