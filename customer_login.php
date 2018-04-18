@@ -63,20 +63,19 @@ include("includes/db.php");
 
 		  <!-- Top header -->
 		  <header class="w3-container w3-xlarge">
-		    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
-			 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
-			 <?php
-			 if (isset($_SESSION['customer_email'])){
+			  <p class="w3-left" style="padding:8px; font-size:20px; padding-left:10px"><a href="index.php">Home</a></p>
+    		 <?php
+    		 if (isset($_SESSION['customer_email'])){
 
-				 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
+    			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer/customer_account.php'>My Account</a></p>";
+    			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_logout.php'>Log out</a></p>";
+    		 } else {
 
-			 } else {
-
-				 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_login.php'>Log In</a></p>";
-				 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_register.php'>Register</a></p>";
-			 }
-			 ?>
-			 <p class="w3-left" style="padding:8px; font-size:20px"><a href="cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
+    			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_login.php'>Log In</a></p>";
+    			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_register.php'>Register</a></p>";
+    		 }
+    		 ?>
+    		 <p class="w3-left" style="padding:8px; font-size:20px; padding-left:20px"><a href="cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
 		    <p class="w3-right">
 				 <div id="form" style="line-height:20px; padding-top:24px; float:right">
 		 			<form method="get" action="results.php" enctype="multipart/form-data">

@@ -82,20 +82,19 @@ include("functions/functions.php");
 
 		  <!-- Top header -->
 		  <header class="w3-container w3-xlarge" style="margin-left:250px">
-		    <p class="w3-left" style="padding:8px; font-size:20px"><a href="../index.php">Home</a></p>
-			 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
+		    <p class="w3-left" style="padding:8px; font-size:20px; padding-left:10px"><a href="../index.php">Home</a></p>
 			 <?php
 			 if (isset($_SESSION['customer_email'])){
 
-				 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_account.php'>My Account</a></p>";
-
+				 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_account.php'>My Account</a></p>";
+				 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='../customer_logout.php'>Log out</a></p>";
 			 } else {
 
-				 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='../customer_login.php'>Log In</a></p>";
-				 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='../customer_register.php'>Register</a></p>";
+				 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='../customer_login.php'>Log In</a></p>";
+				 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='../customer_register.php'>Register</a></p>";
 			 }
 			 ?>
-			 <p class="w3-left" style="padding:8px; font-size:20px"><a href="../cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
+			 <p class="w3-left" style="padding:8px; font-size:20px; padding-left:20px"><a href="../cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
 		    <p class="w3-right">
 				 <div id="form" style="line-height:20px; padding-top:24px; float:right">
 		 			<form method="get" action="../results.php" enctype="multipart/form-data">
@@ -135,7 +134,7 @@ include("functions/functions.php");
 						}
 
 						?>
-				<div id="sidebar_title" style="background-color: #eee; font-size:18px; text-align:left">Account Financials: </div>
+				<div id="sidebar_title" style="background-color: #eee; font-size:18px; text-align:left; padding-left:3px">Account Financials: </div>
 				<li style=padding-left:13px;><a href="../customer_cards.php">Credit Cards</a></li>
 				<li style=padding-left:13px;><a href="../addresses.php">Addresses</a></li>
 
@@ -145,42 +144,45 @@ include("functions/functions.php");
 
 					<?php cart(); ?>
 
+					<!-- Old logout and cart section
 					<div id="shopping_cart">
 
 						<span style="float:right; font-size:18px; padding:5px; line-height:40px; font-size:15px">
 
 							<?php
-							if (isset($_SESSION['customer_email'])){
+							//if (isset($_SESSION['customer_email'])){
 
-								$user = $_SESSION['customer_email'];
+								//$user = $_SESSION['customer_email'];
 
-								$result = mysqli_query($con,"select first_name from accounts where email = '$user'");
-								$row_img = mysqli_fetch_array($result);
-								$name = $row_img['first_name'];
-								echo "Welcome $name!";
+								//$result = mysqli_query($con,"select first_name from accounts where email = '$user'");
+								//$row_img = mysqli_fetch_array($result);
+								//$name = $row_img['first_name'];
+								//echo "Welcome $name!";
 
-							} else {
+							//} else {
 
-								echo "Welcome Guest!";
-							}
+								//echo "Welcome Guest!";
+							//}
 							?>
 							<b style="color:orange">Shopping Cart -</b> Total Items: <?php total_items();?>
 							- Total Price: <?php total_price(); ?> <a href="../cart.php" style="color:orange">Go to Cart</a>
 
 							<?php
-							if (!isset($_SESSION['customer_email'])){
+							//if (!isset($_SESSION['customer_email'])){
 
-								echo "<a href='customer_login.php' style='color:orange'>Login</a>";
+								//echo "<a href='customer_login.php' style='color:orange'>Login</a>";
 
-							} else {
+							//} else {
 
-								echo "<a href='../customer_logout.php' style='color:orange'>Logout</a>";
-							}
+								//echo "<a href='../customer_logout.php' style='color:orange'>Logout</a>";
+							//}
 
 							?>
 						</span>
 					</div>
+					-->
 
+					<br><br><br>
 					<div id="products_box">
 
 						<!--Collapsible section of html for changing account details-->
