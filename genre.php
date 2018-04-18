@@ -38,11 +38,11 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	    </a>
 	    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
 	      
-		  <a href = 'genre.php?pro_genre=1' class="w3-bar-item w3-button":42px'>Sci-fi</a>
-		  <a href = 'genre.php?pro_genre=2' class="w3-bar-item w3-button":42px'>Fiction</a>
-		  <a href = 'genre.php?pro_genre=3' class="w3-bar-item w3-button":42px'>Fantasy</a>
-		  <a href = 'genre.php?pro_genre=4' class="w3-bar-item w3-button":42px'>Drama</a>
-		  <a href = 'genre.php?pro_genre=5' class="w3-bar-item w3-button":42px'>Poetry</a>
+		  <a href = 'genre.php?pro_genre=Sci-fi' class="w3-bar-item w3-button":42px'>Sci-fi</a>
+		  <a href = 'genre.php?pro_genre=Fiction' class="w3-bar-item w3-button":42px'>Fiction</a>
+		  <a href = 'genre.php?pro_genre=Fantasy' class="w3-bar-item w3-button":42px'>Fantasy</a>
+		  <a href = 'genre.php?pro_genre=Drama' class="w3-bar-item w3-button":42px'>Drama</a>
+		  <a href = 'genre.php?pro_genre=Poetry' class="w3-bar-item w3-button":42px'>Poetry</a>
 	   
 	    </div>
 	  </div>
@@ -113,31 +113,31 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					$get_pro = "select * from products where product_genre = '$product_genre'";
 					 
 					$run_pro = mysqli_query($con, $get_pro);
-						if($product_genre==2)
+						if($product_genre=="Fiction")
 						{
 							
 						 echo "<p style='font-size:30px'><b>Fiction</b></p>";
 						
 						}
-						else if($product_genre==1)
+						else if($product_genre=="Sci-fi")
 						{
 							
 						  echo "<p style='font-size:30px'><b>Sci-fi</b></p>";
 						
 						}
-						else if($product_genre==3)
+						else if($product_genre=="Fantasy")
 						{
 							
 						  echo "<p style='font-size:30px'><b>Fantasy</b></p>";
 						
 						}
-						else if($product_genre==4)
+						else if($product_genre=="Drama")
 						{
 							
 						  echo "<p style='font-size:30px'><b>Drama</b></p>";
 						
 						}
-						else if($product_genre==5)
+						else if($product_genre=="Poetry")
 						{
 							
 						  echo "<p style='font-size:30px'><b>Poetry</b></p>";

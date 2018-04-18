@@ -2,7 +2,7 @@
 <?php
 session_start();
 include("functions/functions.php");
-$con = mysqli_connect("localhost","root","","onlinebookstore");
+$con = mysqli_connect("localhost","root","wow.SQL","onlinebookstore");
 ?>
 
 <html>
@@ -39,11 +39,11 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
 
 		
-		  <a href = 'genre.php?pro_genre=1' class="w3-bar-item w3-button":42px'>Sci-fi</a>
-		  <a href = 'genre.php?pro_genre=2' class="w3-bar-item w3-button":42px'>Fiction</a>
-		  <a href = 'genre.php?pro_genre=3' class="w3-bar-item w3-button":42px'>Fantasy</a>
-		  <a href = 'genre.php?pro_genre=4' class="w3-bar-item w3-button":42px'>Drama</a>
-		  <a href = 'genre.php?pro_genre=5' class="w3-bar-item w3-button":42px'>Poetry</a>
+		  <a href = 'genre.php?pro_genre=Sci-fi' class="w3-bar-item w3-button":42px'>Sci-fi</a>
+		  <a href = 'genre.php?pro_genre=Fiction' class="w3-bar-item w3-button":42px'>Fiction</a>
+		  <a href = 'genre.php?pro_genre=Fantasy' class="w3-bar-item w3-button":42px'>Fantasy</a>
+		  <a href = 'genre.php?pro_genre=Drama' class="w3-bar-item w3-button":42px'>Drama</a>
+		  <a href = 'genre.php?pro_genre=Poetry' class="w3-bar-item w3-button":42px'>Poetry</a>
 	   
 
 	    </div>

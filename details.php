@@ -10,6 +10,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 		<title>My Online Shop</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
@@ -18,6 +19,86 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 		<style>
 			.w3-sidebar a {font-family: "Roboto", sans-serif}
 			body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+
+				/* Style the Image Used to Trigger the Modal */
+				#myImg {
+					border-radius: 5px;
+					cursor: pointer;
+					transition: 0.3s;
+				}
+
+				#myImg:hover {opacity: 0.7;}
+
+				/* The Modal (background) */
+				.modal {
+					display: none; /* Hidden by default */
+					position: fixed; /* Stay in place */
+					z-index: 1; /* Sit on top */
+					padding-top: 100px; /* Location of the box */
+					left: 0;
+					top: 0;
+					width: 100%; /* Full width */
+					height: 100%; /* Full height */
+					overflow: auto; /* Enable scroll if needed */
+					background-color: rgb(0,0,0); /* Fallback color */
+					background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+				}
+
+				/* Modal Content (Image) */
+				.modal-content {
+					margin: auto;
+					display: block;
+					width: 80%;
+					max-width: 700px;
+				}
+
+				/* Caption of Modal Image (Image Text) - Same Width as the Image */
+				#caption {
+					margin: auto;
+					display: block;
+					width: 80%;
+					max-width: 700px;
+					text-align: center;
+					color: #ccc;
+					padding: 10px 0;
+					height: 150px;
+				}
+
+				/* Add Animation - Zoom in the Modal */
+				.modal-content, #caption { 
+					animation-name: zoom;
+					animation-duration: 0.6s;
+				}
+
+				@keyframes zoom {
+					from {transform:scale(0)} 
+					to {transform:scale(1)}
+				}
+
+				/* The Close Button */
+				.close {
+					position: absolute;
+					top: 15px;
+					right: 35px;
+					color: #f1f1f1;
+					font-size: 40px;
+					font-weight: bold;
+					transition: 0.3s;
+				}
+
+				.close:hover,
+				.close:focus {
+					color: #bbb;
+					text-decoration: none;
+					cursor: pointer;
+				}
+
+				/* 100% Image Width on Smaller Screens */
+				@media only screen and (max-width: 700px){
+					.modal-content {
+						width: 100%;
+					}
+				}
 		</style>
 	</head>
 <body class="w3-content" style="max-width:1200px">
@@ -78,13 +159,31 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					$pro_bio = $row_pro['product_bio'];
 					$pro_gen = $row_pro['product_genre'];
 					$pro_release = $row_pro['product_release'];
+					?>
+					
+					<!-- Trigger the Modal -->
+				
+					<img id="myImg" src="admin_area/product_images/<?php echo $pro_image; ?>" alt="<?php echo $pro_title; ?>" width="187" height="250">
+
+						<!-- The Modal -->
+					<div id="myModal" class="modal">
+
+					  <!-- The Close Button -->
+					  <span class="close">&times;</span>
+
+					  <!-- Modal Content (The Image) -->
+					  <img class="modal-content" id="<?php echo $pro_image; ?>">
+
+					  <!-- Modal Caption (Image Text) -->
+					  <div id="caption"></div>
+						 
+					</div>
+					<?php
 					echo "
 					
 						<div>
 						
 							<h3>$pro_title</h3>
-							
-							<img src='admin_area/product_images/$pro_image' width='180' height='277' />
 							
 							<p><b> Price: $ $pro_price  </b></p>
 							
@@ -251,6 +350,29 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	<!--Main Container ends here-->
 
 	<script>
+
+			// Get the modal
+			var modal = document.getElementById('myModal');
+
+			// Get the image and insert it inside the modal - use its "alt" text as a caption
+			var img = document.getElementById('myImg');
+			var modalImg = document.getElementById("<?php echo $pro_image; ?>");
+			var captionText = document.getElementById("caption");
+			img.onclick = function(){
+				modal.style.display = "block";
+				modalImg.src = this.src;
+				captionText.innerHTML = this.alt;
+			}
+
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() { 
+				modal.style.display = "none";
+			}
+
+
 		// Accordion
 		function myAccFunc() {
 		    var x = document.getElementById("demoAcc");
