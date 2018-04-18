@@ -38,6 +38,7 @@ $con = mysqli_connect("localhost","root","wow.SQL","onlinebookstore");
 	    </a>
 	    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
 
+
 		
 		  <a href = 'genre.php?pro_genre=Sci-fi' class="w3-bar-item w3-button":42px'>Sci-fi</a>
 		  <a href = 'genre.php?pro_genre=Fiction' class="w3-bar-item w3-button":42px'>Fiction</a>
@@ -45,6 +46,15 @@ $con = mysqli_connect("localhost","root","wow.SQL","onlinebookstore");
 		  <a href = 'genre.php?pro_genre=Drama' class="w3-bar-item w3-button":42px'>Drama</a>
 		  <a href = 'genre.php?pro_genre=Poetry' class="w3-bar-item w3-button":42px'>Poetry</a>
 	   
+
+
+		  <a href = 'genre.php?pro_genre=1' class="w3-bar-item w3-button":42px'>Sci-fi</a>
+		  <a href = 'genre.php?pro_genre=2' class="w3-bar-item w3-button":42px'>Fiction</a>
+		  <a href = 'genre.php?pro_genre=3' class="w3-bar-item w3-button":42px'>Fantasy</a>
+		  <a href = 'genre.php?pro_genre=4' class="w3-bar-item w3-button":42px'>Drama</a>
+		  <a href = 'genre.php?pro_genre=5' class="w3-bar-item w3-button":42px'>Poetry</a>
+
+
 
 	    </div>
 	  </div>
@@ -63,17 +73,19 @@ $con = mysqli_connect("localhost","root","wow.SQL","onlinebookstore");
 
 	  <!-- Top header -->
 	  <header class="w3-container w3-xlarge">
-	    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
-		 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
-		 <?php
-		 if (isset($_SESSION['customer_email'])){
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
-		 } else {
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_login.php'>Log In</a></p>";
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_register.php'>Register</a></p>";
-		 }
-		 ?>
-		 <p class="w3-left" style="padding:8px; font-size:20px"><a href="cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
+		  <p class="w3-left" style="padding:8px; font-size:20px; padding-left:10px"><a href="index.php">Home</a></p>
+ 		 <?php
+ 		 if (isset($_SESSION['customer_email'])){
+
+ 			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer/customer_account.php'>My Account</a></p>";
+ 			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_logout.php'>Log out</a></p>";
+ 		 } else {
+
+ 			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_login.php'>Log In</a></p>";
+ 			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_register.php'>Register</a></p>";
+ 		 }
+ 		 ?>
+ 		 <p class="w3-left" style="padding:8px; font-size:20px; padding-left:20px"><a href="cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
 	    <p class="w3-right">
 			 <div id="form" style="line-height:20px; padding-top:24px; float:right">
 	 			<form method="get" action="results.php" enctype="multipart/form-data">
@@ -127,7 +139,7 @@ $con = mysqli_connect("localhost","root","wow.SQL","onlinebookstore");
 						<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
 					</div>
 				</div>
-				<p><?php echo 
+				<p><?php echo
 				"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
 					<br><b>$<?php echo $pro_price; ?></b></p>
 			</div>
@@ -183,7 +195,7 @@ $con = mysqli_connect("localhost","root","wow.SQL","onlinebookstore");
 					<?php getPro(); ?>
 =======
 
-					<?php 
+					<?php
 					  $get_pro = "select * from products";
 
 					  $run_pro = mysqli_query($con, $get_pro);
@@ -199,7 +211,7 @@ $con = mysqli_connect("localhost","root","wow.SQL","onlinebookstore");
 						  $pro_gen = $row_pro['product_genre'];
 						  $pro_release = $row_pro['product_release'];
 				    ?>
-					
+
 					  <div class="w3-col l3 s6">
 						 <div class="w3-container">
 							<div class="w3-display-container">
