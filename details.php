@@ -14,7 +14,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<!--<link rel="stylesheet" href="styles/style.css" media="all" />-->
+		<link rel="stylesheet" href="styles/star.css" media="all" />
 		<style>
 			.w3-sidebar a {font-family: "Roboto", sans-serif}
 			body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
@@ -44,7 +44,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_register.php'>Register</a></p>";
 		 }
 		 ?>
-		 <p class="w3-left" style="padding:8px; font-size:20px"><a href="cart.php">Shopping Cart</a></p>
+		 <p class="w3-left" style="padding:8px; font-size:20px"><a href="cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
 	    <p class="w3-right">
 			 <div id="form" style="line-height:20px; padding-top:24px; float:right">
 	 			<form method="get" action="results.php" enctype="multipart/form-data">
@@ -153,7 +153,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 				<!-- column 1 -->
 				<td><b>INSERT COMMENT</b></td>
 				<!-- column 2 -->
-				<td><input type="text" name="comment_text" size="20"/></td>
+				<td><input type="text" name="comment_text" size="20" maxlength="200"/></td>
 			</tr>
 		
 		
@@ -202,7 +202,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 			<tr align="right">
 				<td colspan="7"><input type="submit" name="comment_post" value= "Insert Now"/></td>
 			</tr>
-			
+			</table>
 			
 <?php
 					

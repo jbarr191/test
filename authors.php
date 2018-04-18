@@ -101,14 +101,13 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  <div class="w3-row w3-grayscale">
 	  
 	 	<?php 
-					if(isset($_GET['pro_author']))
-					{
-						
+					if(isset($_GET['pro_author'])){
 					$product_author = $_GET['pro_author'];
 					
 					$get_pro = "select * from products where product_author = '$product_author'";
-					 
+					
 					$run_pro = mysqli_query($con, $get_pro);
+<<<<<<< HEAD
 					?>
 						<?php echo "<p style='font-size:25px'><b> Books by: $product_author</b></p>"; ?>
 					<?php	  
@@ -141,13 +140,41 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 										<br><b>$<?php echo $pro_price; ?></b></p>
 								</div>
 										 
+=======
+					
+					$row_pro=mysqli_fetch_array($run_pro);
+					$pro_id = $row_pro['product_id'];
+					$pro_title = $row_pro['product_title'];
+					$pro_image = $row_pro['product_image'];
+					$pro_author = $row_pro['product_author'];
+					$pro_desc= $row_pro['product_desc'];
+					$pro_price = $row_pro['product_price'];
+					$pro_bio = $row_pro['product_bio'];
+					$pro_gen = $row_pro['product_genre'];
+					$pro_release = $row_pro['product_release'];
+	  ?>
+	  <p><b>Books by: </b><?php echo"<b>$product_author</b>" ?>
+		<div class="w3-col l3 s6">
+			<div class="w3-container">
+				<div class="w3-display-container">
+					<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:100%">
+					<span class="w3-tag w3-display-topleft">New</span>
+					<div class="w3-display-middle w3-display-hover">
+						<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+					</div>
+				</div>
+				<p><?php echo 
+				"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
+					<br><b>$<?php echo $pro_price; ?></b></p>
+			</div>
 
-							</div>
-										 
 
-						  <?php
-						}
-					 }
+	    </div>
+>>>>>>> 32b9d342dbb93e61faa137dc4745f15f53cbf23c
+
+
+	  <?php
+		}
 	  ?>
 	  </div>
 <!--

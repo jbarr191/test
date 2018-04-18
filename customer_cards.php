@@ -2,7 +2,7 @@
 <?php
 
 session_start();
-
+include("functions/functions.php");
 include("includes/db.php");
 
 ?>
@@ -99,7 +99,7 @@ include("includes/db.php");
 				 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_register.php'>Register</a></p>";
 			 }
 			 ?>
-			 <p class="w3-left" style="padding:8px; font-size:20px"><a href="cart.php">Shopping Cart</a></p>
+			 <p class="w3-left" style="padding:8px; font-size:20px"><a href="cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
 		    <p class="w3-right">
 				 <div id="form" style="line-height:20px; padding-top:24px; float:right">
 		 			<form method="get" action="results.php" enctype="multipart/form-data">
@@ -111,7 +111,104 @@ include("includes/db.php");
 		    </p>
 		  </header>
 
+		  <div style="background-color: #eee">
+			  <h1 style="padding-left:22px; padding-top:2px">My cards</h1>
+				<?php
+				//gets the user id from the database
+				$user = $_SESSION['customer_email'];
+				$result = mysqli_query($con,"select id_number from accounts where email = '$user'");
+				$row = mysqli_fetch_array($result);
+				$id = $row['id_number'];
+
+				$addressQuery = sprintf("select * from cards where userId= '%s' ", $id);
+				$result = mysqli_query($con, $addressQuery);
+				$num_rows = mysqli_num_rows($result);
+
+				//Tests if any matches were found when looking for already-registed emails
+				if($num_rows == 0)
+				{
+					echo "<div style='text-align:center; color:orange'>You do not have any addresses saved.</div>";
+				} else {
+
+					while($current_row=mysqli_fetch_array($result))
+					{
+						echo "<table style='padding:8px'>";
+						$cur_card = $current_row['cardNum'];
+						$output_card = substr($cur_card, -4);
+						$cur_month = $current_row['expMo'];
+						$cur_year = $current_row['expYr'];
+						$cur_name = $current_row['cardHolderName'];
+
+						echo "</tr><td>XXXX-XXXX-XXXX-$output_card</td></tr>";
+						echo "<tr><td>$cur_name</td></tr>";
+						if($cur_month < 10)
+						{
+							echo "<tr><td>Expires: 0$cur_month/$cur_year</td></tr>";
+						}
+						else
+						{
+							echo "<tr><td>Expires: $cur_month/$cur_year</td></tr>";
+						}
+						echo "</tr></table>";
+					}
+				}
+				?>
+			</div>
+			<br>
+
 		  <div align="center">
+
+			  <?php
+
+			  if (isset($_POST['add_card'])){
+
+				  //gets all the data the user input
+				  $cardNum = $_POST['cardNum'];
+				  $holderName = $_POST['cardsName'];
+				  $month = $_POST['month'];
+				  $year = $_POST['year'];
+
+				  $wrongName = (boolean) false;
+				  $wrongNum = (boolean) false;
+				  $wrongExp = (boolean) false;
+
+				  //checks if address or city were left empty
+				  if(($holderName == '') || (preg_match("#[0-9]+#", $holderName)) )
+				  {
+					  echo "<div style='text-align:center; color:orange'>Name is not valid.</div>";
+					  $wrongName = true;
+				  }
+
+				  //checks if the given zip code is valid
+				  if( ((!preg_match("#[0-9]+#", $cardNum)) || (preg_match("#[a-z]+#", $cardNum)) || (preg_match("#[A-Z]+#", $cardNum)))
+				  || (!(strlen($cardNum) == 16)))
+				  {
+					  echo "<div style='text-align:center; color:orange'>Card number is not valid.</div>";
+					  $wrongNum = true;
+				  }
+
+				  if(($month < 4) && ($year == 2018))
+				  {
+					  echo "<div style='text-align:center; color:orange'>Experation date is not valid.</div>";
+					  $wrongExp = true;
+				  }
+
+				  //if everything is correct, the address is added to the database
+				  if((!$wrongName) && (!$wrongNum) && (!$wrongExp))
+				  {
+					  $insert_c = "insert into cards (cardNum, expMo, expYr, cardHolderName, userId) values ('$cardNum', '$month', '$year','$holderName','$id')";
+
+					  $run_c = mysqli_query($con, $insert_c);
+
+					  if($run_c)
+					  {
+						  echo "<script>alert('New card added')</script>";
+						  echo "<script>window.open('customer_cards.php','_self')</script>";
+					  }
+				  }
+			  }
+			  ?>
+
 			  <button class="collapsible">Add a new credit card</button>
 			  <div class="collapseContent">
 				  <br>
@@ -120,7 +217,7 @@ include("includes/db.php");
 		  				<table align="center" width="600">
 		  					<tr>
 		  						<td align="right">Credit card number: </td>
-		  						<td><input type="text" name="CardNum" style="width:200px"/></td>
+		  						<td><input type="text" name="cardNum" style="width:200px"/></td>
 		  					</tr>
 		  					<tr>
 		  						<td align="right">Cardholder's name: </td>

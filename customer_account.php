@@ -33,7 +33,7 @@ include("includes/db.php");
 			<li><a href="">All Products</a></li>
 			<li><a href="">My Account</a></li>
 			<li><a href="customer_login.php">Log In</a></li>
-			<li><a href="">Shopping Cart</a></li>
+			<p class="w3-left" style="padding:8px; font-size:20px"><a href="cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
 			<li><a href="">Contact Us</a></li>
 		</ul>
 

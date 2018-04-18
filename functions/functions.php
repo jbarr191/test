@@ -1,8 +1,9 @@
+
 <?php
 //fill the third parameter with whatever database server you're working on,
 //or leave it blank if working on localhost
 $con = mysqli_connect("localhost","root","","onlinebookstore");
-
+echo"<link rel='stylesheet' href='styles/star.css' media='all' />";
 //function getAccount($email, $password){
 
 	//global $con;
@@ -236,6 +237,8 @@ function getPro(){
 	}
 }
 
+
+
 function getComments($product_id){
 				global $con;
 	
@@ -252,10 +255,47 @@ function getComments($product_id){
 					$rating = $row_pro['rating'];
 					$anonymous = $row_pro['Anonymous'];
 					
-					if($rating == '0'){
-						$rating = "None";
+				
+					if($rating =='0'){
+						$rating = "No Rating";
 					}
 					
+					if($rating == '1'){
+						$rating = "<span class='star-icon full'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>";
+					}
+					else if($rating == '2'){
+						$rating = "<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>";
+					}
+					else if($rating == '3'){
+						$rating = "<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>";
+					}
+					else if($rating == '4'){
+						$rating = "<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon'>☆</span>";
+					}
+					else if($rating == '5'){
+						$rating = "<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>";
+					}
+
 					if($anonymous =='1'){
 						$user = "Anonymous";
 					}
@@ -271,7 +311,8 @@ function getComments($product_id){
 						<li style ='list-style:none;padding:20px;'>
 						<h3 style = 'float:left;'>$user</h3>
 						<p style = 'overflow-wrap: break-word;'>$comment_text</p>
-						<h5>Rating: $rating</h5>
+						<h6 style = 'float:center;'>$rating</h6>
+						
 						<h3>-----------------------------------------------------------------------------------------</h3>
 						</li>
 					";	
@@ -294,6 +335,47 @@ function getUserID(){
 		
 }
 
+function getAuthor(){
+
+	global $con;
+
+	// query
+	$get_pro = "select * from products";
+
+	// run query on the connection
+	$run_pro = mysqli_query($con, $get_pro);
+
+	while($row_pro=mysqli_fetch_array($run_pro)){
+
+		$pro_id = $row_pro['product_id'];
+		$pro_title = $row_pro['product_title'];
+		$pro_image = $row_pro['product_image'];
+		$pro_author = $row_pro['product_author'];
+		$pro_desc= $row_pro['product_desc'];
+		$pro_price = $row_pro['product_price'];
+		$pro_bio = $row_pro['product_bio'];
+		$pro_gen = $row_pro['product_genre'];
+		$pro_release = $row_pro['product_release'];
+
+	    echo "
+				<div id='single_product'>
+
+					<h3>$pro_title</h3>
+
+					<img src='admin_area/product_images/$pro_image' width='180' height='277' />
+
+					<p><b> Price: $ $pro_price  </b></p>
+
+					<a href='index.php?add_cart=$pro_id'><button style='float:right'>Add to Cart</button></a>
 
 
+					<a href ='comments.php?pro_id=$pro_id' style = 'float:left'>Comments</a>
+
+					<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp Details &nbsp</a>
+
+
+				</div>
+		";
+	}
+}
 ?>

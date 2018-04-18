@@ -22,7 +22,112 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 		<style>
 			.w3-sidebar a {font-family: "Roboto", sans-serif}
 			body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+			
+			body {
+				font-family: Arial;
+				font-size: 17px;
+				padding: 8px;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			.row {
+				display: -ms-flexbox; /* IE10 */
+				display: flex;
+				-ms-flex-wrap: wrap; /* IE10 */
+				flex-wrap: wrap;
+				margin: 0 -16px;
+			}
+
+			.col-25 {
+			-ms-flex: 25%; /* IE10 */
+			flex: 25%;
+			}
+
+			.col-50 {
+			-ms-flex: 50%; /* IE10 */
+			flex: 50%;
+			}
+
+			.col-75 {
+			-ms-flex: 75%; /* IE10 */
+			flex: 75%;
+			}
+
+			.col-25,
+			.col-50,
+			.col-75 {
+				padding: 0 16px;
+			}
+
+			.container {
+				background-color: #f2f2f2;
+				padding: 5px 20px 15px 20px;
+				border: 1px solid lightgrey;
+				border-radius: 3px;
+			}
+
+			#fname, #email, #adr, #city, #state, #zip, #cname, #ccnum, #expmonth, #expyear, #cvv {
+				width: 100%;
+				margin-bottom: 20px;
+				padding: 4px;
+				border: 1px solid #ccc;
+				border-radius: 3px;
+			}
+
+			label {
+				margin-bottom: 10px;
+				display: block;
+			}
+
+			.icon-container {
+				margin-bottom: 20px;
+				padding: 7px 0;
+				font-size: 24px;
+			}
+
+			.btn {
+				background-color: #4CAF50;
+				color: white;
+				padding: 12px;
+				margin: 10px 0;
+				border: none;
+				width: 100%;
+				border-radius: 3px;
+				cursor: pointer;
+				font-size: 17px;
+			}
+
+			.btn:hover {
+				background-color: #45a049;
+			}		
+
+			.blue {
+				color: #2196F3;
+			}
+
+			hr {
+				border: 1px solid lightgrey;
+			}
+
+			span.price {
+				float: right;
+				color: grey;
+			}
+
+			/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+			@media (max-width: 800px) {
+				.row {
+					flex-direction: column-reverse;
+				}
+				.col-25 {
+					margin-bottom: 20px;
+				}
+			}
 		</style>
+		
 	</head>
 <body class="w3-content" style="max-width:1200px">
 
@@ -34,19 +139,6 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 		 	<img id="logo" src="images/logo.jpg" width="240" height="120" />
 		</a>
 	  </div>
-	  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-	    <a href="#" class="w3-bar-item w3-button">Best-Sellers</a>
-	    <a href="#" class="w3-bar-item w3-button">Top-Rated</a>
-	    <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
-	      Genres <i class="fa fa-caret-down"></i>
-	    </a>
-	    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-	      <a href="#" class="w3-bar-item w3-button">Sci-fi</a>
-	      <a href="#" class="w3-bar-item w3-button">Fiction</a>
-	      <a href="#" class="w3-bar-item w3-button">Genre 3</a>
-	    </div>
-	  </div>
-	  <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact Us</a>
 	</nav>
 
 	<!--Main Container starts here-->
@@ -55,21 +147,20 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left:250px">
-
+	
 	  <!-- Push down content on small screens -->
 	  <div class="w3-hide-large" style="margin-top:83px"></div>
 
 	  <!-- Top header -->
+	  
 	  <header class="w3-container w3-xlarge">
 	    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
 		 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
 		 <?php
 		 if (isset($_SESSION['customer_email'])){
-
 			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
 
 		 } else {
-
 			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_login.php'>Log In</a></p>";
 			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_register.php'>Register</a></p>";
 		 }
@@ -91,23 +182,13 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	   
 	  </div>
 
-	  <!-- Product grid -->
-	  <?php cart(); ?>
-
 	  <div class="w3-row w3-grayscale">
 	  
-		<form action="" method="post" enctype="multipart/form-data">
-				
-			<table class="w3-table" align="center" width="700" bgcolor="white">
-						
-				<tr align="center">
-					<th>Remove</th>
-					<th>Product(s)</th>
-					<th>Quantity</th>
-					<th>Price</th>
-				</tr>
-							
-							<?php
+	  <div class="col-25">
+	  
+		<div class="container">
+			<h4>Cart Summary <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></h4>
+		<?php
 							$total = 0;
 							
 							global $con;
@@ -153,98 +234,76 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 									$total += $values;
 							
 							?>
-							
-									<tr align="center">
-										<td><input type="image" src="images/removebtn.png" name="remove" class="btTxt submit" id="saveForm" value="<?php echo $pro_id;?>"/></td>
-										<td><?php echo $product_title; ?><br>
-										<img src="admin_area/product_images/<?php echo $product_image;?>" width="60" height="60" />
-										</td>
-										<td>
-											<input type="text" size="3" name="qty" value="<?php echo $pro_qty;?>" id="<?php echo $pro_id;?>"/>
-											<!--<input type="text" size="3" name="qty"/>
-											<input type="image" src="images/removebtn.png" name="update" class="btTxt submit" id="saveForm" value="<?php echo $pro_id;?>"/> -->
-										</td>
-										<td><?php echo "$" . $single_price; ?></td>
-
-									</tr>
+									<p><a href="#" class="blue"><?php echo $product_title; ?></a> <span class="price"><?php echo "$" . $single_price; ?></span></p>
 						<?php   } 
 							}  // close brackets of above while loops 
-						?>
-						
-				<tr>
-					<th></th>
-					<th></th>
-					<th></th>
-					<td><b><?php echo "Total: $" . $total;?><b></td>
-				</tr>
-							
-				<tr align="center">
-					<td colspan="2"><input type="submit" name="update_cart" value="Update Cart"/></td>
-					<td><input type="submit" name="continue" value="Continue Shopping"/></td>
-					<td><button><a href="checkout.php" style="text-decoration:none; color:black;">Checkout</a></button></td>
-				</tr>
-					
-			</table>
-				
-		</form>	  
-		
-			<?php
+						?>  
+			<hr>
+			<p>Total <span class="price" style="color:black"><b><?php echo "$" . $total;?></b></span></p>
+		</div>	
+	  </div>
+	  
+	  
+	  <form action="/action_page.php">
+      
+        <div class="row">
+          <div class="col-50">
+            <h3>Billing Address</h3>
+            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+            <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+            <input type="text" id="email" name="email" placeholder="john@example.com">
+            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+            <label for="city"><i class="fa fa-institution"></i> City</label>
+            <input type="text" id="city" name="city" placeholder="New York">
 
-						$ip = getIp();
-						
-						// if update cart button is clicked
-						/*if(isset($_POST['update_cart'])){
-							// delete relevant items from the cart database
-							foreach($_POST['remove'] as $remove_id){
-								
-								$delete_product = "delete from cart where p_id='$remove_id' AND ip_add='$ip'";
-								
-								$run_delete = mysqli_query($con, $delete_product);
-								
-								if($run_delete){
-									
-									echo "<script>window.open('cart.php','_self')</script>";
-								}
-							}					
-						} */
-						
-						// if continue shopping button is clicked, go to index.php
-						if(isset($_POST['continue'])){
-							
-							echo "<script>window.open('index.php','_self')</script>";					
-						}
+            <div class="row">
+              <div class="col-50">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="NY">
+              </div>
+              <div class="col-50">
+                <label for="zip">Zip</label>
+                <input type="text" id="zip" name="zip" placeholder="10001">
+              </div>
+            </div>
+          </div>
 
-						if(isset($_POST['remove'])){
-							
-							$remove_id = $_POST['remove'];
-							
-							$delete_product = "delete from cart where p_id='$remove_id' AND ip_add='$ip'";
-								
-							$run_delete = mysqli_query($con, $delete_product);
-								
-							if($run_delete){
-									
-								echo "<script>window.open('cart.php','_self')</script>";
-							}							
-						}
-						
-						/*if(isset($_POST['update'])){
-							
-							$update_id = $_POST['update'];
-							$item_qty = $_POST['qty'];
+          <div class="col-50">
+            <h3>Payment</h3>
+            <label for="fname">Accepted Cards</label>
+            <div class="icon-container">
+              <i class="fa fa-cc-visa" style="color:navy;"></i>
+              <i class="fa fa-cc-amex" style="color:blue;"></i>
+              <i class="fa fa-cc-mastercard" style="color:red;"></i>
+              <i class="fa fa-cc-discover" style="color:orange;"></i>
+            </div>
+            <label for="cname">Name on Card</label>
+            <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+            <label for="ccnum">Credit card number</label>
+            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+            <label for="expmonth">Exp Month</label>
+            <input type="text" id="expmonth" name="expmonth" placeholder="September">
+            <div class="row">
+              <div class="col-50">
+                <label for="expyear">Exp Year</label>
+                <input type="text" id="expyear" name="expyear" placeholder="2018">
+              </div>
+              <div class="col-50">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" placeholder="352">
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <label>
+          <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+        </label>
+        <input type="submit" value="Place Order" class="btn">
+      </form>
 
-							$update_qty = "update cart set qty='$item_qty' where p_id='$update_id' AND ip_add='$ip'";
-
-							$run_update = mysqli_query($con, $update_qty);
-								
-							if($run_update){
-									
-								echo "<script>window.open('cart.php','_self')</script>";
-							}
-						} */
-						
-
-			?>
 	  </div>
 	  
 		<div class="w3-black w3-center w3-padding-24">&copy; 2018 by Software Engineering TEAM 1</div>
