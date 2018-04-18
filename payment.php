@@ -244,65 +244,222 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  </div>
 	  
 	  
-	  <form action="/action_page.php">
+	  <form action="payment.php" method="post" enctype="multipart/form-data">
       
         <div class="row">
           <div class="col-50">
-            <h3>Billing Address</h3>
-            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-            <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
-            <label for="email"><i class="fa fa-envelope"></i> Email</label>
-            <input type="text" id="email" name="email" placeholder="john@example.com">
+            <h3>Shipping Address</h3>
             <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street">
+            <input type="text" id="adr" name="streetAddr" placeholder="542 W. 15th Street" required>
             <label for="city"><i class="fa fa-institution"></i> City</label>
-            <input type="text" id="city" name="city" placeholder="New York">
+            <input type="text" id="city" name="city" placeholder="New York" required>
 
             <div class="row">
               <div class="col-50">
                 <label for="state">State</label>
-                <input type="text" id="state" name="state" placeholder="NY">
+				<select id="state" name="state">
+							<option value="AL">Alabama</option>
+							<option value="AK">Alaska</option>
+							<option value="AZ">Arizona</option>
+							<option value="AR">Arkansas</option>
+							<option value="CA">California</option>
+							<option value="CO">Colorado</option>
+							<option value="CT">Connecticut</option>
+							<option value="DE">Delaware</option>
+							<option value="DC">District Of Columbia</option>
+							<option value="FL">Florida</option>
+							<option value="GA">Georgia</option>
+							<option value="HI">Hawaii</option>
+							<option value="ID">Idaho</option>
+							<option value="IL">Illinois</option>
+							<option value="IN">Indiana</option>
+							<option value="IA">Iowa</option>
+							<option value="KS">Kansas</option>
+							<option value="KY">Kentucky</option>
+							<option value="LA">Louisiana</option>
+							<option value="ME">Maine</option>
+							<option value="MD">Maryland</option>
+							<option value="MA">Massachusetts</option>
+							<option value="MI">Michigan</option>
+							<option value="MN">Minnesota</option>
+							<option value="MS">Mississippi</option>
+							<option value="MO">Missouri</option>
+							<option value="MT">Montana</option>
+							<option value="NE">Nebraska</option>
+							<option value="NV">Nevada</option>
+							<option value="NH">New Hampshire</option>
+							<option value="NJ">New Jersey</option>
+							<option value="NM">New Mexico</option>
+							<option value="NY">New York</option>
+							<option value="NC">North Carolina</option>
+							<option value="ND">North Dakota</option>
+							<option value="OH">Ohio</option>
+							<option value="OK">Oklahoma</option>
+							<option value="OR">Oregon</option>
+							<option value="PA">Pennsylvania</option>
+							<option value="RI">Rhode Island</option>
+							<option value="SC">South Carolina</option>
+							<option value="SD">South Dakota</option>
+							<option value="TN">Tennessee</option>
+							<option value="TX">Texas</option>
+							<option value="UT">Utah</option>
+							<option value="VT">Vermont</option>
+							<option value="VA">Virginia</option>
+							<option value="WA">Washington</option>
+							<option value="WV">West Virginia</option>
+							<option value="WI">Wisconsin</option>
+							<option value="WY">Wyoming</option>
+				</select>
               </div>
               <div class="col-50">
                 <label for="zip">Zip</label>
-                <input type="text" id="zip" name="zip" placeholder="10001">
+                <input type="text" id="zip" name="zip" placeholder="10001" required>
               </div>
             </div>
           </div>
 
           <div class="col-50">
             <h3>Payment</h3>
-            <label for="fname">Accepted Cards</label>
-            <div class="icon-container">
-              <i class="fa fa-cc-visa" style="color:navy;"></i>
-              <i class="fa fa-cc-amex" style="color:blue;"></i>
-              <i class="fa fa-cc-mastercard" style="color:red;"></i>
-              <i class="fa fa-cc-discover" style="color:orange;"></i>
-            </div>
+
             <label for="cname">Name on Card</label>
-            <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+            <input type="text" id="cname" name="cardsName" placeholder="John More Doe" required>
             <label for="ccnum">Credit card number</label>
-            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-            <label for="expmonth">Exp Month</label>
-            <input type="text" id="expmonth" name="expmonth" placeholder="September">
+            <input type="text" id="ccnum" name="cardNum" placeholder="1111222233334444" required>
             <div class="row">
               <div class="col-50">
-                <label for="expyear">Exp Year</label>
-                <input type="text" id="expyear" name="expyear" placeholder="2018">
+                <label for="expmonth">Exp Month</label>
+				<select name="month" id="expmonth" style="width:65">
+		  							<option value="01">01</option>
+		  							<option value="02">02</option>
+		  							<option value="03">03</option>
+									<option value="04">04</option>
+									<option value="05">05</option>
+									<option value="06">06</option>
+									<option value="07">07</option>
+									<option value="08">08</option>
+									<option value="09">09</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+		  		</select>
               </div>
               <div class="col-50">
-                <label for="cvv">CVV</label>
-                <input type="text" id="cvv" name="cvv" placeholder="352">
+                <label for="expyear">Exp Year</label>
+				<select name="year" id="expyear" style="width:80">
+									<option value="2018">2018</option>
+									<option value="2019">2019</option>
+									<option value="2020">2020</option>
+									<option value="2021">2021</option>
+									<option value="2022">2022</option>
+									<option value="2023">2023</option>
+									<option value="2024">2024</option>
+									<option value="2025">2025</option>
+									<option value="2026">2026</option>
+									<option value="2027">2027</option>
+									<option value="2028">2028</option>
+									<option value="2029">2029</option>
+									<option value="2030">2030</option>
+									<option value="2031">2031</option>
+									<option value="2032">2032</option>
+									<option value="2033">2033</option>
+									<option value="2034">2034</option>
+									<option value="2035">2035</option>
+									<option value="2036">2036</option>
+									<option value="2037">2037</option>
+									<option value="2038">2038</option>
+				</select>
               </div>
             </div>
           </div>
           
         </div>
-        <label>
-          <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
-        </label>
-        <input type="submit" value="Place Order" class="btn">
+
+        <input type="submit" name="add_order" value="Place Order" class="btn">
       </form>
+	  
+	  <?php
+		  $ip = getIp();
+		  
+		  $id = getUserID();
+		  
+		  if (isset($_POST['add_order'])){
+
+			  //gets all the data the user input for address
+			  $address = $_POST['streetAddr'];
+			  $zip = $_POST['zip'];
+			  $city = $_POST['city'];
+			  $state = $_POST['state'];
+
+			  $wrongZip = (boolean) false;
+			  
+			  //gets all the data the user input for payment
+			  $cardNum = $_POST['cardNum'];
+			  $holderName = $_POST['cardsName'];
+			  $month = $_POST['month'];
+			  $year = $_POST['year'];
+
+			  $wrongName = (boolean) false;
+		      $wrongNum = (boolean) false;
+			  $wrongExp = (boolean) false;
+
+			  //checks if the given zip code is valid
+			  if( ((!preg_match("#[0-9]+#", $zip)) || (preg_match("#[a-z]+#", $zip)) || (preg_match("#[A-Z]+#", $zip)))
+			  || (!(strlen($zip) == 5)))
+			  {
+				  echo "<script>alert('Enter a valid zip code.')</script>";
+				  $wrongZip = true;
+			  }
+			  
+			  //checks if cardholder name is valid
+			  if(($holderName == '') || (preg_match("#[0-9]+#", $holderName)) )
+			  {
+				  echo "<script>alert('Enter a valid cardholder name.')</script>";
+				  $wrongName = true;
+			  }
+
+			  //checks if card number and expiration are valid
+			  if( ((!preg_match("#[0-9]+#", $cardNum)) || (preg_match("#[a-z]+#", $cardNum)) || (preg_match("#[A-Z]+#", $cardNum)))
+			  || (!(strlen($cardNum) == 16)))
+			  {
+				  echo "<script>alert('Enter a valid card number.')</script>";
+				  $wrongNum = true;
+			  }
+
+			  if(($month < 4) && ($year == 2018))
+			  {
+				  echo "<script>alert('Enter a valid card expiration date.')</script>";
+				  $wrongExp = true;
+			  }
+
+			  // if everything was entered properly
+			  if((!$wrongName) && (!$wrongNum) && (!$wrongExp) && (!$wrongZip))
+			  {
+				  global $con;
+	
+				  // query the db to retrieve all items in cart
+				  $cart_items = "select * from cart where ip_add='$ip'";
+	
+				  // run the above query
+				  $run_cart_items = mysqli_query($con, $cart_items);
+				
+				  // traverse cart items
+				  while($walker=mysqli_fetch_array($run_cart_items))
+				  {
+					  // get the product id from the cart
+					  $pro_id = $walker['p_id'];
+					  
+					  // insert the product into the purchase table
+					  $insert_purchase = "insert into purchase (user_id, book_id) values ('$id','$pro_id')";
+					  
+					  $run_insert_purchase = mysqli_query($con, $insert_purchase);
+						
+				  }
+				  
+				  echo "<script>alert('Purchase order has been placed')</script>";
+				  echo "<script>window.open('index.php','_self')</script>";
+			  }
+		  }
+	  ?>
 
 	  </div>
 	  
