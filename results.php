@@ -280,53 +280,35 @@ include("functions/functions.php");
 							
 							if($_GET['refine_search'] == 1)
 							{
-								$get_pro = "select * from products where product_title like '%$search_query%'
-																	or product_author like '%$search_query%'
-																	or product_price like '%$search_query%'
-																	or product_release like '%$search_query%'
-																	or product_pub like '%$search_query%'
-																	order by product_title asc";
+								$search_cat = "product_title";
 							}
 							
 							elseif($_GET['refine_search'] == 2)
 							{
-								$get_pro = "select * from products where product_title like '%$search_query%'
-																	or product_author like '%$search_query%'
-																	or product_price like '%$search_query%'
-																	or product_release like '%$search_query%'
-																	or product_pub like '%$search_query%'
-																	order by product_author asc";
+								$search_cat = "product_author";
 							}
 							
 							elseif($_GET['refine_search'] == 3)
 							{
-								$get_pro = "select * from products where product_title like '%$search_query%'
-																	or product_author like '%$search_query%'
-																	or product_price like '%$search_query%'
-																	or product_release like '%$search_query%'
-																	or product_pub like '%$search_query%'
-																	order by product_price asc";
+								$search_cat = "product_price";
 							}
 							
 							elseif($_GET['refine_search'] == 4)
 							{
-								$get_pro = "select * from products where product_title like '%$search_query%'
-																	or product_author like '%$search_query%'
-																	or product_price like '%$search_query%'
-																	or product_release like '%$search_query%'
-																	or product_pub like '%$search_query%'
-																	order by product_pub asc";
+								$$search_cat = "product_pub";
 							}
 							
 							elseif($_GET['refine_search'] == 5)
 							{
-								$get_pro = "select * from products where product_title like '%$search_query%'
+								$search_cat = "product_release";
+							}
+							
+							$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
 																	or product_price like '%$search_query%'
 																	or product_release like '%$search_query%'
 																	or product_pub like '%$search_query%'
-																	order by product_release asc";
-							}
+																	order by $search_cat asc";
 							
 							$run_pro = mysqli_query($con, $get_pro);
 							
@@ -386,55 +368,40 @@ include("functions/functions.php");
 							
 						else
 						{
+							$search_id = $_GET['refine_search'];
+							
+							
 							if($_GET['refine_search'] == 1)
 							{
-								$get_pro = "select * from products where product_title like '%$search_query%'
-																	or product_author like '%$search_query%'
-																	or product_price like '%$search_query%'
-																	or product_release like '%$search_query%'
-																	or product_pub like '%$search_query%'
-																	order by product_title desc";
+								$search_cat = "product_title";
 							}
 							
 							elseif($_GET['refine_search'] == 2)
 							{
-								$get_pro = "select * from products where product_title like '%$search_query%'
-																	or product_author like '%$search_query%'
-																	or product_price like '%$search_query%'
-																	or product_release like '%$search_query%'
-																	or product_pub like '%$search_query%'
-																	order by product_author desc";
+								$search_cat = "product_author";
 							}
 							
 							elseif($_GET['refine_search'] == 3)
 							{
-								$get_pro = "select * from products where product_title like '%$search_query%'
-																	or product_author like '%$search_query%'
-																	or product_price like '%$search_query%'
-																	or product_release like '%$search_query%'
-																	or product_pub like '%$search_query%'
-																	order by product_price desc";
+								$search_cat = "product_price";
 							}
 							
 							elseif($_GET['refine_search'] == 4)
 							{
-								$get_pro = "select * from products where product_title like '%$search_query%'
-																	or product_author like '%$search_query%'
-																	or product_price like '%$search_query%'
-																	or product_release like '%$search_query%'
-																	or product_pub like '%$search_query%'
-																	order by product_pub desc";
+								$search_cat = "product_pub";
 							}
 							
 							elseif($_GET['refine_search'] == 5)
 							{
-								$get_pro = "select * from products where product_title like '%$search_query%'
+								$search_cat = "product_release desc";
+							}
+							
+							$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
 																	or product_price like '%$search_query%'
 																	or product_release like '%$search_query%'
 																	or product_pub like '%$search_query%'
-																	order by product_release desc";
-							}
+																	order by $search_cat desc";
 							
 							$run_pro = mysqli_query($con, $get_pro);
 							

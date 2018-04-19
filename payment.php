@@ -221,7 +221,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 								while ($pp_price = mysqli_fetch_array($run_pro_price)){
 			
 									// store the details of each item
-									$product_price = array($pp_price['product_price']);
+									$product_price = array($pp_price['product_price'] * $pro_qty);
 									
 									$product_title = $pp_price['product_title'];
 									
@@ -234,7 +234,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 									$total += $values;
 							
 							?>
-									<p><a href="#" class="blue"><?php echo $product_title; ?></a> <span class="price"><?php echo "$" . $single_price; ?></span></p>
+									<p><a href="#" class="blue"><?php echo $product_title; ?></a> <span class="price"><?php echo "$" . $single_price  . " x " . $pro_qty; ?></span></p>
 						<?php   } 
 							}  // close brackets of above while loops 
 						?>  
@@ -435,7 +435,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 			  if((!$wrongName) && (!$wrongNum) && (!$wrongExp) && (!$wrongZip))
 			  {
 				  global $con;
-	
+
 				  // query the db to retrieve all items in cart
 				  $cart_items = "select * from cart where ip_add='$ip'";
 	
@@ -452,7 +452,11 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					  $insert_purchase = "insert into purchase (user_id, book_id) values ('$id','$pro_id')";
 					  
 					  $run_insert_purchase = mysqli_query($con, $insert_purchase);
-						
+
+					  // delete the product from cart
+					  $empty_cart = "delete from cart where p_id='$pro_id' and ip_add='$ip'";
+					  
+					  $run_empty_cart = mysqli_query($con, $empty_cart);
 				  }
 				  
 				  echo "<script>alert('Purchase order has been placed')</script>";

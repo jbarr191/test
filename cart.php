@@ -116,7 +116,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 							global $con;
 	
 							$ip = getIp();
-	
+
 							// query the db to retrieve all items that belong to an ip
 							$sel_price = "select * from cart where ip_add='$ip'";
 	
@@ -143,7 +143,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 								while ($pp_price = mysqli_fetch_array($run_pro_price)){
 			
 									// store the details of each item
-									$product_price = array($pp_price['product_price']);
+									$product_price = array($pp_price['product_price'] * $pro_qty);
 									
 									$product_title = $pp_price['product_title'];
 									
@@ -162,12 +162,8 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 										<td><?php echo $product_title; ?><br>
 										<img src="admin_area/product_images/<?php echo $product_image;?>" width="60" height="60" />
 										</td>
-										<td>
-											<input type="text" size="3" name="qty" value="<?php echo $pro_qty;?>" id="<?php echo $pro_id;?>"/>
-											<!--<input type="text" size="3" name="qty"/>
-											<input type="image" src="images/removebtn.png" name="update" class="btTxt submit" id="saveForm" value="<?php echo $pro_id;?>"/> -->
-										</td>
-										<td><?php echo "$" . $single_price; ?></td>
+										<td><input type="text" size="3" name="qty[]" value="<?php echo $pro_qty;?>" id="<?php echo $pro_id;?>"/></td>
+										<td><?php echo "$" . $single_price . " x " . $pro_qty; ?></td>
 
 									</tr>
 						<?php   } 
@@ -196,20 +192,45 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 						$ip = getIp();
 						
 						// if update cart button is clicked
-						/*if(isset($_POST['update_cart'])){
-							// delete relevant items from the cart database
-							foreach($_POST['remove'] as $remove_id){
+						if(isset($_POST['update_cart'])){
+							
+							$i = 0;
+							$quantities = array();
+							$item_ids = array();
+							
+							// retrieve the quantities entered
+							foreach($_POST['qty'] as $item_qty){
+
+								$quantities[] = $item_qty;
+							}
+
+							// query the db to retrieve all items that belong to an ip
+							$sel_items = "select * from cart where ip_add='$ip'";
+	
+							// run the above query
+							$run_items = mysqli_query($con, $sel_items);
+
+							// while there's additional rows to fetch from the query results
+							while($items=mysqli_fetch_array($run_items)){
 								
-								$delete_product = "delete from cart where p_id='$remove_id' AND ip_add='$ip'";
+								// get the product id from the cart & add it to array
+								$item_ids[] = $items['p_id'];
+							}
+
+							$item_count = count($item_ids);
+							
+							while($i < $item_count){
+								$quantity = $quantities[$i];
+								$i_id = $item_ids[$i];
 								
-								$run_delete = mysqli_query($con, $delete_product);
-								
-								if($run_delete){
-									
-									echo "<script>window.open('cart.php','_self')</script>";
-								}
-							}					
-						} */
+								$update_qty = "update cart set qty='$quantity' where p_id='$i_id' AND ip_add='$ip'";
+
+								$run_update = mysqli_query($con, $update_qty);
+
+								$i++;
+							}														
+							echo "<script>window.open('cart.php','_self')</script>";											
+						} 
 						
 						// if continue shopping button is clicked, go to index.php
 						if(isset($_POST['continue'])){
@@ -229,24 +250,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 									
 								echo "<script>window.open('cart.php','_self')</script>";
 							}							
-						}
-						
-						/*if(isset($_POST['update'])){
-							
-							$update_id = $_POST['update'];
-							$item_qty = $_POST['qty'];
-
-							$update_qty = "update cart set qty='$item_qty' where p_id='$update_id' AND ip_add='$ip'";
-
-							$run_update = mysqli_query($con, $update_qty);
-								
-							if($run_update){
-									
-								echo "<script>window.open('cart.php','_self')</script>";
-							}
-						} */
-						
-
+						}						
 			?>
 	  </div>
 	  
