@@ -143,7 +143,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 								while ($pp_price = mysqli_fetch_array($run_pro_price)){
 			
 									// store the details of each item
-									$product_price = array($pp_price['product_price']);
+									$product_price = array($pp_price['product_price'] * $pro_qty);
 									
 									$product_title = $pp_price['product_title'];
 									
@@ -163,7 +163,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 										<img src="admin_area/product_images/<?php echo $product_image;?>" width="60" height="60" />
 										</td>
 										<td><input type="text" size="3" name="qty[]" value="<?php echo $pro_qty;?>" id="<?php echo $pro_id;?>"/></td>
-										<td><?php echo "$" . $single_price; ?></td>
+										<td><?php echo "$" . $single_price . " x " . $pro_qty; ?></td>
 
 									</tr>
 						<?php   } 
