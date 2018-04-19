@@ -329,15 +329,6 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					//refresh page to avoid duplicate data
 					echo "<script>window.open('details.php?pro_id=$product_id','_self')</script>";
 					
-					//update rating
-					$rate = mysqli_query($con, "select AVG(rating) from comments where book_id = '$product_id' and rating != '0'" );
-					$rateAvg = $rate ->fetch_array(MYSQLI_NUM);
-					
-					$run = mysqli_query($con, "UPDATE products SET rating = $rateAvg[0] WHERE product_id = $product_id" );
-					$bookinfo = mysqli_num_rows($run);
-					
-					
-					
 					}
 					}
 					else echo "<script>alert('You cannot comment on books you have not purchased')</script>";
