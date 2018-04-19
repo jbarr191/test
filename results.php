@@ -231,13 +231,16 @@ include("functions/functions.php");
 								
 						}
 							
-						else
+						else 
 						{
+							
+							$pageoffset = ($_GET['page']-1) *10;
 							$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
 																	or product_price like '%$search_query%'
 																	or product_release like '%$search_query%'
-																	or product_pub like '%$search_query%'";
+																	or product_pub like '%$search_query%'
+																	limit 10 offset $pageoffset";
 							
 							$run_pro = mysqli_query($con, $get_pro);
 							
