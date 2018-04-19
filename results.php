@@ -80,6 +80,9 @@ include("functions/functions.php");
 	 			<form method="get" action="results.php" enctype="multipart/form-data">
 	 				<input type="text" name="user_query" placeholder="Search for stuff" style="width:200" />
 	 				<input type="submit" name="search" value="Search" />
+					<input type = "hidden" name="page" value = "1" />
+					<input type = "hidden" name="refine_search" value = "0" />
+					<input type = "hidden" name="order" value = "0" />
 	 			</form>
 	 		</div>
 	      <!--<i class="fa fa-search"></i>-->
@@ -160,9 +163,27 @@ include("functions/functions.php");
 -->
 		<!--content_wrapper ends here-->
 				
+				
+				<?php
+					$user_query = $_GET['user_query'];
+					$refine_search = $_GET['refine_search'];
+					$page = $_GET['page'] + 1;
+					$search = $_GET['search'];
+					$order = $_GET['order'];
+					echo"<a href='results.php?user_query=$user_query&search=$search&refine_search=$refine_search&order=$order&page=$page'>Next Page</a>";
+ 	 
+ 	 
+ 	 
+				?>
+				
+				
 				<div id="sort_select">
 					<form method="get" action="results.php" enctype="multipart/form-data">
 						<input type="text" name="user_query" placeholder="Advanced Search" />
+						<input type = "hidden" name="search" value = "0" />
+						<input type = "hidden" name="page" value = "1" />
+					    <input type = "hidden" name="refine_search" value = "0" />
+					    <input type = "hidden" name="order" value = "0" />
 						<td>
 							<select name = "refine_search">
 						
@@ -188,8 +209,8 @@ include("functions/functions.php");
 				
 				
 						</td>
-						<input type="submit" name="search_asc" value="Search Ascending" />
-						<input type="submit" name="search_desc" value="Search Descending" />
+						<input type="submit" name="order" value="Search Ascending" />
+						<input type="submit" name="order" value="Search Descending" />
 						
 					</form>
 				</div>
@@ -199,7 +220,7 @@ include("functions/functions.php");
 					<?php
 					$search_query = $_GET['user_query'];
 					
-					if(isset($_GET['search']))
+					if(isset($_GET['search']) and $_GET['search'] == "Search")
 					{
 						
 						$search_query = $_GET['user_query'];
@@ -263,7 +284,7 @@ include("functions/functions.php");
 						}
 					}
 					
-					elseif(isset($_GET['search_asc']))
+					elseif(isset($_GET['order']) and ($_GET['order']== "Search Ascending"))
 					{
 						
 						$search_query = $_GET['user_query'];
@@ -355,7 +376,7 @@ include("functions/functions.php");
 						}
 					}
 				   
-					elseif(isset($_GET['search_desc']))
+					elseif(isset($_GET['order']) and ($_GET['order']== "Search Descending"))
 					{
 						
 						$search_query = $_GET['user_query'];
