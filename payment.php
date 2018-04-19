@@ -221,7 +221,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 								while ($pp_price = mysqli_fetch_array($run_pro_price)){
 			
 									// store the details of each item
-									$product_price = array($pp_price['product_price']);
+									$product_price = array($pp_price['product_price'] * $pro_qty);
 									
 									$product_title = $pp_price['product_title'];
 									
@@ -234,7 +234,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 									$total += $values;
 							
 							?>
-									<p><a href="#" class="blue"><?php echo $product_title; ?></a> <span class="price"><?php echo "$" . $single_price; ?></span></p>
+									<p><a href="#" class="blue"><?php echo $product_title; ?></a> <span class="price"><?php echo "$" . $single_price  . " x " . $pro_qty; ?></span></p>
 						<?php   } 
 							}  // close brackets of above while loops 
 						?>  
