@@ -95,59 +95,40 @@ include("includes/db.php");
 
 			<div>
 
-				<form action="customer_login.php" method="post" enctype="multipart/form-data">
-
 					<table align="center" width="450">
 
 						<tr align="center">
-							<td colspan="6"><h2>Log In</h2></td>
+							<td colspan="6"><h2>Got any questions?</h2></td>
+						</tr>
+					</table>
+
+					<p style="text-align:center"> If you have any inquiries or suggestions about any of the following sections of the site, please contact us at: </p>
+
+					<table align="center" width="450">
+
+						<tr>
+							<td align="right" style="padding:8px"><b>Account Creation & Management: </b></td>
+							<td style="padding:8px">Jesus Barrios at jbarr191@fiu.edu</td>
 						</tr>
 						<tr>
-							<td align="right"><b>Customer Email: </b></td>
-							<td><input type="text" name="c_email" /></td>
+							<td align="right" style="padding:8px"><b>Search Functionality: </b></td>
+							<td style="padding:8px">Kenny Acosta at kacos011@fiu.edu</td>
 						</tr>
 						<tr>
-							<td align="right"><b>Password: </b></td>
-							<td><input type="password" name="c_pass" /></td>
+							<td align="right" style="padding:8px"><b>Comment & Rating System: </b></td>
+							<td style="padding:8px">Elizabeth Alfaras at ealfa009@fiu.edu</td>
 						</tr>
-						<tr align="center">
-							<td colspan="6"><input type="submit" name="login" value="Sign In" /></td>
+						<tr>
+							<td align="right" style="padding:8px"><b>Book Listings & Inventory: </b></td>
+							<td style="padding:8px">Christina Alonso at calon043@fiu.edu </td>
+						</tr>
+						<tr>
+							<td align="right" style="padding:8px"><b>Shopping Cart System: </b></td>
+							<td style="padding:8px">Jessiel Benitez at jbeni051@fiu.edu </td>
 						</tr>
 
 					</table>
-
-					<div style="float:left">
-						Forgot your password? <a href="customer_login?forgot_pass">Click Here</a>
-					</div><br>
-					<div style="float:left">
-						Don't have an account? <a href="customer_register.php">Join us </a>
-					</div>
 					<br>
-				</form>
-
-				<?php
-
-				if (isset($_POST['login'])){
-
-					$email = $_POST['c_email'];
-					$pass = $_POST['c_pass'];
-					$sel_customer = "select * from accounts where password = '$pass' AND email = '$email'";
-
-					$run = mysqli_query($con, $sel_customer);
-
-					$check_customer = mysqli_num_rows($run);
-
-					if($check_customer == 0) {
-
-						echo "<script>alert('Password or email is incorrect')</script>";
-					} else {
-
-						$_SESSION['customer_email']=$email;
-						echo "<script>window.open('index.php','_self')</script>";
-					}
-				}
-
-				?>
 
 			</div>
 
