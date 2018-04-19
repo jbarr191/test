@@ -435,7 +435,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 			  if((!$wrongName) && (!$wrongNum) && (!$wrongExp) && (!$wrongZip))
 			  {
 				  global $con;
-	
+
 				  // query the db to retrieve all items in cart
 				  $cart_items = "select * from cart where ip_add='$ip'";
 	
@@ -452,7 +452,11 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					  $insert_purchase = "insert into purchase (user_id, book_id) values ('$id','$pro_id')";
 					  
 					  $run_insert_purchase = mysqli_query($con, $insert_purchase);
-						
+
+					  // delete the product from cart
+					  $empty_cart = "delete from cart where p_id='$pro_id' and ip_add='$ip'";
+					  
+					  $run_empty_cart = mysqli_query($con, $empty_cart);
 				  }
 				  
 				  echo "<script>alert('Purchase order has been placed')</script>";
