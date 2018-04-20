@@ -115,7 +115,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	  <!-- Top header -->
 	  <header class="w3-container w3-xlarge">
-	    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
+	    <p class="w3-left" style="padding:8px; font-size:20px"></p>
 
 		 <?php
 		 if (isset($_SESSION['customer_email'])){
@@ -131,6 +131,9 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	 			<form method="get" action="results.php" enctype="multipart/form-data">
 	 				<input type="text" name="user_query" placeholder="Search for stuff" style="width:200" />
 	 				<input type="submit" name="search" value="Search" />
+						<input type = "hidden" name="page" value = "1" />
+					<input type = "hidden" name="refine_search" value = "0" />
+					<input type = "hidden" name="order" value = "0" />
 	 			</form>
 	 		</div>
 	      <!--<i class="fa fa-search"></i>-->

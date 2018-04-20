@@ -231,13 +231,16 @@ include("functions/functions.php");
 								
 						}
 							
-						else
+						else 
 						{
+							
+							$pageoffset = ($_GET['page']-1) *10;
 							$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
 																	or product_price like '%$search_query%'
 																	or product_release like '%$search_query%'
-																	or product_pub like '%$search_query%'";
+																	or product_pub like '%$search_query%'
+																	limit 10 offset $pageoffset";
 							
 							$run_pro = mysqli_query($con, $get_pro);
 							
@@ -266,7 +269,7 @@ include("functions/functions.php");
 									<div class="w3-col l3 s6">
 										<div class="w3-container">
 											<div class="w3-display-container">
-												<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:100%">
+												<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:95%;height:320px">
 												<span class="w3-tag w3-display-topleft">New</span>
 												<div class="w3-display-middle w3-display-hover">
 													<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
@@ -358,7 +361,7 @@ include("functions/functions.php");
 									<div class="w3-col l3 s6">
 										<div class="w3-container">
 											<div class="w3-display-container">
-												<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:100%">
+												<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:95%;height:320px">
 												<span class="w3-tag w3-display-topleft">New</span>
 												<div class="w3-display-middle w3-display-hover">
 													<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
@@ -451,7 +454,7 @@ include("functions/functions.php");
 									<div class="w3-col l3 s6">
 										<div class="w3-container">
 											<div class="w3-display-container">
-												<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:100%">
+												<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:95%;height:320px">
 												<span class="w3-tag w3-display-topleft">New</span>
 												<div class="w3-display-middle w3-display-hover">
 													<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>

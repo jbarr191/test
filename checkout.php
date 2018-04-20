@@ -82,6 +82,9 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	 			<form method="get" action="results.php" enctype="multipart/form-data">
 	 				<input type="text" name="user_query" placeholder="Search for stuff" style="width:200" />
 	 				<input type="submit" name="search" value="Search" />
+						<input type = "hidden" name="page" value = "1" />
+					<input type = "hidden" name="refine_search" value = "0" />
+					<input type = "hidden" name="order" value = "0" />
 	 			</form>
 	 		</div>
 	      <!--<i class="fa fa-search"></i>-->
