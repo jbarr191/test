@@ -39,13 +39,13 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
 
 
-		
-		  <a href = 'genre.php?pro_genre=Sci-fi' class="w3-bar-item w3-button":42px'>Sci-fi</a>
-		  <a href = 'genre.php?pro_genre=Fiction' class="w3-bar-item w3-button":42px'>Fiction</a>
-		  <a href = 'genre.php?pro_genre=Fantasy' class="w3-bar-item w3-button":42px'>Fantasy</a>
-		  <a href = 'genre.php?pro_genre=Drama' class="w3-bar-item w3-button":42px'>Drama</a>
-		  <a href = 'genre.php?pro_genre=Poetry' class="w3-bar-item w3-button":42px'>Poetry</a>
-	   
+
+		  <a href = 'genre.php?pro_genre=Sci-fi' class="w3-bar-item w3-button:42px">Sci-fi</a>
+		  <a href = 'genre.php?pro_genre=Fiction' class="w3-bar-item w3-button:42px">Fiction</a>
+		  <a href = 'genre.php?pro_genre=Fantasy' class="w3-bar-item w3-button:42px">Fantasy</a>
+		  <a href = 'genre.php?pro_genre=Drama' class="w3-bar-item w3-button:42px">Drama</a>
+		  <a href = 'genre.php?pro_genre=Poetry' class="w3-bar-item w3-button:42px">Poetry</a>
+
 
 	    </div>
 	  </div>
