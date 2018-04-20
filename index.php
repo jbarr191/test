@@ -38,8 +38,6 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	    </a>
 	    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
 
-
-
 		  <a href = 'genre.php?pro_genre=Sci-fi' class="w3-bar-item w3-button:42px">Sci-fi</a>
 		  <a href = 'genre.php?pro_genre=Fiction' class="w3-bar-item w3-button:42px">Fiction</a>
 		  <a href = 'genre.php?pro_genre=Fantasy' class="w3-bar-item w3-button:42px">Fantasy</a>
@@ -49,7 +47,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	    </div>
 	  </div>
-	  <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact Us</a>
+	  <a href="contact_us.php" class="w3-bar-item w3-button w3-padding">Contact Us</a>
 	</nav>
 
 	<!--Main Container starts here-->

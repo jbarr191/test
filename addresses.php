@@ -66,12 +66,14 @@ include("includes/db.php");
 		      Genres <i class="fa fa-caret-down"></i>
 		    </a>
 		    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-		      <a href="#" class="w3-bar-item w3-button">Sci-fi</a>
-		      <a href="#" class="w3-bar-item w3-button">Fiction</a>
-		      <a href="#" class="w3-bar-item w3-button">Genre 3</a>
+				 <a href = 'genre.php?pro_genre=Sci-fi' class="w3-bar-item w3-button:42px">Sci-fi</a>
+				 <a href = 'genre.php?pro_genre=Fiction' class="w3-bar-item w3-button:42px">Fiction</a>
+				 <a href = 'genre.php?pro_genre=Fantasy' class="w3-bar-item w3-button:42px">Fantasy</a>
+				 <a href = 'genre.php?pro_genre=Drama' class="w3-bar-item w3-button:42px">Drama</a>
+				 <a href = 'genre.php?pro_genre=Poetry' class="w3-bar-item w3-button:42px">Poetry</a>
 		    </div>
 		  </div>
-		  <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact Us</a>
+		  <a href="contact_us.php" class="w3-bar-item w3-button w3-padding">Contact Us</a>
 		</nav>
 
 		<!--Main Container starts here-->
@@ -107,7 +109,7 @@ include("includes/db.php");
 							<input type = "hidden" name="page" value = "1" />
 					<input type = "hidden" name="refine_search" value = "0" />
 					<input type = "hidden" name="order" value = "0" />
-						
+
 		 			</form>
 		 		</div>
 		      <!--<i class="fa fa-search"></i>-->

@@ -97,43 +97,19 @@ include("includes/db.php");
 
 			<div>
 
-				<form action="customer_login.php" method="post" enctype="multipart/form-data">
-
-					<table align="center" width="450">
-
-						<tr align="center">
-							<td colspan="6"><h2>Log In</h2></td>
-						</tr>
-						<tr>
-							<td align="right"><b>Customer Email: </b></td>
-							<td><input type="text" name="c_email" /></td>
-						</tr>
-						<tr>
-							<td align="right"><b>Password: </b></td>
-							<td><input type="password" name="c_pass" /></td>
-						</tr>
-						<tr align="center">
-							<td colspan="6"><input type="submit" name="login" value="Sign In" /></td>
-						</tr>
-
-					</table>
-
-					<div style="float:left">
-						Forgot your password? <a href="forgot_password.php">Click Here</a>
-					</div><br>
-					<div style="float:left">
-						Don't have an account? <a href="customer_register.php">Join us </a>
-					</div>
-					<br>
-				</form>
-
 				<?php
 
-				if (isset($_POST['login'])){
+				if (isset($_POST['change'])){
 
+					$anythingEmpty = (boolean) false;
+					$nameMatches = (boolean) false;
+					$passwordMatches = (boolean) false;
 					$email = $_POST['c_email'];
-					$pass = $_POST['c_pass'];
-					$sel_customer = "select * from accounts where password = '$pass' AND email = '$email'";
+					$firstName = $_POST['first_name'];
+					$lastName = $_POST['last_name'];
+					$password = $_POST['password'];
+					$c_pass = $_POST['c_password'];
+					$sel_customer = "select * from accounts where email = '$email'";
 
 					$run = mysqli_query($con, $sel_customer);
 
@@ -141,15 +117,50 @@ include("includes/db.php");
 
 					if($check_customer == 0) {
 
-						echo "<script>alert('Password or email is incorrect')</script>";
+						echo "<div style='text-align:center; color:orange'>Email is not linked to any account.</div>";
 					} else {
 
-						$_SESSION['customer_email']=$email;
-						echo "<script>window.open('index.php','_self')</script>";
 					}
 				}
 
 				?>
+
+				<form action="forgot_password.php" method="post" enctype="multipart/form-data">
+
+					<table align="center" width="450">
+
+						<tr align="center">
+							<td colspan="6"><h2>Forgot My Password</h2></td>
+						</tr>
+						<tr>
+							<td align="right"><b>Customer Email: </b></td>
+							<td><input type="text" name="c_email" /></td>
+						</tr>
+						<tr>
+							<td align="right"><b>Confirm First Name: </b></td>
+							<td><input type="text" name="first_name" /></td>
+						</tr>
+						<tr>
+							<td align="right"><b>Confirm Last Name: </b></td>
+							<td><input type="text" name="last_name" /></td>
+						</tr>
+						<tr>
+							<td align="right"><b>New Password: </b></td>
+							<td><input type="password" name="password" /></td>
+						</tr>
+						<tr>
+							<td align="right"><b>Confirm New Password: </b></td>
+							<td><input type="password" name="c_password" /></td>
+						</tr>
+						<tr align="center">
+							<td colspan="6"><input type="submit" name="change" value="Change password" /></td>
+						</tr>
+
+					</table>
+
+					<br>
+				</form>
+
 
 			</div>
 
