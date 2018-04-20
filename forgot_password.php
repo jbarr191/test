@@ -101,9 +101,8 @@ include("includes/db.php");
 
 				if (isset($_POST['change'])){
 
-					$anythingEmpty = (boolean) false;
 					$nameMatches = (boolean) false;
-					$passwordMatches = (boolean) false;
+					$correctPass = (boolean) true;
 					$email = $_POST['c_email'];
 					$firstName = $_POST['first_name'];
 					$lastName = $_POST['last_name'];
@@ -119,6 +118,46 @@ include("includes/db.php");
 
 						echo "<div style='text-align:center; color:orange'>Email is not linked to any account.</div>";
 					} else {
+
+						$result = mysqli_query($con,"select first_name, last_name from accounts where email = '$email'");
+						$row_img = mysqli_fetch_array($result);
+						$fname = $row_img['first_name'];
+						$lname = $row_img['last_name'];
+
+						if ( ($fname == $firstName) && ($lname == $lastName)){
+							$nameMatches = true;
+						} else{
+							echo "<div style='text-align:center; color:orange'>Name does not match the one linked to the account.</div>";
+						}
+
+						//Checks if the two given passwords are the same
+						if($password != $c_pass){
+							echo "<div style='text-align:center; color:orange'>Passwords do not match.</div>";
+							$correctPass = false;
+						}
+
+						//checks if the password is of the correct length
+						if((strlen($password) < 8) || (strlen($password) > 16) ){
+							echo "<div style='text-align:center; color:orange'>Password must be between 8 and 16 characters long.</div>";
+							$correctPass = false;
+						}
+
+						//checks if the password is strong
+						if((!preg_match("#[0-9]+#", $password)) || (!preg_match("#[a-z]+#", $password)) || (!preg_match("#[A-Z]+#", $password))){
+							echo "<div style='text-align:center; color:orange'>Password must have a combination of at least one number, and one capital and lower case letter.</div>";
+							$correctPass = false;
+						}
+
+						if($nameMatches && $correctPass)
+						{
+							$update_c = "update accounts set password='$password' where email='$email'";
+							$run_c = mysqli_query($con, $update_c);
+
+							if($run_c) {
+								echo "<script>alert('Password changed succesfully')</script>";
+								echo "<script>window.open('customer_login.php','_self')</script>";
+							}
+						}
 
 					}
 				}
