@@ -19,7 +19,7 @@ include("functions/functions.php");
 			body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 		</style>
 	</head>
-	
+
 <body class="w3-content" style="max-width:1200px">
 
 <!-- Sidebar/menu -->
@@ -30,7 +30,7 @@ include("functions/functions.php");
 		 	<img id="logo" src="images/logo.jpg" width="240" height="120" />
 		</a>
 	  </div>
-	  
+
 	  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
 	    <a href="#" class="w3-bar-item w3-button">Best-Sellers</a>
 	    <a href="#" class="w3-bar-item w3-button">Top-Rated</a>
@@ -38,15 +38,15 @@ include("functions/functions.php");
 	      Genres <i class="fa fa-caret-down"></i>
 	    </a>
 	    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-	    	
-		  <a href = 'genre.php?pro_genre=Sci-fi' class="w3-bar-item w3-button":42px'>Sci-fi</a>
-		  <a href = 'genre.php?pro_genre=Fiction' class="w3-bar-item w3-button":42px'>Fiction</a>
-		  <a href = 'genre.php?pro_genre=Fantasy' class="w3-bar-item w3-button":42px'>Fantasy</a>
-		  <a href = 'genre.php?pro_genre=Drama' class="w3-bar-item w3-button":42px'>Drama</a>
-		  <a href = 'genre.php?pro_genre=Poetry' class="w3-bar-item w3-button":42px'>Poetry</a>
+
+		  <a href = 'genre.php?pro_genre=Sci-fi' class="w3-bar-item w3-button:42px">Sci-fi</a>
+		  <a href = 'genre.php?pro_genre=Fiction' class="w3-bar-item w3-button:42px">Fiction</a>
+		  <a href = 'genre.php?pro_genre=Fantasy' class="w3-bar-item w3-button:42px">Fantasy</a>
+		  <a href = 'genre.php?pro_genre=Drama' class="w3-bar-item w3-button:42px">Drama</a>
+		  <a href = 'genre.php?pro_genre=Poetry' class="w3-bar-item w3-button:42px">Poetry</a>
 	    </div>
 	  </div>
-	  <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact Us</a>
+	  <a href="contact_us.php" class="w3-bar-item w3-button w3-padding">Contact Us</a>
 	</nav>
 
 	<!--Main Container starts here-->
@@ -61,20 +61,19 @@ include("functions/functions.php");
 
 	  <!-- Top header -->
 	  <header class="w3-container w3-xlarge">
-	    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
-	
+	    <p class="w3-left" style="padding:8px; font-size:20px; padding-left:10px"><a href="index.php">Home</a></p>
 		 <?php
-		 if (isset($_SESSION['customer_email'])){
+ 		 if (isset($_SESSION['customer_email'])){
 
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
+ 			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer/customer_account.php'>My Account</a></p>";
+ 			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_logout.php'>Log out</a></p>";
+ 		 } else {
 
-		 } else {
-
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_login.php'>Log In</a></p>";
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_register.php'>Register</a></p>";
-		 }
-		 ?>
-		 <p class="w3-left" style="padding:8px; font-size:20px"><a href="cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
+ 			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_login.php'>Log In</a></p>";
+ 			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_register.php'>Register</a></p>";
+ 		 }
+ 		 ?>
+		 <p class="w3-left" style="padding:8px; font-size:20px; padding-left:20px"><a href="cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
 	    <p class="w3-right">
 			 <div id="form" style="line-height:20px; padding-top:24px; float:right">
 	 			<form method="get" action="results.php" enctype="multipart/form-data">
@@ -162,8 +161,8 @@ include("functions/functions.php");
 		</div>
 -->
 		<!--content_wrapper ends here-->
-				
-				
+
+
 				<?php
 					$user_query = $_GET['user_query'];
 					$refine_search = $_GET['refine_search'];
@@ -171,12 +170,12 @@ include("functions/functions.php");
 					$search = $_GET['search'];
 					$order = $_GET['order'];
 					echo"<a href='results.php?user_query=$user_query&search=$search&refine_search=$refine_search&order=$order&page=$page'>Next Page</a>";
- 	 
- 	 
- 	 
+
+
+
 				?>
-				
-				
+
+
 				<div id="sort_select">
 					<form method="get" action="results.php" enctype="multipart/form-data">
 						<input type="text" name="user_query" placeholder="Advanced Search" />
@@ -186,54 +185,54 @@ include("functions/functions.php");
 					    <input type = "hidden" name="order" value = "0" />
 						<td>
 							<select name = "refine_search">
-						
+
 								<option>Sort By:</option>
 								<!--query to get genres from database -->
 								<?php
-									//query copied from getGen() in functions.php 
+									//query copied from getGen() in functions.php
 									$get_search = "select * from search";
-							
+
 									$run_search = mysqli_query($con, $get_search);
-							
-						
+
+
 									while ($row_search = mysqli_fetch_array($run_search))
 									{
 										$search_id = $row_search['search_id'];
 										$search_cat = $row_search['search_cat'];
-									
+
 									echo "<option value='$search_id'>$search_cat</option>";
 									}
-												
+
 								?>
 							</select>
-				
-				
+
+
 						</td>
 						<input type="submit" name="order" value="Search Ascending" />
 						<input type="submit" name="order" value="Search Descending" />
-						
+
 					</form>
 				</div>
-			
+
 				<div class="w3-row w3-container">
-				
+
 					<?php
 					$search_query = $_GET['user_query'];
-					
+
 					if(isset($_GET['search']) and $_GET['search'] == "Search")
 					{
-						
+
 						$search_query = $_GET['user_query'];
-						
+
 						if($search_query == '')
 						{
 								echo "<h2 style='padding:20px;'>Your search was empty!</h2>";
-								
+
 						}
-							
-						else 
+
+						else
 						{
-							
+
 							$pageoffset = ($_GET['page']-1) *10;
 							$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
@@ -241,20 +240,20 @@ include("functions/functions.php");
 																	or product_release like '%$search_query%'
 																	or product_pub like '%$search_query%'
 																	limit 10 offset $pageoffset";
-							
+
 							$run_pro = mysqli_query($con, $get_pro);
-							
+
 							$count_pro = mysqli_num_rows($run_pro);
-							
+
 							if($count_pro == 0){
 								echo "<h2 style='padding:20px;'>No search results found!</h2>";
 								}
-									
+
 							else ?>
 									<div class="w3-row">
 								<?php while($row_pro = mysqli_fetch_array($run_pro))
 								{
-								
+
 									$pro_id = $row_pro['product_id'];
 									$pro_title = $row_pro['product_title'];
 									$pro_image = $row_pro['product_image'];
@@ -265,7 +264,7 @@ include("functions/functions.php");
 									$pro_gen = $row_pro['product_genre'];
 									$pro_release = $row_pro['product_release'];
 								?>
-								
+
 									<div class="w3-col l3 s6">
 										<div class="w3-container">
 											<div class="w3-display-container">
@@ -275,58 +274,58 @@ include("functions/functions.php");
 													<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
 												</div>
 											</div>
-										<p><?php echo 
+										<p><?php echo
 										"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
 										<br><b>$<?php echo $pro_price; ?></b></p>
 										</div>
 
 
 									</div> <?php
-		
+
 								}	?> </div> <?php
 						}
 					}
-					
+
 					elseif(isset($_GET['order']) and ($_GET['order']== "Search Ascending"))
 					{
-						
+
 						$search_query = $_GET['user_query'];
-						
+
 						if($search_query == '')
 						{
 								echo "<h2 style='padding:20px;'>Your search was empty!</h2>";
-								
+
 						}
-							
+
 						else
 						{
-							
-							
+
+
 							if($_GET['refine_search'] == 1)
 							{
 								$search_cat = "product_title";
 							}
-							
+
 							elseif($_GET['refine_search'] == 2)
 							{
 								$search_cat = "product_author";
 							}
-							
+
 							elseif($_GET['refine_search'] == 3)
 							{
 								$search_cat = "product_price";
 							}
-							
+
 							elseif($_GET['refine_search'] == 4)
 							{
 								$$search_cat = "product_pub";
 							}
-							
+
 							elseif($_GET['refine_search'] == 5)
 							{
 								$search_cat = "product_release";
 							}
-							
+
 							$pageoffset = ($_GET['page']-1) * 10;
 							$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
@@ -335,20 +334,20 @@ include("functions/functions.php");
 																	or product_pub like '%$search_query%'
 																	order by $search_cat asc
 																	limit 10 offset $pageoffset";
-							
+
 							$run_pro = mysqli_query($con, $get_pro);
-							
+
 							$count_pro = mysqli_num_rows($run_pro);
-							
+
 							if($count_pro == 0){
 								echo "<h2 style='padding:20px;'>No search results found!</h2>";
 								}
-									
+
 							else ?>
 									<div class="w3-row">
 								<?php while($row_pro = mysqli_fetch_array($run_pro))
 								{
-								
+
 									$pro_id = $row_pro['product_id'];
 									$pro_title = $row_pro['product_title'];
 									$pro_image = $row_pro['product_image'];
@@ -359,7 +358,7 @@ include("functions/functions.php");
 									$pro_gen = $row_pro['product_genre'];
 									$pro_release = $row_pro['product_release'];
 								?>
-								
+
 									<div class="w3-col l3 s6">
 										<div class="w3-container">
 											<div class="w3-display-container">
@@ -369,59 +368,59 @@ include("functions/functions.php");
 													<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
 												</div>
 											</div>
-										<p><?php echo 
+										<p><?php echo
 										"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
 										<br><b>$<?php echo $pro_price; ?></b></p>
 										</div>
 
 
 									</div> <?php
-		
+
 								}	?> </div> <?php
 						}
 					}
-				   
+
 					elseif(isset($_GET['order']) and ($_GET['order']== "Search Descending"))
 					{
-						
+
 						$search_query = $_GET['user_query'];
-						
+
 						if($search_query == '')
 						{
 								echo "<h2 style='padding:20px;'>Your search was empty!</h2>";
-								
+
 						}
-							
+
 						else
 						{
 							$search_id = $_GET['refine_search'];
-							
-							
+
+
 							if($_GET['refine_search'] == 1)
 							{
 								$search_cat = "product_title";
 							}
-							
+
 							elseif($_GET['refine_search'] == 2)
 							{
 								$search_cat = "product_author";
 							}
-							
+
 							elseif($_GET['refine_search'] == 3)
 							{
 								$search_cat = "product_price";
 							}
-							
+
 							elseif($_GET['refine_search'] == 4)
 							{
 								$search_cat = "product_pub";
 							}
-							
+
 							elseif($_GET['refine_search'] == 5)
 							{
 								$search_cat = "product_release";
 							}
-							
+
 							$pageoffset = ($_GET['page']-1) * 10;
 							$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
@@ -430,20 +429,20 @@ include("functions/functions.php");
 																	or product_pub like '%$search_query%'
 																	order by $search_cat desc
 																	limit 10 offset $pageoffset";
-							
+
 							$run_pro = mysqli_query($con, $get_pro);
-							
+
 							$count_pro = mysqli_num_rows($run_pro);
-							
+
 							if($count_pro == 0){
 								echo "<h2 style='padding:20px;'>No search results found!</h2>";
 								}
-									
+
 							else ?>
 									<div class="w3-row">
 								<?php while($row_pro = mysqli_fetch_array($run_pro))
 								{
-								
+
 									$pro_id = $row_pro['product_id'];
 									$pro_title = $row_pro['product_title'];
 									$pro_image = $row_pro['product_image'];
@@ -454,7 +453,7 @@ include("functions/functions.php");
 									$pro_gen = $row_pro['product_genre'];
 									$pro_release = $row_pro['product_release'];
 								?>
-								
+
 									<div class="w3-col l3 s6">
 										<div class="w3-container">
 											<div class="w3-display-container">
@@ -464,22 +463,22 @@ include("functions/functions.php");
 													<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
 												</div>
 											</div>
-										<p><?php echo 
+										<p><?php echo
 										"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
 										<br><b>$<?php echo $pro_price; ?></b></p>
 										</div>
 
 
 									</div> <?php
-		
+
 								}	?> </div> <?php
 						}
 					}
-				
-							
+
+
 					?>
-				
-				
+
+
 		<!--content_wrapper ends here-->
 
 
@@ -488,7 +487,7 @@ include("functions/functions.php");
 
 	</div>
 	<!--Main Container ends here-->
-	
+
 	<script>
 		// Accordion
 		function myAccFunc() {
