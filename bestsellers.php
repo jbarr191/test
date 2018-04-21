@@ -31,7 +31,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 			</a>
 	  	</div>
 	  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-	    <a href="bestsellers.php" class="w3-bar-item w3-button">Best-Sellers</a>
+	    <a href="#" class="w3-bar-item w3-button">Best-Sellers</a>
 	    <a href="#" class="w3-bar-item w3-button">Top-Rated</a>
 	    <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
 	      Genres <i class="fa fa-caret-down"></i>
@@ -101,15 +101,16 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  </div>
 
 	  <div class="w3-container w3-text-grey" id="books">
-	    <p>8 items</p>
 	  </div>
 
 	  <!-- Product grid -->
 	    <?php cart(); ?>
 
 	  <div class="w3-container w3-grayscale">
+		<p style='font-size:30px'><b>Best-Sellers</b></p>
 	  <?php
-		$get_pro = "select * from products";
+	  // order by number of purchases
+		$get_pro = "select * from products where purchases>0 order by purchases desc limit 8";
 		$run_pro = mysqli_query($con, $get_pro);
 		while($row_pro=mysqli_fetch_array($run_pro)){
 			$pro_id = $row_pro['product_id'];
