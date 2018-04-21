@@ -82,6 +82,7 @@ include("functions/functions.php");
 					<input type = "hidden" name="page" value = "1" />
 					<input type = "hidden" name="refine_search" value = "0" />
 					<input type = "hidden" name="order" value = "0" />
+					<input type = "hidden" name="booklimit" value = "10" />
 	 			</form>
 	 		</div>
 	      <!--<i class="fa fa-search"></i>-->
@@ -169,7 +170,8 @@ include("functions/functions.php");
 					$page = $_GET['page'] + 1;
 					$search = $_GET['search'];
 					$order = $_GET['order'];
-					echo"<a href='results.php?user_query=$user_query&search=$search&refine_search=$refine_search&order=$order&page=$page'>Next Page</a>";
+					$limit = $_GET['booklimit'];
+					echo"<a href='results.php?user_query=$user_query&search=$search&refine_search=$refine_search&order=$order&page=$page&booklimit=$limit'>Next Page</a>";
 
 
 
@@ -183,6 +185,7 @@ include("functions/functions.php");
 						<input type = "hidden" name="page" value = "1" />
 					    <input type = "hidden" name="refine_search" value = "0" />
 					    <input type = "hidden" name="order" value = "0" />
+						<input type = "hidden" name="booklimit" value = "10" />
 						<td>
 							<select name = "refine_search">
 
@@ -210,6 +213,8 @@ include("functions/functions.php");
 						</td>
 						<input type="submit" name="order" value="Search Ascending" />
 						<input type="submit" name="order" value="Search Descending" />
+						<input type="checkbox" name="booklimit" value="20" />Set page limit to 20 books<br />
+						
 
 					</form>
 				</div>
@@ -234,6 +239,8 @@ include("functions/functions.php");
 						{
 
 							$pageoffset = ($_GET['page']-1) *10;
+							
+							
 							$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
 																	or product_price like '%$search_query%'
@@ -319,22 +326,31 @@ include("functions/functions.php");
 
 								elseif($_GET['refine_search'] == 4)
 								{
-									$$search_cat = "product_pub";
+									$search_cat = "product_pub";
 								}
 
 								elseif($_GET['refine_search'] == 5)
 								{
 									$search_cat = "product_release";
 								}
-
-								$pageoffset = ($_GET['page']-1) * 10;
+								
+								if($_GET['booklimit'] == 20){
+									$limit = 20;
+								}
+								
+								$pageoffset = ($_GET['page']-1) * $limit;
+								
+								
+								
+								
+								
 								$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
 																	or product_price like '%$search_query%'
 																	or product_release like '%$search_query%'
 																	or product_pub like '%$search_query%'
 																	order by $search_cat asc
-																	limit 10 offset $pageoffset";
+																	limit $limit offset $pageoffset";
 
 								checkSearch(mysqli_query($con, $get_pro));									
 																	
@@ -430,15 +446,19 @@ include("functions/functions.php");
 								{
 									$search_cat = "product_release";
 								}
+								
+								if($_GET['booklimit'] == 20){
+									$limit = 20;
+								}
 
-								$pageoffset = ($_GET['page']-1) * 10;
+								$pageoffset = ($_GET['page']-1) * $limit;
 								$get_pro = "select * from products where product_title like '%$search_query%'
 																		or product_author like '%$search_query%'
 																		or product_price like '%$search_query%'
 																		or product_release like '%$search_query%'
 																		or product_pub like '%$search_query%'
 																		order by $search_cat desc
-																		limit 10 offset $pageoffset";
+																		limit $limit offset $pageoffset";
 
 								checkSearch(mysqli_query($con, $get_pro));
 								
