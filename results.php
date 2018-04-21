@@ -327,12 +327,14 @@ include("functions/functions.php");
 								$search_cat = "product_release";
 							}
 							
+							$pageoffset = ($_GET['page']-1) * 10;
 							$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
 																	or product_price like '%$search_query%'
 																	or product_release like '%$search_query%'
 																	or product_pub like '%$search_query%'
-																	order by $search_cat asc";
+																	order by $search_cat asc
+																	limit 10 offset $pageoffset";
 							
 							$run_pro = mysqli_query($con, $get_pro);
 							
@@ -417,15 +419,17 @@ include("functions/functions.php");
 							
 							elseif($_GET['refine_search'] == 5)
 							{
-								$search_cat = "product_release desc";
+								$search_cat = "product_release";
 							}
 							
+							$pageoffset = ($_GET['page']-1) * 10;
 							$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
 																	or product_price like '%$search_query%'
 																	or product_release like '%$search_query%'
 																	or product_pub like '%$search_query%'
-																	order by $search_cat desc";
+																	order by $search_cat desc
+																	limit 10 offset $pageoffset";
 							
 							$run_pro = mysqli_query($con, $get_pro);
 							
