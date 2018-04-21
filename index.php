@@ -31,8 +31,10 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 			</a>
 	  	</div>
 	  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+
 	    <a href="bestsellers.php" class="w3-bar-item w3-button">Best-Sellers</a>
-	    <a href="#" class="w3-bar-item w3-button">Top-Rated</a>
+	    <a href="topranked.php" class="w3-bar-item w3-button">Top-Rated</a>
+
 	    <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
 	      Genres <i class="fa fa-caret-down"></i>
 	    </a>
