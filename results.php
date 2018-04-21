@@ -266,7 +266,7 @@ include("functions/functions.php");
 								?>
 
 									<div class="w3-col l3 s6">
-										<div class="w3-container">
+										<div class="w3-container-topleft">
 											<div class="w3-display-container">
 												<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:95%;height:320px">
 												<span class="w3-tag w3-display-topleft">New</span>
@@ -276,8 +276,8 @@ include("functions/functions.php");
 											</div>
 										<p><?php echo
 										"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
-										<br><b>$<?php echo $pro_price; ?></b></p>
-										</div>
+											<br><b>$<?php echo $pro_price; ?></b></p>
+									</div>
 
 
 									</div> <?php
@@ -352,7 +352,7 @@ include("functions/functions.php");
 								}
 
 								else ?>
-										<div class="w3-row">
+									 <div class="w3-container w3-grayscale">
 									<?php while($row_pro = mysqli_fetch_array($run_pro))
 									{
 
@@ -368,7 +368,7 @@ include("functions/functions.php");
 									?>
 
 										<div class="w3-col l3 s6">
-											<div class="w3-container">
+											<div class="w3-container-topleft">
 												<div class="w3-display-container">
 													<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:95%;height:320px">
 													<span class="w3-tag w3-display-topleft">New</span>
@@ -376,9 +376,9 @@ include("functions/functions.php");
 														<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
 													</div>
 												</div>
-											<p><?php echo
-											"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
-											<br><b>$<?php echo $pro_price; ?></b></p>
+												<p><?php echo
+												"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
+													<br><b>$<?php echo $pro_price; ?></b></p>
 											</div>
 
 
@@ -460,7 +460,7 @@ include("functions/functions.php");
 									}
 
 								else ?>
-										<div class="w3-row">
+										<div class="w3-container w3-grayscale">
 									<?php while($row_pro = mysqli_fetch_array($run_pro))
 									{
 
@@ -476,7 +476,7 @@ include("functions/functions.php");
 									?>
 
 										<div class="w3-col l3 s6">
-											<div class="w3-container">
+											<div class="w3-container-topleft">
 												<div class="w3-display-container">
 													<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:95%;height:320px">
 													<span class="w3-tag w3-display-topleft">New</span>
@@ -484,9 +484,9 @@ include("functions/functions.php");
 														<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
 													</div>
 												</div>
-											<p><?php echo
-											"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
-											<br><b>$<?php echo $pro_price; ?></b></p>
+												<p><?php echo
+												"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
+													<br><b>$<?php echo $pro_price; ?></b></p>
 											</div>
 
 

@@ -161,22 +161,22 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 						$pro_release = $row_pro['product_release'];
 						  ?>
 
-							<div class="w3-col l3 s6">
-								<div class="w3-container">
-									<div class="w3-display-container">
-										<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:95%;height:320px">
-										<span class="w3-tag w3-display-topleft">New</span>
-										<div class="w3-display-middle w3-display-hover">
-											<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+						<div class="w3-col l3 s6">
+									<div class="w3-container-topleft">
+										<div class="w3-display-container">
+											<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:95%;height:320px">
+											<span class="w3-tag w3-display-topleft">New</span>
+											<div class="w3-display-middle w3-display-hover">
+												<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+											</div>
 										</div>
+										<p><?php echo
+										"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
+											<br><b>$<?php echo $pro_price; ?></b></p>
 									</div>
-									<p><?php echo
-									"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
-										<br><b>$<?php echo $pro_price; ?></b></p>
+
+
 								</div>
-
-
-							</div>
 
 
 						  <?php
