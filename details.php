@@ -162,6 +162,48 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					$pro_bio = $row_pro['product_bio'];
 					$pro_gen = $row_pro['product_genre'];
 					$pro_release = $row_pro['product_release'];
+					$ratingaverage = $row_pro['ratings'];
+					
+					if($ratingaverage =='0'){
+						$ratingaverage = "No Rating";
+					}
+					
+					else if($ratingaverage >= '1' and $ratingaverage < '2'){
+						$ratingaverage = "<span class='star-icon full'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>";
+					}
+					else if($ratingaverage >= '2' and $ratingaverage < '3'){
+						$ratingaverage = "<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>";
+					}
+					else if($ratingaverage >= '3' and $ratingaverage < '4'){
+						$ratingaverage = "<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon'>☆</span>
+									<span class='star-icon'>☆</span>";
+					}
+					else if($ratingaverage >= '4' and $ratingaverage < '5'){
+						$ratingaverage = "<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon'>☆</span>";
+					}
+					else if($ratingaverage >= '5'){
+						$ratingaverage = "<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>
+									<span class='star-icon full'>☆</span>";
+					}
+					
 					?>
 					
 					<!-- Trigger the Modal -->
@@ -187,6 +229,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 						<div>
 						
 							<h3>$pro_title</h3>
+						    <h3>$ratingaverage</h3>
 							
 							<p><b> Price: $ $pro_price  </b></p>
 							
@@ -336,7 +379,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					$rate = mysqli_query($con, "select AVG(rating) from comments where book_id = '$product_id' and rating != '0'" );
 					$rateAvg = $rate ->fetch_array(MYSQLI_NUM);
 					
-					$run = mysqli_query($con, "UPDATE products SET rating = $rateAvg[0] WHERE product_id = $product_id" );
+					$run = mysqli_query($con, "UPDATE products SET ratings = $rateAvg[0] WHERE product_id = $product_id" );
 					$bookinfo = mysqli_num_rows($run);
 					
 					

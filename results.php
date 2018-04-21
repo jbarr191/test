@@ -395,7 +395,9 @@ include("functions/functions.php");
 						{
 							$search_id = $_GET['refine_search'];
 
-
+							if(!mysqli_num_rows($run_pro)){
+								echo "<h2 style='padding:20px;'>derp!</h2>";
+							}
 							if($_GET['refine_search'] == 1)
 							{
 								$search_cat = "product_title";
@@ -432,7 +434,7 @@ include("functions/functions.php");
 
 							$run_pro = mysqli_query($con, $get_pro);
 
-							$count_pro = mysqli_num_rows($run_pro);
+							$count_pro = @mysqli_num_rows($run_pro);
 
 							if($count_pro == 0){
 								echo "<h2 style='padding:20px;'>No search results found!</h2>";
