@@ -101,23 +101,25 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 				}
 		</style>
 	</head>
-<body 
-	<div class="w3-content" style="max-width:1200px">
+<body class="w3-content" style="max-width:1200px">
+
 	<!-- Sidebar/menu -->
-	<nav class="w3-container w3-bar-block w3-white w3-collapse w3-top" style="z-index: -3;width:250px" id="mySidebar">
-		<div class="w3-container w3-display-container>
+	<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="width:250px" id="mySidebar">
+		<div class="w3-container w3-display-container w3-padding-16">
 			<i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
 		 	<a href="index.php">
 		 		<img id="logo" src="images/logo.jpg" width="240" height="120" />
 			</a>
 	  	</div>
 	  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+
 	    <a href="bestsellers.php" class="w3-bar-item w3-button">Best-Sellers</a>
 	    <a href="topranked.php" class="w3-bar-item w3-button">Top-Rated</a>
+
 	    <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
 	      Genres <i class="fa fa-caret-down"></i>
 	    </a>
-	    <div id="demoAcc"  w3-hide w3-padding-large w3-medium">
+	    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
 
 		  <a href = 'genre.php?pro_genre=Sci-fi' class="w3-bar-item w3-button:42px">Sci-fi</a>
 		  <a href = 'genre.php?pro_genre=Fiction' class="w3-bar-item w3-button:42px">Fiction</a>
@@ -127,12 +129,10 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 
 	    </div>
-		
 	  </div>
 	  <a href="contact_us.php" class="w3-bar-item w3-button w3-padding">Contact Us</a>
-	
 	</nav>
-	</div>
+	
 	<!--Main Container starts here-->
 	<!-- Overlay effect when opening sidebar on small screens -->
 	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
