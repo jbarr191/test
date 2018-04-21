@@ -2,7 +2,7 @@
 <?php
 session_start();
 include("functions/functions.php");
-$con = mysqli_connect("localhost","root","wow.SQL","onlinebookstore");
+$con = mysqli_connect("localhost","root","","onlinebookstore");
 ?>
 
 <html>
