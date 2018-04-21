@@ -22,7 +22,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 		<style>
 			.w3-sidebar a {font-family: "Roboto", sans-serif}
 			body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
-			
+
 			body {
 				font-family: Arial;
 				font-size: 17px;
@@ -102,7 +102,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 			.btn:hover {
 				background-color: #45a049;
-			}		
+			}
 
 			.blue {
 				color: #2196F3;
@@ -127,7 +127,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 				}
 			}
 		</style>
-		
+
 	</head>
 <body class="w3-content" style="max-width:1200px">
 
@@ -147,25 +147,26 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left:250px">
-	
+
 	  <!-- Push down content on small screens -->
 	  <div class="w3-hide-large" style="margin-top:83px"></div>
 
 	  <!-- Top header -->
-	  
-	  <header class="w3-container w3-xlarge">
-	    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
-		 <p class="w3-left" style="padding:8px; font-size:20px">All Products</p>
-		 <?php
-		 if (isset($_SESSION['customer_email'])){
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
 
-		 } else {
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_login.php'>Log In</a></p>";
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_register.php'>Register</a></p>";
-		 }
-		 ?>
-		 <p class="w3-left" style="padding:8px; font-size:20px"><a href="cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
+	  <header class="w3-container w3-xlarge">
+		  <p class="w3-left" style="padding:8px; font-size:20px; padding-left:10px; font-family:Montserrat"><a href="index.php">Home</a></p>
+ 		 <?php
+ 		 if (isset($_SESSION['customer_email'])){
+
+ 			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px; font-family:Montserrat'><a href='customer/customer_account.php'>My Account</a></p>";
+ 			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px; font-family:Montserrat'><a href='customer_logout.php'>Log out</a></p>";
+ 		 } else {
+
+ 			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px; font-family:Montserrat'><a href='customer_login.php'>Log In</a></p>";
+ 			 echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px; font-family:Montserrat'><a href='customer_register.php'>Register</a></p>";
+ 		 }
+ 		 ?>
+ 		 <p class="w3-left" style="padding:8px; font-size:20px; padding-left:20px; font-family:Montserrat"><a href="cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
 	    <p class="w3-right">
 			 <div id="form" style="line-height:20px; padding-top:24px; float:right">
 	 			<form method="get" action="results.php" enctype="multipart/form-data">
@@ -182,73 +183,73 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	  <!-- Image header -->
 	  <div class="w3-display-container w3-container">
-	   
+
 	  </div>
 
 	  <div class="w3-row w3-grayscale">
-	  
+
 	  <div class="col-25">
-	  
+
 		<div class="container">
 			<h4>Cart Summary <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></h4>
 		<?php
 							$total = 0;
-							
+
 							global $con;
-	
+
 							$ip = getIp();
-	
+
 							// query the db to retrieve all items that belong to an ip
 							$sel_price = "select * from cart where ip_add='$ip'";
-	
+
 							// run the above query
 							$run_price = mysqli_query($con, $sel_price);
 
 							// while there's additional rows to fetch from the query results
 							while($p_price=mysqli_fetch_array($run_price)){
-		
+
 								// get the product id from the cart
 								$pro_id = $p_price['p_id'];
-								
-								
+
+
 								// get the quantity from the cart
 								$pro_qty = $p_price['qty'];
-		
+
 								// retrieve the product with the matching id from products table
 								$pro_price = "select * from products where product_id = '$pro_id'";
-		
+
 								// run the above query
 								$run_pro_price = mysqli_query($con, $pro_price);
-		
+
 								// while there's additional rows to fetch from the query results
 								while ($pp_price = mysqli_fetch_array($run_pro_price)){
-			
+
 									// store the details of each item
 									$product_price = array($pp_price['product_price'] * $pro_qty);
-									
+
 									$product_title = $pp_price['product_title'];
-									
+
 									$product_image = $pp_price['product_image'];
-									
+
 									$single_price = $pp_price['product_price'];
-									
+
 									$values = array_sum($product_price);
-									
+
 									$total += $values;
-							
+
 							?>
 									<p><a href="#" class="blue"><?php echo $product_title; ?></a> <span class="price"><?php echo "$" . $single_price  . " x " . $pro_qty; ?></span></p>
-						<?php   } 
-							}  // close brackets of above while loops 
-						?>  
+						<?php   }
+							}  // close brackets of above while loops
+						?>
 			<hr>
 			<p>Total <span class="price" style="color:black"><b><?php echo "$" . $total;?></b></span></p>
-		</div>	
+		</div>
 	  </div>
-	  
-	  
+
+
 	  <form action="payment.php" method="post" enctype="multipart/form-data">
-      
+
         <div class="row">
           <div class="col-50">
             <h3>Shipping Address</h3>
@@ -374,17 +375,17 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
               </div>
             </div>
           </div>
-          
+
         </div>
 
         <input type="submit" name="add_order" value="Place Order" class="btn">
       </form>
-	  
+
 	  <?php
 		  $ip = getIp();
-		  
+
 		  $id = getUserID();
-		  
+
 		  if (isset($_POST['add_order'])){
 
 			  //gets all the data the user input for address
@@ -394,7 +395,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 			  $state = $_POST['state'];
 
 			  $wrongZip = (boolean) false;
-			  
+
 			  //gets all the data the user input for payment
 			  $cardNum = $_POST['cardNum'];
 			  $holderName = $_POST['cardsName'];
@@ -412,7 +413,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 				  echo "<script>alert('Enter a valid zip code.')</script>";
 				  $wrongZip = true;
 			  }
-			  
+
 			  //checks if cardholder name is valid
 			  if(($holderName == '') || (preg_match("#[0-9]+#", $holderName)) )
 			  {
@@ -441,27 +442,27 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 				  // query the db to retrieve all items in cart
 				  $cart_items = "select * from cart where ip_add='$ip'";
-	
+
 				  // run the above query
 				  $run_cart_items = mysqli_query($con, $cart_items);
-				
+
 				  // traverse cart items
 				  while($walker=mysqli_fetch_array($run_cart_items))
 				  {
 					  // get the product id from the cart
 					  $pro_id = $walker['p_id'];
-					  
+
 					  // insert the product into the purchase table
 					  $insert_purchase = "insert into purchase (user_id, book_id) values ('$id','$pro_id')";
-					  
+
 					  $run_insert_purchase = mysqli_query($con, $insert_purchase);
 
 					  // delete the product from cart
 					  $empty_cart = "delete from cart where p_id='$pro_id' and ip_add='$ip'";
-					  
+
 					  $run_empty_cart = mysqli_query($con, $empty_cart);
 				  }
-				  
+
 				  echo "<script>alert('Purchase order has been placed')</script>";
 				  echo "<script>window.open('index.php','_self')</script>";
 			  }
@@ -469,7 +470,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  ?>
 
 	  </div>
-	  
+
 		<div class="w3-black w3-center w3-padding-24">&copy; 2018 by Software Engineering TEAM 1</div>
 	</div>
 
