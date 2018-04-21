@@ -333,17 +333,17 @@ include("functions/functions.php");
 								{
 									$search_cat = "product_release";
 								}
-
+								elseif($_GET['refine_search'] == 6)
+								{
+									$search_cat = "ratings";
+								}
 								if($_GET['booklimit'] == 20){
 									$limit = 20;
 								}
 
 								$pageoffset = ($_GET['page']-1) * $limit;
 
-								elseif($_GET['refine_search'] == 6)
-								{
-									$search_cat = "ratings";
-								}
+								
 								$pageoffset = ($_GET['page']-1) * 10;
 								$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
@@ -447,17 +447,18 @@ include("functions/functions.php");
 								{
 									$search_cat = "product_release";
 								}
-<<<<<<< HEAD
-
-								if($_GET['booklimit'] == 20){
-									$limit = 20;
-=======
 								elseif($_GET['refine_search'] == 6)
 								{
 									$search_cat = "ratings";
->>>>>>> 846f0e48c0bd3d39cffbc90b9c04e5457e3c4fe0
+
 								}
 
+
+								if($_GET['booklimit'] == 20){
+									$limit = 20;
+								}
+
+			
 								$pageoffset = ($_GET['page']-1) * $limit;
 								$get_pro = "select * from products where product_title like '%$search_query%'
 																		or product_author like '%$search_query%'
