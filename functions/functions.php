@@ -378,4 +378,10 @@ function getAuthor(){
 		";
 	}
 }
+
+function checkSearch($check){
+	if(!$check)
+		throw new Exception("<h2 style='padding:20px;'>Please select a sort method!</h2>");
+	return true;
+}
 ?>

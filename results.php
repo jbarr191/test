@@ -300,34 +300,35 @@ include("functions/functions.php");
 						else
 						{
 
+							try{
+								
+								if($_GET['refine_search'] == 1)
+								{
+									$search_cat = "product_title";
+								}
 
-							if($_GET['refine_search'] == 1)
-							{
-								$search_cat = "product_title";
-							}
+								elseif($_GET['refine_search'] == 2)
+								{
+									$search_cat = "product_author";
+								}
 
-							elseif($_GET['refine_search'] == 2)
-							{
-								$search_cat = "product_author";
-							}
+								elseif($_GET['refine_search'] == 3)
+								{
+									$search_cat = "product_price";
+								}
 
-							elseif($_GET['refine_search'] == 3)
-							{
-								$search_cat = "product_price";
-							}
+								elseif($_GET['refine_search'] == 4)
+								{
+									$$search_cat = "product_pub";
+								}
 
-							elseif($_GET['refine_search'] == 4)
-							{
-								$$search_cat = "product_pub";
-							}
+								elseif($_GET['refine_search'] == 5)
+								{
+									$search_cat = "product_release";
+								}
 
-							elseif($_GET['refine_search'] == 5)
-							{
-								$search_cat = "product_release";
-							}
-
-							$pageoffset = ($_GET['page']-1) * 10;
-							$get_pro = "select * from products where product_title like '%$search_query%'
+								$pageoffset = ($_GET['page']-1) * 10;
+								$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
 																	or product_price like '%$search_query%'
 																	or product_release like '%$search_query%'
@@ -335,48 +336,56 @@ include("functions/functions.php");
 																	order by $search_cat asc
 																	limit 10 offset $pageoffset";
 
-							$run_pro = mysqli_query($con, $get_pro);
+								checkSearch(mysqli_query($con, $get_pro));									
+																	
+								$run_pro = mysqli_query($con, $get_pro);
 
-							$count_pro = mysqli_num_rows($run_pro);
-
-							if($count_pro == 0){
-								echo "<h2 style='padding:20px;'>No search results found!</h2>";
+								checkSearch(mysqli_num_rows($run_pro));	
+								
+								$count_pro = mysqli_num_rows($run_pro);
+								
+								if($count_pro == 0){
+									echo "<h2 style='padding:20px;'>No search results found!</h2>";
 								}
 
-							else ?>
-									<div class="w3-row">
-								<?php while($row_pro = mysqli_fetch_array($run_pro))
-								{
+								else ?>
+										<div class="w3-row">
+									<?php while($row_pro = mysqli_fetch_array($run_pro))
+									{
 
-									$pro_id = $row_pro['product_id'];
-									$pro_title = $row_pro['product_title'];
-									$pro_image = $row_pro['product_image'];
-									$pro_author = $row_pro['product_author'];
-									$pro_desc= $row_pro['product_desc'];
-									$pro_price = $row_pro['product_price'];
-									$pro_bio = $row_pro['product_bio'];
-									$pro_gen = $row_pro['product_genre'];
-									$pro_release = $row_pro['product_release'];
-								?>
+										$pro_id = $row_pro['product_id'];
+										$pro_title = $row_pro['product_title'];
+										$pro_image = $row_pro['product_image'];
+										$pro_author = $row_pro['product_author'];
+										$pro_desc= $row_pro['product_desc'];
+										$pro_price = $row_pro['product_price'];
+										$pro_bio = $row_pro['product_bio'];
+										$pro_gen = $row_pro['product_genre'];
+										$pro_release = $row_pro['product_release'];
+									?>
 
-									<div class="w3-col l3 s6">
-										<div class="w3-container">
-											<div class="w3-display-container">
-												<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:95%;height:320px">
-												<span class="w3-tag w3-display-topleft">New</span>
-												<div class="w3-display-middle w3-display-hover">
-													<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+										<div class="w3-col l3 s6">
+											<div class="w3-container">
+												<div class="w3-display-container">
+													<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:95%;height:320px">
+													<span class="w3-tag w3-display-topleft">New</span>
+													<div class="w3-display-middle w3-display-hover">
+														<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+													</div>
 												</div>
+											<p><?php echo
+											"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
+											<br><b>$<?php echo $pro_price; ?></b></p>
 											</div>
-										<p><?php echo
-										"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
-										<br><b>$<?php echo $pro_price; ?></b></p>
-										</div>
 
 
-									</div> <?php
+										</div> <?php
 
-								}	?> </div> <?php
+									}	?> </div> <?php
+							}
+							catch(Exception $e) {
+								echo $e->getMessage();
+							}
 						}
 					}
 
@@ -393,91 +402,97 @@ include("functions/functions.php");
 
 						else
 						{
-							$search_id = $_GET['refine_search'];
+							try{
+							
+								$search_id = $_GET['refine_search'];
 
-							if(!mysqli_num_rows($run_pro)){
-								echo "<h2 style='padding:20px;'>derp!</h2>";
-							}
-							if($_GET['refine_search'] == 1)
-							{
-								$search_cat = "product_title";
-							}
-
-							elseif($_GET['refine_search'] == 2)
-							{
-								$search_cat = "product_author";
-							}
-
-							elseif($_GET['refine_search'] == 3)
-							{
-								$search_cat = "product_price";
-							}
-
-							elseif($_GET['refine_search'] == 4)
-							{
-								$search_cat = "product_pub";
-							}
-
-							elseif($_GET['refine_search'] == 5)
-							{
-								$search_cat = "product_release";
-							}
-
-							$pageoffset = ($_GET['page']-1) * 10;
-							$get_pro = "select * from products where product_title like '%$search_query%'
-																	or product_author like '%$search_query%'
-																	or product_price like '%$search_query%'
-																	or product_release like '%$search_query%'
-																	or product_pub like '%$search_query%'
-																	order by $search_cat desc
-																	limit 10 offset $pageoffset";
-
-							$run_pro = mysqli_query($con, $get_pro);
-
-							$count_pro = @mysqli_num_rows($run_pro);
-
-							if($count_pro == 0){
-								echo "<h2 style='padding:20px;'>No search results found!</h2>";
+								if($_GET['refine_search'] == 1)
+								{
+									$search_cat = "product_title";
 								}
 
-							else ?>
-									<div class="w3-row">
-								<?php while($row_pro = mysqli_fetch_array($run_pro))
+								elseif($_GET['refine_search'] == 2)
 								{
+									$search_cat = "product_author";
+								}
 
-									$pro_id = $row_pro['product_id'];
-									$pro_title = $row_pro['product_title'];
-									$pro_image = $row_pro['product_image'];
-									$pro_author = $row_pro['product_author'];
-									$pro_desc= $row_pro['product_desc'];
-									$pro_price = $row_pro['product_price'];
-									$pro_bio = $row_pro['product_bio'];
-									$pro_gen = $row_pro['product_genre'];
-									$pro_release = $row_pro['product_release'];
-								?>
+								elseif($_GET['refine_search'] == 3)
+								{
+									$search_cat = "product_price";
+								}
 
-									<div class="w3-col l3 s6">
-										<div class="w3-container">
-											<div class="w3-display-container">
-												<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:95%;height:320px">
-												<span class="w3-tag w3-display-topleft">New</span>
-												<div class="w3-display-middle w3-display-hover">
-													<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+								elseif($_GET['refine_search'] == 4)
+								{
+									$search_cat = "product_pub";
+								}
+
+								elseif($_GET['refine_search'] == 5)
+								{
+									$search_cat = "product_release";
+								}
+
+								$pageoffset = ($_GET['page']-1) * 10;
+								$get_pro = "select * from products where product_title like '%$search_query%'
+																		or product_author like '%$search_query%'
+																		or product_price like '%$search_query%'
+																		or product_release like '%$search_query%'
+																		or product_pub like '%$search_query%'
+																		order by $search_cat desc
+																		limit 10 offset $pageoffset";
+
+								checkSearch(mysqli_query($con, $get_pro));
+								
+								$run_pro = mysqli_query($con, $get_pro);
+
+								checkSearch(mysqli_num_rows($run_pro));
+								
+								$count_pro = mysqli_num_rows($run_pro);
+
+								if($count_pro == 0){
+									echo "<h2 style='padding:20px;'>No search results found!</h2>";
+									}
+
+								else ?>
+										<div class="w3-row">
+									<?php while($row_pro = mysqli_fetch_array($run_pro))
+									{
+
+										$pro_id = $row_pro['product_id'];
+										$pro_title = $row_pro['product_title'];
+										$pro_image = $row_pro['product_image'];
+										$pro_author = $row_pro['product_author'];
+										$pro_desc= $row_pro['product_desc'];
+										$pro_price = $row_pro['product_price'];
+										$pro_bio = $row_pro['product_bio'];
+										$pro_gen = $row_pro['product_genre'];
+										$pro_release = $row_pro['product_release'];
+									?>
+
+										<div class="w3-col l3 s6">
+											<div class="w3-container">
+												<div class="w3-display-container">
+													<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:95%;height:320px">
+													<span class="w3-tag w3-display-topleft">New</span>
+													<div class="w3-display-middle w3-display-hover">
+														<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+													</div>
 												</div>
+											<p><?php echo
+											"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
+											<br><b>$<?php echo $pro_price; ?></b></p>
 											</div>
-										<p><?php echo
-										"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
-										<br><b>$<?php echo $pro_price; ?></b></p>
-										</div>
 
 
-									</div> <?php
+										</div> <?php
 
-								}	?> </div> <?php
+									}	?> </div> <?php
+							}
+							catch(Exception $e) {
+									echo $e->getMessage();
+								}
 						}
+
 					}
-
-
 					?>
 
 
