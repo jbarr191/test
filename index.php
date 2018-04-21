@@ -91,16 +91,16 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	  <!-- Image header -->
 	  <div class="w3-display-container w3-container">
-	    <img src="images/harrypottercover.jpg" alt="Jeans" style="width:100%">
+	    <img src="images/harrypottercover.jpg" alt="Books" style="width:100%">
 	    <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
-	      <h1 class="w3-jumbo w3-hide-small">New arrivals</h1>
-	      <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1>
-	      <h1 class="w3-hide-small">COLLECTION 2016 (CHANGE LATER)</h1>
-	      <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
+	      <h1 class="w3-jumbo w3-hide-small">Welcome</h1>
+	      <h1 class="w3-hide-large w3-hide-medium">Welcome</h1>
+	      <h1 class="w3-hide-small">CHECK OUT OUR STARTING SELECTION</h1>
+	      <p><a href="#books" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
 	    </div>
 	  </div>
 
-	  <div class="w3-container w3-text-grey" id="jeans">
+	  <div class="w3-container w3-text-grey" id="books">
 	    <p>8 items</p>
 	  </div>
 
@@ -243,7 +243,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 		        x.className = x.className.replace(" w3-show", "");
 		    }
 		}
-		// Click on the "Jeans" link on page load to open the accordion for demo purposes
+		// Click on the "books" link on page load to open the accordion for demo purposes
 		document.getElementById("myBtn").click();
 		// Script to open and close sidebar
 		function w3_close() {
