@@ -450,17 +450,20 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 				  // traverse cart items
 				  while($walker=mysqli_fetch_array($run_cart_items))
 				  {
-					  // get the product id from the cart
+					  // get the product id & quantity from the cart
 					  $pro_id = $walker['p_id'];
+					  $pro_quantity = $walker['qty'];
 
 					  // insert the product into the purchase table
 					  $insert_purchase = "insert into purchase (user_id, book_id) values ('$id','$pro_id')";
-
 					  $run_insert_purchase = mysqli_query($con, $insert_purchase);
-
+					  
+					  // update purchases count for this item in products table
+					  $update_products = "update products set purchases=purchases+'$pro_quantity' where product_id='$pro_id'";
+					  $run_update_products = mysqli_query($con, $update_products);
+					  
 					  // delete the product from cart
 					  $empty_cart = "delete from cart where p_id='$pro_id' and ip_add='$ip'";
-
 					  $run_empty_cart = mysqli_query($con, $empty_cart);
 				  }
 
