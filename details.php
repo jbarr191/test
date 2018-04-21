@@ -65,13 +65,13 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 				}
 
 				/* Add Animation - Zoom in the Modal */
-				.modal-content, #caption { 
+				.modal-content, #caption {
 					animation-name: zoom;
 					animation-duration: 0.6s;
 				}
 
 				@keyframes zoom {
-					from {transform:scale(0)} 
+					from {transform:scale(0)}
 					to {transform:scale(1)}
 				}
 
@@ -102,6 +102,33 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 		</style>
 	</head>
 <body class="w3-content" style="max-width:1200px">
+	<!-- Sidebar/menu -->
+	<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+		<div class="w3-container w3-display-container w3-padding-16">
+			<i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+		 	<a href="index.php">
+		 		<img id="logo" src="images/logo.jpg" width="240" height="120" />
+			</a>
+	  	</div>
+	  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+	    <a href="#" class="w3-bar-item w3-button">Best-Sellers</a>
+	    <a href="#" class="w3-bar-item w3-button">Top-Rated</a>
+	    <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
+	      Genres <i class="fa fa-caret-down"></i>
+	    </a>
+	    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+
+		  <a href = 'genre.php?pro_genre=Sci-fi' class="w3-bar-item w3-button:42px">Sci-fi</a>
+		  <a href = 'genre.php?pro_genre=Fiction' class="w3-bar-item w3-button:42px">Fiction</a>
+		  <a href = 'genre.php?pro_genre=Fantasy' class="w3-bar-item w3-button:42px">Fantasy</a>
+		  <a href = 'genre.php?pro_genre=Drama' class="w3-bar-item w3-button:42px">Drama</a>
+		  <a href = 'genre.php?pro_genre=Poetry' class="w3-bar-item w3-button:42px">Poetry</a>
+
+
+	    </div>
+	  </div>
+	  <a href="contact_us.php" class="w3-bar-item w3-button w3-padding">Contact Us</a>
+	</nav>
 
 	<!--Main Container starts here-->
 	<!-- Overlay effect when opening sidebar on small screens -->
@@ -115,17 +142,19 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	  <!-- Top header -->
 	  <header class="w3-container w3-xlarge">
-	    <p class="w3-left" style="padding:8px; font-size:20px"></p>
+		 <p class="w3-left" style="padding:8px; font-size:20px; padding-left:10px"><a href="index.php">Home</a></p>
+		<?php
+		if (isset($_SESSION['customer_email'])){
 
-		 <?php
-		 if (isset($_SESSION['customer_email'])){
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
-		 } else {
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_login.php'>Log In</a></p>";
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_register.php'>Register</a></p>";
-		 }
-		 ?>
-		 <p class="w3-left" style="padding:8px; font-size:20px"><a href="cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
+			echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer/customer_account.php'>My Account</a></p>";
+			echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_logout.php'>Log out</a></p>";
+		} else {
+
+			echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_login.php'>Log In</a></p>";
+			echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_register.php'>Register</a></p>";
+		}
+		?>
+		<p class="w3-left" style="padding:8px; font-size:20px; padding-left:20px"><a href="cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
 	    <p class="w3-right">
 			 <div id="form" style="line-height:20px; padding-top:24px; float:right">
 	 			<form method="get" action="results.php" enctype="multipart/form-data">
@@ -142,17 +171,17 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	  <!-- Image header -->
 	  <div class="w3-display-container w3-container" style = "text-align:center;">
-	    		
-					<?php 
+
+					<?php
 					if(isset($_GET['pro_id'])){
 					$product_id = $_GET['pro_id'];
-					
+
 					$get_pro = "select * from products where product_id = '$product_id'";
-					
+
 					$run_pro = mysqli_query($con, $get_pro);
-					
+
 					$row_pro=mysqli_fetch_array($run_pro);
-					
+
 					$pro_id = $row_pro['product_id'];
 					$pro_title = $row_pro['product_title'];
 					$pro_image = $row_pro['product_image'];
@@ -163,11 +192,11 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					$pro_gen = $row_pro['product_genre'];
 					$pro_release = $row_pro['product_release'];
 					$ratingaverage = $row_pro['ratings'];
-					
+
 					if($ratingaverage =='0'){
 						$ratingaverage = "No Rating";
 					}
-					
+
 					else if($ratingaverage >= '1' and $ratingaverage < '2'){
 						$ratingaverage = "<span class='star-icon full'>☆</span>
 									<span class='star-icon'>☆</span>
@@ -203,11 +232,11 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 									<span class='star-icon full'>☆</span>
 									<span class='star-icon full'>☆</span>";
 					}
-					
+
 					?>
-					
+
 					<!-- Trigger the Modal -->
-				
+
 					<img id="myImg" src="admin_area/product_images/<?php echo $pro_image; ?>" alt="<?php echo $pro_title; ?>" width="187" height="250">
 
 						<!-- The Modal -->
@@ -221,39 +250,39 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 					  <!-- Modal Caption (Image Text) -->
 					  <div id="caption"></div>
-						 
+
 					</div>
 					<?php
 					echo "
-					
+
 						<div>
-						
+
 							<h3>$pro_title</h3>
 						    <h3>$ratingaverage</h3>
-							
+
 							<p><b> Price: $ $pro_price  </b></p>
-							
+
 							<b> Author: </b><a href = 'authors.php?pro_author=$pro_author' style = 'float:center;width:42px;height:42px'>&nbsp$pro_author&nbsp</a>
-							
+
 							<br><b>Book Description : </b>
 							<p align='center'>$pro_desc</p>
 							<br><b>Author Biography : </b>
 							<p align='center'>$pro_bio</p>
 							<br><b>Genre : </b>
 							<p align='center'>$pro_gen</p>
-						
+
 							<br>
-					
-							
+
+
 							<a href='index.php?add_cart=$pro_id'><button style='float:right'>Add to Cart</button></a>
-							
-							
-							<a href = 'index.php? style = 'float:center;height:42px'>&nbsp Go Back &nbsp</a>
-						
-	
-						</div>			
+
+
+							<div style='padding-left:100px'><a href = 'index.php? style = 'float:center;height:42px;'>&nbspGo Back&nbsp</a></div>
+
+
+						</div>
 					";
-					
+
 					}
 					?>
 	  </div>
@@ -263,29 +292,29 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  <?php cart(); ?>
 
 	  <div class="w3-row w3-grayscale">
-	 
-		
+
+
 		<h3 style="text-align:left;"><u>COMMENTS</u></h3>
 				<ul style ="text-align:center;">
-				
-				
+
+
 				<?php
-					
+
 					if(isset($_GET['pro_id'])){
 					$product_id = $_GET['pro_id'];
 					getComments($product_id);
 					}
-					
-					
+
+
 				?>
 				</ul>
-					
-		
+
+
 	  </div>
 			<div>
 
 			<?php
-					
+
 					if(isset($_GET['pro_id'])){
 					$product_id = $_GET['pro_id'];
 					echo "<form action= 'details.php?pro_id=$product_id' method = 'post' enctype = 'multipart/form-data'>
@@ -293,67 +322,67 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					}
 			?>
 					<table  bgcolor="white">
-			<!-- insert into table  -->			
+			<!-- insert into table  -->
 			<tr>
 				<!-- column 1 -->
 				<td><b>INSERT COMMENT</b></td>
 				<!-- column 2 -->
 				<td><input type="text" name="comment_text" size="20" maxlength="200"/></td>
 			</tr>
-		
-		
+
+
 			<tr>
 				<td align = "right"><b>USER</b></td>
 				<td>
 					<select name = "anonymous">
-						
+
 						<option>Select</option>
-					
+
 						<option value='0'>Use Username</option>
-						
+
 						<option value = '1'>Post Anonymous</option>
-												
-				
+
+
 					</select>
-				
-				
+
+
 				</td>
 			</tr>
 				<tr>
 				<td align = "right"><b>RATING</b></td>
 				<td>
 					<select name = "rating">
-						
+
 						<option>Select</option>
-					
+
 						<option value='1'>1</option>
-						
+
 						<option value = '2'>2</option>
-						
+
 						<option value = '3'>3</option>
-						
+
 						<option value = '4'>4</option>
-						
+
 						<option value = '5'>5</option>
-												
-				
+
+
 					</select>
-				
-				
+
+
 				</td>
 			</tr>
-		
+
 			<!--insert button -->
 			<tr align="right">
 				<td colspan="7"><input type="submit" name="comment_post" value= "Insert Now"/></td>
 			</tr>
 			</table>
-			
+
 <?php
-					
+
 							//if something is submitted insert using post(), then execute
-					
-			
+
+
 					if(isset($_POST['comment_post']) && isset($_GET['pro_id'])&& isset($_SESSION['customer_email'])){
 					//get text data from fields
 					$rating= $_POST['rating'];
@@ -361,12 +390,12 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					$comment_text= $_POST['comment_text'];
 					$product_id = $_GET['pro_id'];
 					$user_id = getUserID();
-				
+
 					$run = mysqli_query($con, "select * from purchase where user_id ='$user_id' and book_id = '$product_id'" );
 					$purchased = mysqli_num_rows($run);
 					if($purchased != 0) {
-					
-					$insert_comments = "insert into comments(book_id, anonymous, comment_text,rating, user_id) 
+
+					$insert_comments = "insert into comments(book_id, anonymous, comment_text,rating, user_id)
 											values('$product_id','$anonymous','$comment_text','$rating',$user_id)";
 					$insert_com = mysqli_query($con, $insert_comments);
 					if($insert_com)
@@ -374,29 +403,29 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					echo "<script>alert('Comment has been inserted!')</script>";
 					//refresh page to avoid duplicate data
 					echo "<script>window.open('details.php?pro_id=$product_id','_self')</script>";
-					
+
 					//update rating
 					$rate = mysqli_query($con, "select AVG(rating) from comments where book_id = '$product_id' and rating != '0'" );
 					$rateAvg = $rate ->fetch_array(MYSQLI_NUM);
-					
+
 					$run = mysqli_query($con, "UPDATE products SET ratings = $rateAvg[0] WHERE product_id = $product_id" );
 					$bookinfo = mysqli_num_rows($run);
-					
-					
-					
+
+
+
 					}
 					}
 					else echo "<script>alert('You cannot comment on books you have not purchased')</script>";
-					
-					
+
+
 					}
 					else if(!(isset($_SESSION['customer_email']))&& isset($_POST['comment_post'])){
 						echo "<script>alert('Please log in to comment')</script>";
 					}
-					
-					
+
+
 ?>
-		
+
 			</div>
 
 		<div class="w3-black w3-center w3-padding-24">&copy; 2018 by Software Engineering TEAM 1</div>
@@ -423,7 +452,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 			var span = document.getElementsByClassName("close")[0];
 
 			// When the user clicks on <span> (x), close the modal
-			span.onclick = function() { 
+			span.onclick = function() {
 				modal.style.display = "none";
 			}
 
