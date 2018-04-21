@@ -32,19 +32,21 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  	</div>
 	  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
 	    <a href="#" class="w3-bar-item w3-button">Best-Sellers</a>
-	    <a href="topranked.php" class="w3-bar-item w3-button">Top-Rated</a>
+	    <a href="#" class="w3-bar-item w3-button">Top-Rated</a>
 	    <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
 	      Genres <i class="fa fa-caret-down"></i>
 	    </a>
 	    <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-	      <a href = 'genre.php?pro_genre=1' class="w3-bar-item w3-button":42px'>Sci-fi</a>
-		  <a href = 'genre.php?pro_genre=2' class="w3-bar-item w3-button":42px'>Fiction</a>
-		  <a href = 'genre.php?pro_genre=3' class="w3-bar-item w3-button":42px'>Fantasy</a>
-		  <a href = 'genre.php?pro_genre=4' class="w3-bar-item w3-button":42px'>Drama</a>
-		  <a href = 'genre.php?pro_genre=5' class="w3-bar-item w3-button":42px'>Poetry</a>
+
+		  <a href = 'genre.php?pro_genre=Sci-fi' class="w3-bar-item w3-button:42px">Sci-fi</a>
+		  <a href = 'genre.php?pro_genre=Fiction' class="w3-bar-item w3-button:42px">Fiction</a>
+		  <a href = 'genre.php?pro_genre=Fantasy' class="w3-bar-item w3-button:42px">Fantasy</a>
+		  <a href = 'genre.php?pro_genre=Drama' class="w3-bar-item w3-button:42px">Drama</a>
+		  <a href = 'genre.php?pro_genre=Poetry' class="w3-bar-item w3-button:42px">Poetry</a>
+
 	    </div>
 	  </div>
-	  <a href="#footer" class="w3-bar-item w3-button w3-padding">Contact Us</a>
+	  <a href="contact_us.php" class="w3-bar-item w3-button w3-padding">Contact Us</a>
 	</nav>
 
 	<!--Main Container starts here-->
@@ -59,29 +61,28 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	  <!-- Top header -->
 	  <header class="w3-container w3-xlarge">
-	    <p class="w3-left" style="padding:8px; font-size:20px"><a href="index.php">Home</a></p>
-	
-		 <?php
-		 if (isset($_SESSION['customer_email'])){
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer/customer_account.php'>My Account</a></p>";
-		 } else {
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_login.php'>Log In</a></p>";
-			 echo "<p class='w3-left' style='padding:8px; font-size:20px'><a href='customer_register.php'>Register</a></p>";
-		 }
-		 ?>
-		 <p class="w3-left" style="padding:8px; font-size:20px"><a href="cart.php">Shopping Cart</a></p>
+		  <p class="w3-left" style="padding:8px; font-size:20px; padding-left:10px"><a href="index.php">Home</a></p>
+ 		<?php
+ 		if (isset($_SESSION['customer_email'])){
+ 
+ 			echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer/customer_account.php'>My Account</a></p>";
+ 			echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_logout.php'>Log out</a></p>";
+ 		} else {
+
+ 			echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_login.php'>Log In</a></p>";
+ 			echo "<p class='w3-left' style='padding:8px; font-size:20px; padding-left:20px'><a href='customer_register.php'>Register</a></p>";
+ 		}
+ 		?>
+ 		<p class="w3-left" style="padding:8px; font-size:20px; padding-left:20px"><a href="cart.php">Shopping Cart </a><span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b><?php total_items(); ?></b></span></p>
 	    <p class="w3-right">
 			 <div id="form" style="line-height:20px; padding-top:24px; float:right">
 	 			<form method="get" action="results.php" enctype="multipart/form-data">
 	 				<input type="text" name="user_query" placeholder="Search for stuff" style="width:200" />
 	 				<input type="submit" name="search" value="Search" />
-						<input type = "hidden" name="page" value = "1" />
+					<input type = "hidden" name="page" value = "1" />
 					<input type = "hidden" name="refine_search" value = "0" />
 					<input type = "hidden" name="order" value = "0" />
-					
-					
 	 			</form>
-				
 	 		</div>
 	      <!--<i class="fa fa-search"></i>-->
 	    </p>
@@ -89,39 +90,41 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 
 	  <!-- Image header -->
 	  <div class="w3-display-container w3-container">
-	    <img src="images/harrypottercover.jpg" alt="Jeans" style="width:100%">
+	    <img src="images/harrypottercover.jpg" alt="Books" style="width:100%">
 	    <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
-	      <h1 class="w3-jumbo w3-hide-small">New arrivals</h1>
-	      <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1>
-	      <h1 class="w3-hide-small">COLLECTION 2016 (CHANGE LATER)</h1>
-	      <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
+			 <h1 class="w3-jumbo w3-hide-small">Welcome</h1>
+ 	      <h1 class="w3-hide-large w3-hide-medium">Welcome</h1>
+ 	      <h1 class="w3-hide-small">CHECK OUT OUR STARTING SELECTION</h1>
+	      <p><a href="index.php#books" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
 	    </div>
 	  </div>
 
-	  <div class="w3-container w3-text-grey" id="jeans">
-	   
-		
-	  </div>
 
 	  <!-- Product grid -->
-	
+
 
 	  <div class="w3-row w3-grayscale">
-	  
-	 	<?php 
-					if(isset($_GET['pro_author']))
-					{
-						
-					$product_author = $_GET['pro_author'];
-					
-					$get_pro = "select * from products where product_author = '$product_author'";
-					 
+
+	 	<?php
+				
+					$get_pro = "select * from products where ratings >= '4.5' 
+								order by ratings desc";
+
 					$run_pro = mysqli_query($con, $get_pro);
-					echo "<p style='font-size:30px'><b>Books by: $product_author</b></p>";
+						
+
+				
+
+						
+
+						
+					?>
+					 <p style="font-size:30px"><b>5 Star Books</b></p>
+					<?php
 						while($row_pro=mysqli_fetch_array($run_pro))
 						{
-						
-						
+
+
 						$pro_id = $row_pro['product_id'];
 						$pro_title = $row_pro['product_title'];
 						$pro_image = $row_pro['product_image'];
@@ -132,27 +135,28 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 						$pro_gen = $row_pro['product_genre'];
 						$pro_release = $row_pro['product_release'];
 						  ?>
+
 							<div class="w3-col l3 s6">
 								<div class="w3-container">
 									<div class="w3-display-container">
-										<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:100%">
+										<img src="admin_area/product_images/<?php echo $pro_image; ?>" style="width:95%;height:320px">
 										<span class="w3-tag w3-display-topleft">New</span>
 										<div class="w3-display-middle w3-display-hover">
 											<a href="index.php?add_cart=<?php echo $pro_id; ?>"><button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
 										</div>
 									</div>
-									<p><?php echo 
+									<p><?php echo
 									"<a href = 'details.php?pro_id=$pro_id' style = 'float:center;width:42px;height:42px'>&nbsp $pro_title &nbsp</a>"; ?>
 										<br><b>$<?php echo $pro_price; ?></b></p>
 								</div>
-										 
+
 
 							</div>
-										 
+
 
 						  <?php
 						}
-					 }
+					 
 	  ?>
 	  </div>
 <!--
@@ -197,9 +201,12 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 <<<<<<< HEAD
 					<?php getPro(); ?>
 =======
-					<?php 
+
+					<?php
 					  $get_pro = "select * from products";
+
 					  $run_pro = mysqli_query($con, $get_pro);
+
 					  while($row_pro=mysqli_fetch_array($run_pro)){
 						  $pro_id = $row_pro['product_id'];
 						  $pro_title = $row_pro['product_title'];
@@ -211,7 +218,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 						  $pro_gen = $row_pro['product_genre'];
 						  $pro_release = $row_pro['product_release'];
 				    ?>
-					
+
 					  <div class="w3-col l3 s6">
 						 <div class="w3-container">
 							<div class="w3-display-container">
@@ -227,6 +234,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	<?php
 		}
 					?>
+
 >>>>>>> 7d832bc1075f9ba028e323dc7bf435ea2b250dc0
 				</div>
 			</div>

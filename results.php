@@ -33,7 +33,7 @@ include("functions/functions.php");
 
 	  <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
 	    <a href="#" class="w3-bar-item w3-button">Best-Sellers</a>
-	    <a href="#" class="w3-bar-item w3-button">Top-Rated</a>
+	    <a href="topranked.php" class="w3-bar-item w3-button">Top-Rated</a>
 	    <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
 	      Genres <i class="fa fa-caret-down"></i>
 	    </a>
@@ -326,7 +326,10 @@ include("functions/functions.php");
 								{
 									$search_cat = "product_release";
 								}
-
+								elseif($_GET['refine_search'] == 6)
+								{
+									$search_cat = "ratings";
+								}
 								$pageoffset = ($_GET['page']-1) * 10;
 								$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
@@ -429,6 +432,10 @@ include("functions/functions.php");
 								elseif($_GET['refine_search'] == 5)
 								{
 									$search_cat = "product_release";
+								}
+								elseif($_GET['refine_search'] == 6)
+								{
+									$search_cat = "ratings";
 								}
 
 								$pageoffset = ($_GET['page']-1) * 10;
