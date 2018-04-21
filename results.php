@@ -419,7 +419,7 @@ include("functions/functions.php");
 							
 							elseif($_GET['refine_search'] == 5)
 							{
-								$search_cat = "product_release desc";
+								$search_cat = "product_release";
 							}
 							
 							$pageoffset = ($_GET['page']-1) * 10;
