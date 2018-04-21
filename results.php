@@ -326,6 +326,11 @@ include("functions/functions.php");
 							{
 								$search_cat = "product_release";
 							}
+							elseif($_GET['refine_search'] == 6)
+							{
+								$search_cat = "ratings";
+							}
+							
 							
 							$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
@@ -418,6 +423,10 @@ include("functions/functions.php");
 							elseif($_GET['refine_search'] == 5)
 							{
 								$search_cat = "product_release desc";
+							}
+							elseif($_GET['refine_search'] == 6)
+							{
+								$search_cat = "ratings";
 							}
 							
 							$get_pro = "select * from products where product_title like '%$search_query%'
