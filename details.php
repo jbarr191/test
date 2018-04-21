@@ -162,42 +162,42 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 					$pro_bio = $row_pro['product_bio'];
 					$pro_gen = $row_pro['product_genre'];
 					$pro_release = $row_pro['product_release'];
-					$rating = $row_pro['ratings'];
+					$ratingaverage = $row_pro['ratings'];
 					
-					if($rating =='0'){
-						$rating = "No Rating";
+					if($ratingaverage =='0'){
+						$ratingaverage = "No Rating";
 					}
 					
-					if($rating >= '1' and $rating < "2"){
-						$rating = "<span class='star-icon full'>☆</span>
+					else if($ratingaverage >= '1' and $ratingaverage < '2'){
+						$ratingaverage = "<span class='star-icon full'>☆</span>
 									<span class='star-icon'>☆</span>
 									<span class='star-icon'>☆</span>
 									<span class='star-icon'>☆</span>
 									<span class='star-icon'>☆</span>";
 					}
-					else if($rating >= '2' and $rating < "3"){
-						$rating = "<span class='star-icon full'>☆</span>
+					else if($ratingaverage >= '2' and $ratingaverage < '3'){
+						$ratingaverage = "<span class='star-icon full'>☆</span>
 									<span class='star-icon full'>☆</span>
 									<span class='star-icon'>☆</span>
 									<span class='star-icon'>☆</span>
 									<span class='star-icon'>☆</span>";
 					}
-					else if($rating >= '3' and $rating < "4"){
-						$rating = "<span class='star-icon full'>☆</span>
+					else if($ratingaverage >= '3' and $ratingaverage < '4'){
+						$ratingaverage = "<span class='star-icon full'>☆</span>
 									<span class='star-icon full'>☆</span>
 									<span class='star-icon full'>☆</span>
 									<span class='star-icon'>☆</span>
 									<span class='star-icon'>☆</span>";
 					}
-					else if($rating >= '4' and $rating < "5"){
-						$rating = "<span class='star-icon full'>☆</span>
+					else if($ratingaverage >= '4' and $ratingaverage < '5'){
+						$ratingaverage = "<span class='star-icon full'>☆</span>
 									<span class='star-icon full'>☆</span>
 									<span class='star-icon full'>☆</span>
 									<span class='star-icon full'>☆</span>
 									<span class='star-icon'>☆</span>";
 					}
-					else if($rating >= '5'){
-						$rating = "<span class='star-icon full'>☆</span>
+					else if($ratingaverage >= '5'){
+						$ratingaverage = "<span class='star-icon full'>☆</span>
 									<span class='star-icon full'>☆</span>
 									<span class='star-icon full'>☆</span>
 									<span class='star-icon full'>☆</span>
@@ -229,7 +229,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 						<div>
 						
 							<h3>$pro_title</h3>
-						    <h3>$rating</h3>
+						    <h3>$ratingaverage</h3>
 							
 							<p><b> Price: $ $pro_price  </b></p>
 							
