@@ -109,6 +109,7 @@ include("includes/db.php");
 							<input type = "hidden" name="page" value = "1" />
 					<input type = "hidden" name="refine_search" value = "0" />
 					<input type = "hidden" name="order" value = "0" />
+					<input type = "hidden" name="booklimit" value = "10" />
 
 		 			</form>
 		 		</div>
