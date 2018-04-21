@@ -104,7 +104,7 @@ $con = mysqli_connect("localhost","root","","onlinebookstore");
 	  </div>
 
 	  <div class="w3-container w3-text-grey" id="books">
-	    <p>8 items</p>
+	    <p>15 items</p>
 	  </div>
 
 	  <!-- Product grid -->

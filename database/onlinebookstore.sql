@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2018 at 02:20 AM
+-- Generation Time: Apr 21, 2018 at 09:19 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -44,7 +44,8 @@ CREATE TABLE `accounts` (
 
 INSERT INTO `accounts` (`email`, `id_number`, `first_name`, `last_name`, `password`, `user_image`, `username`) VALUES
 ('a@mail.com', 0, 'Jane', 'Doe', '1234', 'IMG_0014.JPG', 'a_username'),
-('asd@gmail.com', 88832, 'Liz', 'asd', 'Idkbro123', 'totoro.png', 'Liz');
+('asd@gmail.com', 88832, 'Liz', 'asd', 'Idkbro123', 'totoro.png', 'Liz'),
+('some@test.com', 614921, 'some', 'test', 'Test9999', '', 'testing');
 
 -- --------------------------------------------------------
 
@@ -53,12 +54,20 @@ INSERT INTO `accounts` (`email`, `id_number`, `first_name`, `last_name`, `passwo
 --
 
 CREATE TABLE `addresses` (
-  `streetAddr` int(150) NOT NULL,
+  `streetAddr` varchar(150) NOT NULL,
   `zip` int(6) NOT NULL,
   `city` varchar(30) NOT NULL,
   `state` varchar(16) NOT NULL,
   `userId` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `addresses`
+--
+
+INSERT INTO `addresses` (`streetAddr`, `zip`, `city`, `state`, `userId`) VALUES
+('13536', 33176, 'Miami', 'FL', 614921),
+('13536 SW 114 pl', 33176, 'Miami', 'FL', 614921);
 
 -- --------------------------------------------------------
 
@@ -117,6 +126,13 @@ CREATE TABLE `cards` (
   `userId` int(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `cards`
+--
+
+INSERT INTO `cards` (`cardNum`, `expMo`, `expYr`, `cardHolderName`, `userId`) VALUES
+('4444222266668888', 10, 2018, 'Name mcName', 614921);
+
 -- --------------------------------------------------------
 
 --
@@ -128,15 +144,6 @@ CREATE TABLE `cart` (
   `ip_add` varchar(255) NOT NULL,
   `qty` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`p_id`, `ip_add`, `qty`) VALUES
-(5, '::1', 1),
-(6, '::1', 1),
-(9, '::1', 1);
 
 -- --------------------------------------------------------
 
@@ -159,7 +166,8 @@ CREATE TABLE `comments` (
 
 INSERT INTO `comments` (`book_id`, `user_id`, `comment_text`, `rating`, `Anonymous`, `com_id`) VALUES
 (5, 0, 'This book wasnt that great', 0, 0, 17),
-(5, 0, 'Awesome book', 2, 0, 18);
+(5, 0, 'Awesome book', 2, 0, 18),
+(11, 614921, 'Best book ever', 5, 0, 19);
 
 -- --------------------------------------------------------
 
@@ -207,11 +215,11 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`product_id`, `product_title`, `product_image`, `product_author`, `product_desc`, `product_price`, `product_bio`, `product_genre`, `product_pub`, `product_release`, `ratings`, `purchases`) VALUES
 (5, 'To Kill a Mockingbird', 'mockingbird.jpg', 'Harper Lee', 'The unforgettable novel of a childhood in a sleepy Southern town and the crisis of conscience that rocked it, To Kill A Mockingbird became both an instant bestseller and a critical success when it was first published in 1960. It went on to win the Pulitzer Prize in 1961 and was later made into an Academy Award-winning film, also a classic.', 6.61, 'Nelle Harper Lee (April 28, 1926 â€“ February 19, 2016), better known by her pen name Harper Lee, was an American novelist widely known for To Kill a Mockingbird, published in 1960. Immediately successful, it won the 1961 Pulitzer Prize and has become a classic of modern American literature.', 'Fiction', 'Warner Books, Inc.', '1960-07-11', '4', 0),
-(6, 'Pride and Prejudice', 'pride.jpg', 'Jane Austen', 'â€œIt is a truth universally acknowledged, that a single man in possession of a good fortune must be in want of a wife.â€ So begins Pride and Prejudice, Jane Austenâ€™s witty comedy of mannersâ€”one of the most popular novels of all timeâ€”that features splendidly civilized sparring between the proud Mr. Darcy and the prejudiced Elizabeth Bennet', 6.99, 'Jane Austen (16 December 1775 â€“ 18 July 1817) was an English novelist known primarily for her six major novels, which interpret, critique and comment upon the British landed gentry at the end of the 18th century. ', 'Fiction', 'Thomas Egerton', '1813-01-28', '0', 0),
+(6, 'Pride and Prejudice', 'pride.jpg', 'Jane Austen', 'â€œIt is a truth universally acknowledged, that a single man in possession of a good fortune must be in want of a wife.â€ So begins Pride and Prejudice, Jane Austenâ€™s witty comedy of mannersâ€”one of the most popular novels of all timeâ€”that features splendidly civilized sparring between the proud Mr. Darcy and the prejudiced Elizabeth Bennet', 6.99, 'Jane Austen (16 December 1775 â€“ 18 July 1817) was an English novelist known primarily for her six major novels, which interpret, critique and comment upon the British landed gentry at the end of the 18th century. ', 'Fiction', 'Thomas Egerton', '1813-01-28', '0', 1),
 (8, 'The Great Gatsby', 'greatGatsby.jpg', 'Francis Fitzgerald', 'Jay Gatsby is the man who has everything. But one thing will always be out of his reach. Everybody who is anybody is seen at his glittering parties. Day and night his Long Island mansion buzzes with bright young things drinking, dancing, and debating his mysterious character. ', 3.99, 'Francis Scott Key Fitzgerald was an American writer of novels and short stories, whose works have been seen as evocative of the Jazz Age, a term he himself allegedly coined. He is regarded as one of the greatest twentieth century writers.', 'Fiction', 'Charles Scribners Sons', '1925-04-10', '0', 0),
-(9, 'The Book Thief', 'bookthief.jpg', 'Markus Zusak', 'Itâ€™s just a small story really, about among other things: a girl, some words, an accordionist, some fanatical Germans, a Jewish fist-fighter, and quite a lot of thievery ...', 5.29, 'Markus Zusak was born in 1975 and is the author of five books, including the international bestseller, The Book Thief , which is translated into more than forty languages.', 'Fiction', '', '0000-00-00', '0', 0),
+(9, 'The Book Thief', 'bookthief.jpg', 'Markus Zusak', 'Itâ€™s just a small story really, about among other things: a girl, some words, an accordionist, some fanatical Germans, a Jewish fist-fighter, and quite a lot of thievery ...', 5.29, 'Markus Zusak was born in 1975 and is the author of five books, including the international bestseller, The Book Thief , which is translated into more than forty languages.', 'Fiction', '', '0000-00-00', '0', 2),
 (10, 'Sense and Sensibility', 'SenseandSensibility.jpg', 'Jane Austen', 'Henry Dashwood, his second wife, and their three daughters live for many years with Henry\'s wealthy bachelor uncle. That uncle decides, in late life, to will the use and income only of his property first to Henry, then to Henry\'s first son John Dashwood (by his first marriage), so that the property should pass intact to John\'s three-year-old son Harry. ', 6.99, 'It is a truth universally acknowledged, that a single man in possession of a good fortune must be in want of a wife.â€ So begins Pride and Prejudice, Jane Austenâ€™s witty comedy of mannersâ€”one of the most popular novels of all timeâ€”that features splendidly civilized sparring between the proud Mr. Darcy and the prejudiced Elizabeth Bennet', 'Fiction', 'Thomas Egerton', '1811-01-28', '0', 0),
-(11, '1984', '1984.jpg', 'George Orwell', 'Winston Smith is a man who lives in Airstrip One, the remnants of Britain broken down by war, civil conflict, and revolution in the year 1984. A member of the middle class Outer Party, Winston lives in a one-room London flat in the Victory Mansions. Smith lives on rations consisting of black bread, synthetic meals, and \"Victory\"-branded gin. Telescreens in every building, accompanied by microphones and cameras, allow the Thought Police to identify anyone who might compromise the Party\'s regime, and threat of surveillance forces citizens to display an obligatory optimism regarding the country, who are afraid for being arrested for thoughtcrime, the infraction of expressing thoughts contradictory to the Party\'s ideology. ', 9.99, 'ERIC ARTHUR BLAIR (1903–1950), better known by his pen name George Orwell, was an English author and journalist whose best-known works include the dystopian novel 1984 and the satirical novella Animal Farm. He is consistently ranked among the best English writers of the 20th century, and his writing has had a huge, lasting influence on contemporary culture. Several of his coined words have since entered the English language, and the word \"Orwellian\" is now used to describe totalitarian or authoritarian social practices.', 'Sci-fi', 'Secker & Warburg', '1949-06-08', '0', 0),
+(11, '1984', '1984.jpg', 'George Orwell', 'Winston Smith is a man who lives in Airstrip One, the remnants of Britain broken down by war, civil conflict, and revolution in the year 1984. A member of the middle class Outer Party, Winston lives in a one-room London flat in the Victory Mansions. Smith lives on rations consisting of black bread, synthetic meals, and \"Victory\"-branded gin. Telescreens in every building, accompanied by microphones and cameras, allow the Thought Police to identify anyone who might compromise the Party\'s regime, and threat of surveillance forces citizens to display an obligatory optimism regarding the country, who are afraid for being arrested for thoughtcrime, the infraction of expressing thoughts contradictory to the Party\'s ideology. ', 9.99, 'ERIC ARTHUR BLAIR (1903–1950), better known by his pen name George Orwell, was an English author and journalist whose best-known works include the dystopian novel 1984 and the satirical novella Animal Farm. He is consistently ranked among the best English writers of the 20th century, and his writing has had a huge, lasting influence on contemporary culture. Several of his coined words have since entered the English language, and the word \"Orwellian\" is now used to describe totalitarian or authoritarian social practices.', 'Sci-fi', 'Secker & Warburg', '1949-06-08', '5', 1),
 (12, 'A Wrinkle in Time', 'wrinkleintime.jpg', 'Madeleine L\'Engle', 'Thirteen-year-old Meg Murry\'s classmates and teachers see her as a troublesome and stubborn student. Her family knows that she is emotionally immature but also sees her capable of doing great things. The family includes her scientist mother Katherine, her missing scientist father Alexander, the twins Sandy and Dennys, and her five-year-old brother Charles Wallace Murry, a child genius who can sometimes read Meg\'s mind.', 6.99, 'Madeleine L\'Engle Camp was an American writer who wrote young adult fiction, including A Wrinkle in Time and its sequels: A Wind in the Door, A Swiftly Tilting Planet, Many Waters and An Acceptable Time. Her works reflect both her Christian faith and her strong interest in science. ', 'Sci-fi', 'Farrar, Straus & Giroux', '1962-01-01', '0', 0),
 (13, 'The Hobbit', 'hobbit.jpg', 'J. R. R. Tolkien', 'A reluctant Hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home, and the gold within it from the dragon Smaug.\r\n', 9.5, 'J.R.R. Tolkien (1892-1973) is the creator of Middle-earth and author of such classic and extraordinary works of fiction as The Hobbit , The Lord of the Rings , and The Silmarillion . His books have been translated into more than fifty languages and have sold many millions of copies worldwide.', 'Fantasy', 'George Allen & Unwin', '1937-09-21', '0', 0),
 (14, 'The Catcher in the Rye', 'catcher.jpg', 'J. D. Salinger', 'A classic novel originally published for adults, it has since become popular with adolescent readers for its themes of teenage angst and alienation.', 9.48, 'His cloistered lifestyle and limited output have not prevented readers and writers from lionizing J. D. Salinger. With one-of-a-kind stories and the classic book The Catcher in the Rye, Salinger captured with wit and poignancy a growing malaise in post-war America. The 1951 novel The Catcher in the Rye, his best-known book, was an immediate success and remains popular and controversial. Salinger followed Catcher with Nine Stories, Franny and Zooey, and Raise High the Roof Beam, Carpenters and Seymour: An Introduction.', 'Fiction', 'Little, Brown and Company', '1951-07-15', '0', 0),
@@ -238,7 +246,10 @@ CREATE TABLE `purchase` (
 --
 
 INSERT INTO `purchase` (`user_id`, `book_id`) VALUES
-(0, 5);
+(0, 5),
+(614921, 6),
+(614921, 9),
+(614921, 11);
 
 -- --------------------------------------------------------
 
@@ -318,7 +329,7 @@ ALTER TABLE `search`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `genres`

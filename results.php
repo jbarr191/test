@@ -214,7 +214,7 @@ include("functions/functions.php");
 						<input type="submit" name="order" value="Search Ascending" />
 						<input type="submit" name="order" value="Search Descending" />
 						<input type="checkbox" name="booklimit" value="20" />Set page limit to 20 books<br />
-						
+
 
 					</form>
 				</div>
@@ -239,8 +239,8 @@ include("functions/functions.php");
 						{
 
 							$pageoffset = ($_GET['page']-1) *10;
-							
-							
+
+
 							$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
 																	or product_price like '%$search_query%'
@@ -308,7 +308,7 @@ include("functions/functions.php");
 						{
 
 							try{
-								
+
 								if($_GET['refine_search'] == 1)
 								{
 									$search_cat = "product_title";
@@ -333,25 +333,18 @@ include("functions/functions.php");
 								{
 									$search_cat = "product_release";
 								}
-<<<<<<< HEAD
-								
+
 								if($_GET['booklimit'] == 20){
 									$limit = 20;
 								}
-								
+
 								$pageoffset = ($_GET['page']-1) * $limit;
-								
-								
-								
-								
-								
-=======
+
 								elseif($_GET['refine_search'] == 6)
 								{
 									$search_cat = "ratings";
 								}
 								$pageoffset = ($_GET['page']-1) * 10;
->>>>>>> 846f0e48c0bd3d39cffbc90b9c04e5457e3c4fe0
 								$get_pro = "select * from products where product_title like '%$search_query%'
 																	or product_author like '%$search_query%'
 																	or product_price like '%$search_query%'
@@ -360,14 +353,14 @@ include("functions/functions.php");
 																	order by $search_cat asc
 																	limit $limit offset $pageoffset";
 
-								checkSearch(mysqli_query($con, $get_pro));									
-																	
+								checkSearch(mysqli_query($con, $get_pro));
+
 								$run_pro = mysqli_query($con, $get_pro);
 
-								checkSearch(mysqli_num_rows($run_pro));	
-								
+								checkSearch(mysqli_num_rows($run_pro));
+
 								$count_pro = mysqli_num_rows($run_pro);
-								
+
 								if($count_pro == 0){
 									echo "<h2 style='padding:20px;'>No search results found!</h2>";
 								}
@@ -427,7 +420,7 @@ include("functions/functions.php");
 						else
 						{
 							try{
-							
+
 								$search_id = $_GET['refine_search'];
 
 								if($_GET['refine_search'] == 1)
@@ -455,7 +448,7 @@ include("functions/functions.php");
 									$search_cat = "product_release";
 								}
 <<<<<<< HEAD
-								
+
 								if($_GET['booklimit'] == 20){
 									$limit = 20;
 =======
@@ -475,11 +468,11 @@ include("functions/functions.php");
 																		limit $limit offset $pageoffset";
 
 								checkSearch(mysqli_query($con, $get_pro));
-								
+
 								$run_pro = mysqli_query($con, $get_pro);
 
 								checkSearch(mysqli_num_rows($run_pro));
-								
+
 								$count_pro = mysqli_num_rows($run_pro);
 
 								if($count_pro == 0){
